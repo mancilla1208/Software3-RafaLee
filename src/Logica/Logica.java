@@ -12,6 +12,7 @@ package Logica;
 public class Logica {
 
     public void imprimir() {
+        //para imprimir
         System.out.println("hola");
 
     }
