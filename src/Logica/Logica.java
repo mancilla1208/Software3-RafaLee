@@ -10,11 +10,10 @@ package Logica;
  * @author andre
  */
 public class Logica {
-
-    public void imprimir() {
-        //para imprimir
+    
+    public void imprimir(){
         System.out.println("hola");
-
+        
     }
-
+    
 }
