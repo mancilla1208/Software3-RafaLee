@@ -11,6 +11,7 @@ import static GUI.Principal.jLabelEstudiante;
 import static GUI.Principal.jbDocente;
 import static GUI.Principal.jbEstudiante;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -92,16 +93,20 @@ public class ListaEstudiantes extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    //Validar selección de nombre al momento de un estudiante escoger
     private void jButtonAceptarEstuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarEstuActionPerformed
 
-        dispose();
-        Estudiante estudiante = new Estudiante();
-        Principal.VentaPrincipal.add(estudiante);
-        Principal.VentaPrincipal.moveToFront(estudiante);
-        estudiante.setSize(Principal.VentaPrincipal.getWidth(), Principal.VentaPrincipal.getHeight());
-        estudiante.setLocation(0, 0);
-        estudiante.show();
+        if (jComboBoxListaEstu.getSelectedItem() == "Nombres") {
+            JOptionPane.showMessageDialog(null, "Seleccione un nombre válido");
+        } else {
+            dispose();
+            Estudiante estudiante = new Estudiante();
+            Principal.VentaPrincipal.add(estudiante);
+            Principal.VentaPrincipal.moveToFront(estudiante);
+            estudiante.setSize(Principal.VentaPrincipal.getWidth(), Principal.VentaPrincipal.getHeight());
+            estudiante.setLocation(0, 0);
+            estudiante.show();
+        }
 
 
     }//GEN-LAST:event_jButtonAceptarEstuActionPerformed
