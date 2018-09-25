@@ -24,7 +24,10 @@ public class Estudiante extends javax.swing.JInternalFrame {
     public Estudiante() {
         initComponents();
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
-
+        
+        ListaEstudiantes abrir = new ListaEstudiantes();
+        
+        //jLabelnombreEstudiante.setText(abrir.jComboBoxListaEstu.);
         jButtonSalirEstudiante.setOpaque(false);
         jButtonSalirEstudiante.setContentAreaFilled(false);
         jButtonSalirEstudiante.setBorderPainted(false);
@@ -49,7 +52,7 @@ public class Estudiante extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabelnombreEstudiante = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jButtonSalirEstudiante = new javax.swing.JButton();
         jButtonVolverEstu = new javax.swing.JButton();
@@ -120,8 +123,7 @@ public class Estudiante extends javax.swing.JInternalFrame {
         jPanel2.setBackground(new java.awt.Color(153, 153, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 20)); // NOI18N
-        jLabel1.setText("Pepito Perez");
+        jLabelnombreEstudiante.setFont(new java.awt.Font("Comic Sans MS", 1, 20)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
         jLabel2.setText("Grado 1");
@@ -146,13 +148,9 @@ public class Estudiante extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelnombreEstudiante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(317, 317, 317)
                 .addComponent(jLabelSalirEstu, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -167,8 +165,9 @@ public class Estudiante extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(5, 5, 5)
+                        .addComponent(jLabelnombreEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2))
                     .addComponent(jLabelSalirEstu, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonSalirEstudiante, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -293,13 +292,13 @@ public class Estudiante extends javax.swing.JInternalFrame {
         jLabelDocente.setVisible(true);
         jLabelEstudiante.setVisible(true);
         jLabelBienvenidos.setVisible(true);
+        
     }//GEN-LAST:event_jButtonVolverEstuActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonSalirEstudiante;
     private javax.swing.JButton jButtonVolverEstu;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -309,6 +308,7 @@ public class Estudiante extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelSalirEstu;
+    private javax.swing.JLabel jLabelnombreEstudiante;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
