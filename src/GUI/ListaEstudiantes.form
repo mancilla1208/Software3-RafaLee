@@ -55,12 +55,15 @@
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
             <StringItem index="0" value="Nombres"/>
-            <StringItem index="1" value="Rafa1"/>
-            <StringItem index="2" value="Pepe"/>
-            <StringItem index="3" value="Chilindrina"/>
+            <StringItem index="1" value="Andres Mancilla"/>
+            <StringItem index="2" value="Felipe Otalvaro"/>
+            <StringItem index="3" value="Chavo del Ocho"/>
           </StringArray>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxListaEstuActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>

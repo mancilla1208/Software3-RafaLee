@@ -62,7 +62,12 @@ public class ListaEstudiantes extends javax.swing.JFrame {
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 410, -1));
 
         jComboBoxListaEstu.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
-        jComboBoxListaEstu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombres", "Rafa1", "Pepe", "Chilindrina" }));
+        jComboBoxListaEstu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombres", "Andres Mancilla", "Felipe Otalvaro", "Chavo del Ocho" }));
+        jComboBoxListaEstu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxListaEstuActionPerformed(evt);
+            }
+        });
         getContentPane().add(jComboBoxListaEstu, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, 290, -1));
 
         jButtonAceptarEstu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Aceptar.png"))); // NOI18N
@@ -111,6 +116,10 @@ public class ListaEstudiantes extends javax.swing.JFrame {
         jLabelBienvenidos.setVisible(true);
 
     }//GEN-LAST:event_jButtonCancelarEstuActionPerformed
+
+    private void jComboBoxListaEstuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxListaEstuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxListaEstuActionPerformed
 
     /**
      * @param args the command line arguments
