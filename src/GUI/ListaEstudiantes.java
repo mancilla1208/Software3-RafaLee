@@ -107,7 +107,7 @@ public class ListaEstudiantes extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAceptarEstuActionPerformed
 
     private void jButtonCancelarEstuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarEstuActionPerformed
-        
+
         dispose();
 
         jbDocente.setVisible(true);
