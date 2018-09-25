@@ -10,6 +10,7 @@ import static GUI.Principal.jLabelDocente;
 import static GUI.Principal.jLabelEstudiante;
 import static GUI.Principal.jbDocente;
 import static GUI.Principal.jbEstudiante;
+import java.awt.Color;
 
 /**
  *
@@ -23,6 +24,8 @@ public class ListaEstudiantes extends javax.swing.JFrame {
     public ListaEstudiantes() {
         initComponents();
         this.setLocationRelativeTo(null);
+
+        jComboBoxListaEstu.setBackground(new Color(222, 243, 252, 40));
 
         jButtonAceptarEstu.setOpaque(false);
         jButtonAceptarEstu.setContentAreaFilled(false);
@@ -43,7 +46,7 @@ public class ListaEstudiantes extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBoxListaEstu = new javax.swing.JComboBox<>();
         jButtonAceptarEstu = new javax.swing.JButton();
         jButtonCancelarEstu = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -58,9 +61,9 @@ public class ListaEstudiantes extends javax.swing.JFrame {
         jLabel2.setText("Selecciona tu nombre");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 410, -1));
 
-        jComboBox1.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombres", "Rafa1", "Pepe", "Chilindrina" }));
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, 290, -1));
+        jComboBoxListaEstu.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        jComboBoxListaEstu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombres", "Rafa1", "Pepe", "Chilindrina" }));
+        getContentPane().add(jComboBoxListaEstu, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, 290, -1));
 
         jButtonAceptarEstu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Aceptar.png"))); // NOI18N
         jButtonAceptarEstu.addActionListener(new java.awt.event.ActionListener() {
@@ -106,7 +109,7 @@ public class ListaEstudiantes extends javax.swing.JFrame {
         jLabelDocente.setVisible(true);
         jLabelEstudiante.setVisible(true);
         jLabelBienvenidos.setVisible(true);
-        
+
     }//GEN-LAST:event_jButtonCancelarEstuActionPerformed
 
     /**
@@ -148,7 +151,7 @@ public class ListaEstudiantes extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAceptarEstu;
     private javax.swing.JButton jButtonCancelarEstu;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBoxListaEstu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables

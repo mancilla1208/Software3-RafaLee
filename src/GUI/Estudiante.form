@@ -197,6 +197,9 @@
               <Image iconType="3" name="/Imagenes/Salir.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSalirEstudianteActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

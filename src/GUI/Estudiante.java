@@ -115,6 +115,11 @@ public class Estudiante extends javax.swing.JInternalFrame {
         jLabel2.setText("Grado 1");
 
         jButtonSalirEstudiante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Salir.png"))); // NOI18N
+        jButtonSalirEstudiante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalirEstudianteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -249,6 +254,10 @@ public class Estudiante extends javax.swing.JInternalFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButtonSalirEstudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirEstudianteActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jButtonSalirEstudianteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
