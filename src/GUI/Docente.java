@@ -78,63 +78,39 @@ public class Docente extends javax.swing.JInternalFrame {
         setResizable(true);
         setTitle("Docente");
         setAutoscrolls(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanelBarraDocente.setBackground(new java.awt.Color(255, 220, 184));
         jPanelBarraDocente.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanelBarraDocente.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Benilda Villa Montes");
+        jPanelBarraDocente.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 14, 248, -1));
 
         jLabel2.setFont(new java.awt.Font("Monotype Corsiva", 0, 18)); // NOI18N
         jLabel2.setText("Docente");
+        jPanelBarraDocente.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 42, 65, 13));
 
         jButtonCrearTarea.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/CrearTarea.png"))); // NOI18N
+        jPanelBarraDocente.add(jButtonCrearTarea, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 20, 54, -1));
 
         jLabel3.setFont(new java.awt.Font("Monotype Corsiva", 0, 18)); // NOI18N
         jLabel3.setText("2018");
+        jPanelBarraDocente.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 61, 65, -1));
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/docenteNiños.png"))); // NOI18N
+        jPanelBarraDocente.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 340, 100));
 
         jButtonGuardarTarea.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/GuardarTarea.png"))); // NOI18N
+        jButtonGuardarTarea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonGuardarTareaActionPerformed(evt);
+            }
+        });
+        jPanelBarraDocente.add(jButtonGuardarTarea, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, 60, 60));
 
-        javax.swing.GroupLayout jPanelBarraDocenteLayout = new javax.swing.GroupLayout(jPanelBarraDocente);
-        jPanelBarraDocente.setLayout(jPanelBarraDocenteLayout);
-        jPanelBarraDocenteLayout.setHorizontalGroup(
-            jPanelBarraDocenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelBarraDocenteLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(jPanelBarraDocenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanelBarraDocenteLayout.createSequentialGroup()
-                        .addGap(208, 208, 208)
-                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(60, 60, 60)
-                .addComponent(jButtonGuardarTarea, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(jButtonCrearTarea, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
-        );
-        jPanelBarraDocenteLayout.setVerticalGroup(
-            jPanelBarraDocenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelBarraDocenteLayout.createSequentialGroup()
-                .addGap(61, 61, 61)
-                .addComponent(jLabel3))
-            .addGroup(jPanelBarraDocenteLayout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jLabel12)
-            .addGroup(jPanelBarraDocenteLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel1))
-            .addGroup(jPanelBarraDocenteLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jButtonGuardarTarea, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanelBarraDocenteLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jButtonCrearTarea))
-        );
+        getContentPane().add(jPanelBarraDocente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 100));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -167,7 +143,7 @@ public class Docente extends javax.swing.JInternalFrame {
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel5)))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,6 +247,8 @@ public class Docente extends javax.swing.JInternalFrame {
             .addComponent(jTabbedPane1)
         );
 
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 101, -1, -1));
+
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -320,7 +298,7 @@ public class Docente extends javax.swing.JInternalFrame {
                         .addComponent(jRadioButton2)
                         .addComponent(jRadioButton1)
                         .addComponent(jLabel7)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(146, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -341,9 +319,12 @@ public class Docente extends javax.swing.JInternalFrame {
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
 
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(276, 101, 620, 461));
+
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/archivo.png"))); // NOI18N
         jMenu1.setText("Archivo");
 
         jMenuItemInicio.setBackground(new java.awt.Color(255, 255, 255));
@@ -358,8 +339,10 @@ public class Docente extends javax.swing.JInternalFrame {
 
         jMenuBar1.add(jMenu1);
 
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Gestionar.png"))); // NOI18N
         jMenu2.setText("G. Estudiantes");
 
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Gestionar2.png"))); // NOI18N
         jMenuItem1.setText("Gestionar estudiante");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -371,26 +354,6 @@ public class Docente extends javax.swing.JInternalFrame {
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jPanelBarraDocente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanelBarraDocente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -424,6 +387,10 @@ public class Docente extends javax.swing.JInternalFrame {
 
         }
     }//GEN-LAST:event_jMenuItemInicioActionPerformed
+
+    private void jButtonGuardarTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarTareaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonGuardarTareaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
