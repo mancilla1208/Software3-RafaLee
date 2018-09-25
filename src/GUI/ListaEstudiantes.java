@@ -106,6 +106,8 @@ public class ListaEstudiantes extends javax.swing.JFrame {
             estudiante.setSize(Principal.VentaPrincipal.getWidth(), Principal.VentaPrincipal.getHeight());
             estudiante.setLocation(0, 0);
             estudiante.show();
+            Estudiante.jLabelNombreEstudiante.setText((String) jComboBoxListaEstu.getSelectedItem());
+
         }
 
 
