@@ -6,6 +6,7 @@
 package GUI;
 
 import java.awt.Color;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -83,6 +84,17 @@ public class GestionarEstudiante extends javax.swing.JFrame {
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreActionPerformed(evt);
+            }
+        });
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
+
+        txtGrado.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtGradoKeyTyped(evt);
             }
         });
 
@@ -189,9 +201,19 @@ public class GestionarEstudiante extends javax.swing.JFrame {
         getContentPane().add(jPanelEliModiEstu, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 460, 240));
 
         jButtonEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Eliminar.png"))); // NOI18N
+        jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEliminarActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButtonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 420, 60, 50));
 
         jButtonEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Editar.png"))); // NOI18N
+        jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditarActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButtonEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 420, 60, 50));
 
         jButtonVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Volver.png"))); // NOI18N
@@ -220,13 +242,59 @@ public class GestionarEstudiante extends javax.swing.JFrame {
 
     private void jButtonAñadirEstuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAñadirEstuActionPerformed
 
-        String Dato[] = new String[2];
+        String nombre;
+        String grado;
 
-        Dato[0] = txtNombre.getText();
-        Dato[1] = txtGrado.getText();
-        modelo.addRow(Dato);
+        nombre = txtNombre.getText();
+        grado = txtGrado.getText();
 
+        if (nombre.equals("") || grado.equals("")) {
+            JOptionPane.showMessageDialog(null, "Verifique los campos y vuelva a intentarlo");
+        } else {
+            String Dato[] = new String[2];
+
+            Dato[0] = txtNombre.getText();
+            Dato[1] = txtGrado.getText();
+            modelo.addRow(Dato);
+
+            txtGrado.setText(null);
+            txtNombre.setText(null);
+        }
     }//GEN-LAST:event_jButtonAñadirEstuActionPerformed
+
+    private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
+        int filaSelec = jTableListaEstu.getSelectedRow();
+        if (filaSelec >= 0) {
+            txtNombre.setText(jTableListaEstu.getValueAt(filaSelec, 0).toString());
+            txtGrado.setText(jTableListaEstu.getValueAt(filaSelec, 1).toString());
+            modelo.removeRow(filaSelec);
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una estudiante primero");
+        }
+    }//GEN-LAST:event_jButtonEditarActionPerformed
+
+    private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
+        int filaSelec = jTableListaEstu.getSelectedRow();
+        if (filaSelec >= 0) {
+            modelo.removeRow(filaSelec);
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una estudiante primero");
+        }
+    }//GEN-LAST:event_jButtonEliminarActionPerformed
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        char v = evt.getKeyChar();
+        if ((v < 'a' || v > 'z') && (v < 'A' || v > 'Z')) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void txtGradoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGradoKeyTyped
+        char v = evt.getKeyChar();
+        if (v < '0' || v > '9') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtGradoKeyTyped
 
     /**
      * @param args the command line arguments
