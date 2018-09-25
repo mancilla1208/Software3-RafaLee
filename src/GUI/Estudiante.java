@@ -27,7 +27,7 @@ public class Estudiante extends javax.swing.JInternalFrame {
         
         ListaEstudiantes abrir = new ListaEstudiantes();
         
-        //jLabelnombreEstudiante.setText(abrir.jComboBoxListaEstu.);
+        //jLabelnombreEstudiante.setText(ListaEstudiantes.jComboBoxListaEstu.getItemAt());
         jButtonSalirEstudiante.setOpaque(false);
         jButtonSalirEstudiante.setContentAreaFilled(false);
         jButtonSalirEstudiante.setBorderPainted(false);
