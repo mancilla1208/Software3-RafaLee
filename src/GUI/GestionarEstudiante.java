@@ -6,6 +6,7 @@
 package GUI;
 
 import java.awt.Color;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,15 +14,14 @@ import java.awt.Color;
  */
 public class GestionarEstudiante extends javax.swing.JFrame {
 
+    DefaultTableModel modelo = new DefaultTableModel();
+
     /**
      * Creates new form AgregarEstudiante
      */
     public GestionarEstudiante() {
         initComponents();
         this.setLocationRelativeTo(null);
-
-        jPanelAddEstu.setBackground(new Color(222, 243, 252, 40));
-        jPanelEliModiEstu.setBackground(new Color(222, 243, 252, 40));
 
         jButtonAñadirEstu.setOpaque(false);
         jButtonAñadirEstu.setContentAreaFilled(false);
@@ -38,6 +38,10 @@ public class GestionarEstudiante extends javax.swing.JFrame {
         jButtonVolver.setOpaque(false);
         jButtonVolver.setContentAreaFilled(false);
         jButtonVolver.setBorderPainted(false);
+
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Grado");
+        jTableListaEstu.setModel(modelo);
     }
 
     /**
@@ -52,8 +56,8 @@ public class GestionarEstudiante extends javax.swing.JFrame {
         jPanelAddEstu = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextFieldNombreEstu = new javax.swing.JTextField();
-        jTextFieldGradoEstu = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
+        txtGrado = new javax.swing.JTextField();
         jButtonAñadirEstu = new javax.swing.JButton();
         jPanelEliModiEstu = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -67,7 +71,7 @@ public class GestionarEstudiante extends javax.swing.JFrame {
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanelAddEstu.setBackground(new java.awt.Color(137, 188, 255));
+        jPanelAddEstu.setBackground(new java.awt.Color(222, 243, 252));
         jPanelAddEstu.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Agregar estudiante", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 0, 12))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
@@ -76,13 +80,18 @@ public class GestionarEstudiante extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
         jLabel3.setText("Grado:");
 
-        jTextFieldNombreEstu.addActionListener(new java.awt.event.ActionListener() {
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldNombreEstuActionPerformed(evt);
+                txtNombreActionPerformed(evt);
             }
         });
 
         jButtonAñadirEstu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Agregar.png"))); // NOI18N
+        jButtonAñadirEstu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAñadirEstuActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelAddEstuLayout = new javax.swing.GroupLayout(jPanelAddEstu);
         jPanelAddEstu.setLayout(jPanelAddEstuLayout);
@@ -96,12 +105,12 @@ public class GestionarEstudiante extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanelAddEstuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelAddEstuLayout.createSequentialGroup()
-                        .addComponent(jTextFieldGradoEstu, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtGrado, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonAñadirEstu, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonAñadirEstu)
                         .addGap(44, 44, 44))
                     .addGroup(jPanelAddEstuLayout.createSequentialGroup()
-                        .addComponent(jTextFieldNombreEstu, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(71, Short.MAX_VALUE))))
         );
         jPanelAddEstuLayout.setVerticalGroup(
@@ -110,7 +119,7 @@ public class GestionarEstudiante extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanelAddEstuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextFieldNombreEstu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanelAddEstuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelAddEstuLayout.createSequentialGroup()
                         .addGap(0, 13, Short.MAX_VALUE)
@@ -119,7 +128,7 @@ public class GestionarEstudiante extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanelAddEstuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jTextFieldGradoEstu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtGrado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(22, 22, 22))))
         );
 
@@ -143,7 +152,7 @@ public class GestionarEstudiante extends javax.swing.JFrame {
                 {null, null}
             },
             new String [] {
-                "Title 1", "Title 2"
+                "Nombre", "Grado"
             }
         ) {
             Class[] types = new Class [] {
@@ -200,14 +209,24 @@ public class GestionarEstudiante extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldNombreEstuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNombreEstuActionPerformed
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldNombreEstuActionPerformed
+    }//GEN-LAST:event_txtNombreActionPerformed
 
     private void jButtonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolverActionPerformed
 
         dispose();
     }//GEN-LAST:event_jButtonVolverActionPerformed
+
+    private void jButtonAñadirEstuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAñadirEstuActionPerformed
+
+        String Dato[] = new String[2];
+
+        Dato[0] = txtNombre.getText();
+        Dato[1] = txtGrado.getText();
+        modelo.addRow(Dato);
+
+    }//GEN-LAST:event_jButtonAñadirEstuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -259,7 +278,7 @@ public class GestionarEstudiante extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelEliModiEstu;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableListaEstu;
-    private javax.swing.JTextField jTextFieldGradoEstu;
-    private javax.swing.JTextField jTextFieldNombreEstu;
+    private javax.swing.JTextField txtGrado;
+    private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }
