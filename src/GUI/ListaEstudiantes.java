@@ -93,7 +93,7 @@ public class ListaEstudiantes extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    //Validar selección de nombre
+    //Validar selección de nombre al momento de un estudiante escoger
     private void jButtonAceptarEstuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarEstuActionPerformed
         
         if(jComboBoxListaEstu.getSelectedItem()== "Nombres"){
