@@ -20,10 +20,16 @@ public class CrearActividad extends javax.swing.JFrame {
 
         jButtonExaminarPre.setVisible(false);
         jLabelNombreArchivoPre.setVisible(false);
+        jTextAreaRespuesta.setVisible(false);
+        jScrollPaneRespuesta.setVisible(false);
         jLabelPreguntaA.setVisible(false);
         jLabelPreguntaB.setVisible(false);
         jLabelPreguntaC.setVisible(false);
         jLabelPreguntaD.setVisible(false);
+        jTextFieldRespuesta1.setVisible(false);
+        jTextFieldRespuesta2.setVisible(false);
+        jTextFieldRespuesta3.setVisible(false);
+        jTextFieldRespuesta4.setVisible(false);
 
     }
 
@@ -54,7 +60,7 @@ public class CrearActividad extends javax.swing.JFrame {
         jTextFieldRespuesta4 = new javax.swing.JTextField();
         jButtonExaminarPre = new javax.swing.JButton();
         jLabelNombreArchivoPre = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        jScrollPaneRespuesta = new javax.swing.JScrollPane();
         jTextAreaRespuesta = new javax.swing.JTextArea();
         jButtonVolver = new javax.swing.JButton();
         jButtonAceptar = new javax.swing.JButton();
@@ -147,17 +153,22 @@ public class CrearActividad extends javax.swing.JFrame {
         jLabelNombreArchivoPre.setText("Nombre de archivo cargado");
         jPanel2.add(jLabelNombreArchivoPre, new org.netbeans.lib.awtextra.AbsoluteConstraints(158, 233, 288, -1));
 
-        jScrollPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Respuesta", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 0, 12))); // NOI18N
+        jScrollPaneRespuesta.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Respuesta", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 0, 12))); // NOI18N
 
         jTextAreaRespuesta.setColumns(20);
         jTextAreaRespuesta.setRows(5);
-        jScrollPane2.setViewportView(jTextAreaRespuesta);
+        jScrollPaneRespuesta.setViewportView(jTextAreaRespuesta);
 
-        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 480, 120));
+        jPanel2.add(jScrollPaneRespuesta, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 480, 120));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 530, 280));
         jPanel2.getAccessibleContext().setAccessibleName("Preguntas");
 
+        jButtonVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVolverActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButtonVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 460, 70, 50));
         getContentPane().add(jButtonAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 460, 70, 50));
 
@@ -177,13 +188,51 @@ public class CrearActividad extends javax.swing.JFrame {
 
     private void jButtonTipoPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTipoPreActionPerformed
 
-        jTextAreaRespuesta.setVisible(false);
-
         if (jComboBoxTipoPreguntas.getSelectedItem() == "Icfes") {
             jTextAreaRespuesta.setVisible(false);
+            jScrollPaneRespuesta.setVisible(false);
+
+            jLabelPreguntaA.setVisible(true);
+            jLabelPreguntaB.setVisible(true);
+            jLabelPreguntaC.setVisible(true);
+            jLabelPreguntaD.setVisible(true);
+
+            jTextFieldRespuesta1.setVisible(true);
+            jTextFieldRespuesta2.setVisible(true);
+            jTextFieldRespuesta3.setVisible(true);
+            jTextFieldRespuesta4.setVisible(true);
+
+            jButtonExaminarPre.setVisible(true);
+            jLabelNombreArchivoPre.setVisible(true);
+
+        } else if (jComboBoxTipoPreguntas.getSelectedItem() == "Abierta") {
+
+            jTextAreaRespuesta.setVisible(true);
+            jScrollPaneRespuesta.setVisible(true);
+
+            jLabelPreguntaA.setVisible(false);
+            jLabelPreguntaB.setVisible(false);
+            jLabelPreguntaC.setVisible(false);
+            jLabelPreguntaD.setVisible(false);
+
+            jTextFieldRespuesta1.setVisible(false);
+            jTextFieldRespuesta2.setVisible(false);
+            jTextFieldRespuesta3.setVisible(false);
+            jTextFieldRespuesta4.setVisible(false);
+
+            jButtonExaminarPre.setVisible(true);
+            jLabelNombreArchivoPre.setVisible(true);
+
+        } else if (jComboBoxTipoPreguntas.getSelectedItem() == "Completar") {
+
         }
 
+
     }//GEN-LAST:event_jButtonTipoPreActionPerformed
+
+    private void jButtonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolverActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButtonVolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -239,7 +288,7 @@ public class CrearActividad extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanelTipoPreguntas;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPaneRespuesta;
     private javax.swing.JTextArea jTextAreaPregunta;
     private javax.swing.JTextArea jTextAreaRespuesta;
     private javax.swing.JTextField jTextFieldRespuesta1;
