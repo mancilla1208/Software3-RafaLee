@@ -63,7 +63,7 @@ public class ListaEstudiantes extends javax.swing.JFrame {
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 410, -1));
 
         jComboBoxListaEstu.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
-        jComboBoxListaEstu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombres", "Andres Mancilla", "Felipe Otalvaro", "Chavo del Ocho" }));
+        jComboBoxListaEstu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Andres Mancilla", "Felipe Otalvaro", "Chavo del Ocho" }));
         jComboBoxListaEstu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxListaEstuActionPerformed(evt);
@@ -96,9 +96,11 @@ public class ListaEstudiantes extends javax.swing.JFrame {
     //Validar selección de nombre al momento de un estudiante escoger
     private void jButtonAceptarEstuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarEstuActionPerformed
 
-        if (jComboBoxListaEstu.getSelectedItem() == "Nombres") {
+        if (jComboBoxListaEstu.getSelectedItem() == "Seleccione") {
+            jComboBoxListaEstu.setOpaque(true);
             JOptionPane.showMessageDialog(null, "Seleccione un nombre válido");
         } else {
+            jComboBoxListaEstu.setOpaque(false);
             dispose();
             Estudiante estudiante = new Estudiante();
             Principal.VentaPrincipal.add(estudiante);

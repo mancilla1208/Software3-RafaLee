@@ -176,7 +176,6 @@ public class CrearActividad extends javax.swing.JFrame {
         jPanel2.add(jScrollPaneRespuesta, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 480, 120));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 530, 280));
-        jPanel2.getAccessibleContext().setAccessibleName("Preguntas");
 
         jButtonVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Exit.png"))); // NOI18N
         jButtonVolver.addActionListener(new java.awt.event.ActionListener() {
@@ -195,6 +194,8 @@ public class CrearActividad extends javax.swing.JFrame {
 
         jButtonGuardarTarea.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/GuardarTarea.png"))); // NOI18N
         getContentPane().add(jButtonGuardarTarea, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 460, 70, 50));
+
+        jButtonSiguientePre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/siguiente.png"))); // NOI18N
         getContentPane().add(jButtonSiguientePre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 460, 70, 50));
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 0, 570, 530));
 
