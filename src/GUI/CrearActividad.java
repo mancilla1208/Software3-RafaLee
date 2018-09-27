@@ -31,6 +31,18 @@ public class CrearActividad extends javax.swing.JFrame {
         jTextFieldRespuesta3.setVisible(false);
         jTextFieldRespuesta4.setVisible(false);
 
+        jButtonSiguientePre.setOpaque(false);
+        jButtonSiguientePre.setContentAreaFilled(false);
+        jButtonSiguientePre.setBorderPainted(false);
+
+        jButtonGuardarTarea.setOpaque(false);
+        jButtonGuardarTarea.setContentAreaFilled(false);
+        jButtonGuardarTarea.setBorderPainted(false);
+
+        jButtonVolver.setOpaque(false);
+        jButtonVolver.setContentAreaFilled(false);
+        jButtonVolver.setBorderPainted(false);
+
     }
 
     /**
@@ -63,9 +75,10 @@ public class CrearActividad extends javax.swing.JFrame {
         jScrollPaneRespuesta = new javax.swing.JScrollPane();
         jTextAreaRespuesta = new javax.swing.JTextArea();
         jButtonVolver = new javax.swing.JButton();
-        jButtonAceptar = new javax.swing.JButton();
         jButtonExaminarGeneral = new javax.swing.JButton();
         jLabelNombreArchivoGeneral = new javax.swing.JLabel();
+        jButtonGuardarTarea = new javax.swing.JButton();
+        jButtonSiguientePre = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -150,8 +163,9 @@ public class CrearActividad extends javax.swing.JFrame {
         jButtonExaminarPre.setText("Examinar");
         jPanel2.add(jButtonExaminarPre, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 229, 101, -1));
 
+        jLabelNombreArchivoPre.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         jLabelNombreArchivoPre.setText("Nombre de archivo cargado");
-        jPanel2.add(jLabelNombreArchivoPre, new org.netbeans.lib.awtextra.AbsoluteConstraints(158, 233, 288, -1));
+        jPanel2.add(jLabelNombreArchivoPre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, 288, 20));
 
         jScrollPaneRespuesta.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Respuesta", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 0, 12))); // NOI18N
 
@@ -162,21 +176,27 @@ public class CrearActividad extends javax.swing.JFrame {
         jPanel2.add(jScrollPaneRespuesta, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 480, 120));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 530, 280));
-        jPanel2.getAccessibleContext().setAccessibleName("Preguntas");
 
+        jButtonVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Exit.png"))); // NOI18N
         jButtonVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonVolverActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 460, 70, 50));
-        getContentPane().add(jButtonAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 460, 70, 50));
+        getContentPane().add(jButtonVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 460, 70, 50));
 
         jButtonExaminarGeneral.setText("Examinar");
         getContentPane().add(jButtonExaminarGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 100, -1));
 
+        jLabelNombreArchivoGeneral.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         jLabelNombreArchivoGeneral.setText("Nombre de archivo de lectura general");
-        getContentPane().add(jLabelNombreArchivoGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 180, 20));
+        getContentPane().add(jLabelNombreArchivoGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 290, 20));
+
+        jButtonGuardarTarea.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/GuardarTarea.png"))); // NOI18N
+        getContentPane().add(jButtonGuardarTarea, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 460, 70, 50));
+
+        jButtonSiguientePre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/siguiente.png"))); // NOI18N
+        getContentPane().add(jButtonSiguientePre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 460, 70, 50));
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 0, 570, 530));
 
         pack();
@@ -270,9 +290,10 @@ public class CrearActividad extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonAceptar;
     private javax.swing.JButton jButtonExaminarGeneral;
     private javax.swing.JButton jButtonExaminarPre;
+    private javax.swing.JButton jButtonGuardarTarea;
+    private javax.swing.JButton jButtonSiguientePre;
     private javax.swing.JButton jButtonTipoPre;
     private javax.swing.JButton jButtonVolver;
     private javax.swing.JComboBox<String> jComboBoxTipoPreguntas;

@@ -23,10 +23,12 @@ public class GestionarEstudiante extends javax.swing.JFrame {
     public GestionarEstudiante() {
         initComponents();
         this.setLocationRelativeTo(null);
+        jPanelAddEstu.setBackground(new Color(222, 243, 252, 30));
 
-        jButtonAñadirEstu.setOpaque(false);
-        jButtonAñadirEstu.setContentAreaFilled(false);
-        jButtonAñadirEstu.setBorderPainted(false);
+        jButtonAñadirEstu.setBackground(new Color(222, 243, 252, 0));
+//        jButtonAñadirEstu.setOpaque(false);
+//        jButtonAñadirEstu.setContentAreaFilled(false);
+//        jButtonAñadirEstu.setBorderPainted(false);
 
         jButtonEditar.setOpaque(false);
         jButtonEditar.setContentAreaFilled(false);
@@ -59,13 +61,13 @@ public class GestionarEstudiante extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         txtGrado = new javax.swing.JTextField();
-        jButtonAñadirEstu = new javax.swing.JButton();
         jPanelEliModiEstu = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableListaEstu = new javax.swing.JTable();
         jButtonEliminar = new javax.swing.JButton();
         jButtonEditar = new javax.swing.JButton();
         jButtonVolver = new javax.swing.JButton();
+        jButtonAñadirEstu = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -98,19 +100,12 @@ public class GestionarEstudiante extends javax.swing.JFrame {
             }
         });
 
-        jButtonAñadirEstu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Agregar.png"))); // NOI18N
-        jButtonAñadirEstu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAñadirEstuActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanelAddEstuLayout = new javax.swing.GroupLayout(jPanelAddEstu);
         jPanelAddEstu.setLayout(jPanelAddEstuLayout);
         jPanelAddEstuLayout.setHorizontalGroup(
             jPanelAddEstuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelAddEstuLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addContainerGap()
                 .addGroup(jPanelAddEstuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
@@ -118,12 +113,10 @@ public class GestionarEstudiante extends javax.swing.JFrame {
                 .addGroup(jPanelAddEstuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelAddEstuLayout.createSequentialGroup()
                         .addComponent(txtGrado, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonAñadirEstu)
-                        .addGap(44, 44, 44))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanelAddEstuLayout.createSequentialGroup()
                         .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(71, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanelAddEstuLayout.setVerticalGroup(
             jPanelAddEstuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,19 +125,14 @@ public class GestionarEstudiante extends javax.swing.JFrame {
                 .addGroup(jPanelAddEstuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanelAddEstuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelAddEstuLayout.createSequentialGroup()
-                        .addGap(0, 13, Short.MAX_VALUE)
-                        .addComponent(jButtonAñadirEstu))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAddEstuLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanelAddEstuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(txtGrado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(22, 22, 22))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addGroup(jPanelAddEstuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtGrado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22))
         );
 
-        getContentPane().add(jPanelAddEstu, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 460, 130));
+        getContentPane().add(jPanelAddEstu, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 380, 130));
 
         jPanelEliModiEstu.setBackground(new java.awt.Color(222, 243, 252));
         jPanelEliModiEstu.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Eliminar/Modificar", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
@@ -224,6 +212,14 @@ public class GestionarEstudiante extends javax.swing.JFrame {
         });
         getContentPane().add(jButtonVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 420, 60, 50));
 
+        jButtonAñadirEstu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Agregar.png"))); // NOI18N
+        jButtonAñadirEstu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAñadirEstuActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonAñadirEstu, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 120, 52, 46));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoGestionEstu.jpg"))); // NOI18N
         jLabel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 255), 2, true));
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 490));
@@ -283,10 +279,7 @@ public class GestionarEstudiante extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
-        char v = evt.getKeyChar();
-        if ((v < 'a' || v > 'z') && (v < 'A' || v > 'Z')) {
-            evt.consume();
-        }
+
     }//GEN-LAST:event_txtNombreKeyTyped
 
     private void txtGradoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGradoKeyTyped

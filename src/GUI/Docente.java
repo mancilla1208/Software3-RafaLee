@@ -19,6 +19,7 @@ public class Docente extends javax.swing.JInternalFrame {
      */
     public Docente() {
         initComponents();
+
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
 
         jButtonCrearTarea.setOpaque(false);
@@ -93,6 +94,11 @@ public class Docente extends javax.swing.JInternalFrame {
         jPanelBarraDocente.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 42, 65, 13));
 
         jButtonCrearTarea.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/CrearTarea.png"))); // NOI18N
+        jButtonCrearTarea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCrearTareaActionPerformed(evt);
+            }
+        });
         jPanelBarraDocente.add(jButtonCrearTarea, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 20, 54, -1));
 
         jLabel3.setFont(new java.awt.Font("Monotype Corsiva", 0, 18)); // NOI18N
@@ -391,6 +397,13 @@ public class Docente extends javax.swing.JInternalFrame {
     private void jButtonGuardarTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarTareaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonGuardarTareaActionPerformed
+
+    private void jButtonCrearTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearTareaActionPerformed
+
+        CrearActividad nueva = new CrearActividad();
+        nueva.show();
+
+    }//GEN-LAST:event_jButtonCrearTareaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

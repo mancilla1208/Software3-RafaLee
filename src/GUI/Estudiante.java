@@ -49,7 +49,7 @@ public class Estudiante extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabelNombreEstudiante = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jButtonSalirEstudiante = new javax.swing.JButton();
         jButtonVolverEstu = new javax.swing.JButton();
@@ -122,9 +122,9 @@ public class Estudiante extends javax.swing.JInternalFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 20)); // NOI18N
-        jLabel1.setText("Pepito Perez");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 13, -1, 21));
+        jLabelNombreEstudiante.setFont(new java.awt.Font("Comic Sans MS", 1, 20)); // NOI18N
+        jLabelNombreEstudiante.setText("Pepito Perez");
+        jPanel2.add(jLabelNombreEstudiante, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 13, -1, 21));
 
         jLabel2.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
         jLabel2.setText("Grado 1");
@@ -273,7 +273,6 @@ public class Estudiante extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonSalirEstudiante;
     private javax.swing.JButton jButtonVolverEstu;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -283,6 +282,7 @@ public class Estudiante extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    public static javax.swing.JLabel jLabelNombreEstudiante;
     private javax.swing.JLabel jLabelSalirEstu;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
