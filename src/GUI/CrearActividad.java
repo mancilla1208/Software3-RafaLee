@@ -104,7 +104,6 @@ public class CrearActividad extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanelTipoPreguntas.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tipos de preguntas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 14))); // NOI18N
         jPanelTipoPreguntas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -116,41 +115,27 @@ public class CrearActividad extends javax.swing.JFrame {
         jComboBoxTipoPreguntas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Icfes", "Abierta", "Completar" }));
         jPanelTipoPreguntas.add(jComboBoxTipoPreguntas, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 30, 110, -1));
 
-        getContentPane().add(jPanelTipoPreguntas, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 370, 70));
-
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Preguntas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 14))); // NOI18N
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTextAreaPregunta.setColumns(20);
         jTextAreaPregunta.setRows(5);
         jScrollPane1.setViewportView(jTextAreaPregunta);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 34, 467, 53));
-
         jLabelNumPregunta.setText("No.");
-        jPanel2.add(jLabelNumPregunta, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 34, 25, 31));
 
         jLabelPreguntaA.setText("a)");
-        jPanel2.add(jLabelPreguntaA, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 101, -1, -1));
 
         jLabelPreguntaB.setText("b)");
-        jPanel2.add(jLabelPreguntaB, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 132, -1, -1));
 
         jLabelPreguntaC.setText("c)");
-        jPanel2.add(jLabelPreguntaC, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 163, -1, -1));
 
         jLabelPreguntaD.setText("d)");
-        jPanel2.add(jLabelPreguntaD, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 194, -1, -1));
 
         jTextFieldRespuesta1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldRespuesta1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jTextFieldRespuesta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(67, 98, 447, -1));
-        jPanel2.add(jTextFieldRespuesta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(67, 129, 447, -1));
-        jPanel2.add(jTextFieldRespuesta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(67, 160, 447, -1));
-        jPanel2.add(jTextFieldRespuesta4, new org.netbeans.lib.awtextra.AbsoluteConstraints(67, 191, 447, -1));
 
         jButtonCargarPre.setText("Examinar");
         jButtonCargarPre.addActionListener(new java.awt.event.ActionListener() {
@@ -158,11 +143,9 @@ public class CrearActividad extends javax.swing.JFrame {
                 jButtonCargarPreActionPerformed(evt);
             }
         });
-        jPanel2.add(jButtonCargarPre, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 229, 101, -1));
 
         jLabelNombreArchivoPre.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        jLabelNombreArchivoPre.setText("Nombre de archivo cargado");
-        jPanel2.add(jLabelNombreArchivoPre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, 288, 20));
+        jLabelNombreArchivoPre.setText("Nombre de archivo");
 
         jScrollPaneRespuesta.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Respuesta", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 0, 12))); // NOI18N
 
@@ -170,17 +153,95 @@ public class CrearActividad extends javax.swing.JFrame {
         jTextAreaRespuesta.setRows(5);
         jScrollPaneRespuesta.setViewportView(jTextAreaRespuesta);
 
-        jPanel2.add(jScrollPaneRespuesta, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 480, 120));
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabelNumPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jButtonCargarPre, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabelNombreArchivoPre, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addComponent(jLabelPreguntaC))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addComponent(jLabelPreguntaA))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jTextFieldRespuesta3, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jTextFieldRespuesta2, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addComponent(jLabelPreguntaB))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addComponent(jLabelPreguntaD))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jTextFieldRespuesta4, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jTextFieldRespuesta1, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPaneRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelNumPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addComponent(jLabelPreguntaC))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabelPreguntaA))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(62, 62, 62)
+                        .addComponent(jTextFieldRespuesta3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(jTextFieldRespuesta2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(jLabelPreguntaB))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(96, 96, 96)
+                        .addComponent(jLabelPreguntaD))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(93, 93, 93)
+                        .addComponent(jTextFieldRespuesta4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldRespuesta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jScrollPaneRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonCargarPre, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelNombreArchivoPre, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 530, 280));
-
-        jButtonVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Exit.png"))); // NOI18N
+        jButtonVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Salir.png"))); // NOI18N
         jButtonVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonVolverActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 480, 70, 50));
 
         jButtonCargarArchivoGeneral.setText("Examinar");
         jButtonCargarArchivoGeneral.addActionListener(new java.awt.event.ActionListener() {
@@ -188,22 +249,18 @@ public class CrearActividad extends javax.swing.JFrame {
                 jButtonCargarArchivoGeneralActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonCargarArchivoGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 100, -1));
 
         jLabelNombreArchivoGeneral.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        jLabelNombreArchivoGeneral.setText("Nombre de archivo de lectura general");
-        getContentPane().add(jLabelNombreArchivoGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 150, 290, 20));
+        jLabelNombreArchivoGeneral.setText("Nombre de archivo ");
 
         jButtonGuardarTarea.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/GuardarTarea.png"))); // NOI18N
-        getContentPane().add(jButtonGuardarTarea, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 480, 70, 50));
 
-        jButtonSiguientePre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/siguiente.png"))); // NOI18N
+        jButtonSiguientePre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/siguientePre.png"))); // NOI18N
         jButtonSiguientePre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSiguientePreActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonSiguientePre, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 480, 70, 50));
 
         jButtonAñadirTipoPre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/AgregarTarea.png"))); // NOI18N
         jButtonAñadirTipoPre.addActionListener(new java.awt.event.ActionListener() {
@@ -211,10 +268,60 @@ public class CrearActividad extends javax.swing.JFrame {
                 jButtonAñadirTipoPreActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonAñadirTipoPre, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 80, 50, 60));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoBordeCT2.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 580));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(130, 130, 130)
+                .addComponent(jPanelTipoPreguntas, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(jButtonAñadirTipoPre, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(140, 140, 140)
+                .addComponent(jButtonCargarArchivoGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(jLabelNombreArchivoGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(140, 140, 140)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(260, 260, 260)
+                .addComponent(jButtonSiguientePre, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(jButtonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(jButtonGuardarTarea, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(70, 70, 70)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanelTipoPreguntas, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jButtonAñadirTipoPre, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabelNombreArchivoGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonCargarArchivoGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(7, 7, 7)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonSiguientePre, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonGuardarTarea, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -275,13 +382,14 @@ public class CrearActividad extends javax.swing.JFrame {
         if (seleccionado.showDialog(null, "ABRIR ARCHIVO") == JFileChooser.APPROVE_OPTION) {
             archivo = seleccionado.getSelectedFile();
             if (archivo.canRead()) {
-                if (archivo.getName().endsWith("txt")) {
+                if (archivo.getName().endsWith("txt") || archivo.getName().endsWith("doc") || archivo.getName().endsWith("pdf")) {
                     String contenido = gestion.AbrirATexto(archivo);
-                    // txtAreaTexto.setText(contenido);
+                    jLabelNombreArchivoGeneral.setText(archivo.getName());
                 } else {
-                    if (archivo.getName().endsWith("jpg") || archivo.getName().endsWith("png") || archivo.getName().endsWith("gif")) {
+                    if (archivo.getName().endsWith("jpg") || archivo.getName().endsWith("png") || archivo.getName().endsWith("gif") || archivo.getName().endsWith("jpeg")) {
                         bytesImg = gestion.AbrirAImagen(archivo);
-                        //   lblImagen.setIcon(new ImageIcon(bytesImg));
+                        jLabelNombreArchivoGeneral.setText(archivo.getName());
+
                     } else {
                         JOptionPane.showMessageDialog(null, "Por favor seleccione un archivo de texto o de imagen.");
                     }
@@ -298,13 +406,13 @@ public class CrearActividad extends javax.swing.JFrame {
         if (seleccionado.showDialog(null, "ABRIR ARCHIVO") == JFileChooser.APPROVE_OPTION) {
             archivo = seleccionado.getSelectedFile();
             if (archivo.canRead()) {
-                if (archivo.getName().endsWith("txt")) {
+                if (archivo.getName().endsWith("txt") || archivo.getName().endsWith("doc") || archivo.getName().endsWith("pdf")) {
                     String contenido = gestion.AbrirATexto(archivo);
-                    //txtAreaTexto.setText(contenido);
+                    jLabelNombreArchivoPre.setText(archivo.getName());
                 } else {
-                    if (archivo.getName().endsWith("jpg") || archivo.getName().endsWith("png") || archivo.getName().endsWith("gif")) {
+                    if (archivo.getName().endsWith("jpg") || archivo.getName().endsWith("png") || archivo.getName().endsWith("gif") || archivo.getName().endsWith("jpeg")) {
                         bytesImg = gestion.AbrirAImagen(archivo);
-                        //  lblImagen.setIcon(new ImageIcon(bytesImg));
+                        jLabelNombreArchivoPre.setText(archivo.getName());
                     } else {
                         JOptionPane.showMessageDialog(null, "Por favor seleccione un archivo de texto o de imagen.");
                     }
