@@ -275,13 +275,14 @@ public class CrearActividad extends javax.swing.JFrame {
         if (seleccionado.showDialog(null, "ABRIR ARCHIVO") == JFileChooser.APPROVE_OPTION) {
             archivo = seleccionado.getSelectedFile();
             if (archivo.canRead()) {
-                if (archivo.getName().endsWith("txt")) {
+                if (archivo.getName().endsWith("txt") || archivo.getName().endsWith("doc") || archivo.getName().endsWith("pdf")) {
                     String contenido = gestion.AbrirATexto(archivo);
-                    // txtAreaTexto.setText(contenido);
+                    jLabelNombreArchivoGeneral.setText(archivo.getName());
                 } else {
                     if (archivo.getName().endsWith("jpg") || archivo.getName().endsWith("png") || archivo.getName().endsWith("gif")) {
                         bytesImg = gestion.AbrirAImagen(archivo);
-                        //   lblImagen.setIcon(new ImageIcon(bytesImg));
+                        jLabelNombreArchivoGeneral.setText(archivo.getName());
+
                     } else {
                         JOptionPane.showMessageDialog(null, "Por favor seleccione un archivo de texto o de imagen.");
                     }
@@ -298,13 +299,13 @@ public class CrearActividad extends javax.swing.JFrame {
         if (seleccionado.showDialog(null, "ABRIR ARCHIVO") == JFileChooser.APPROVE_OPTION) {
             archivo = seleccionado.getSelectedFile();
             if (archivo.canRead()) {
-                if (archivo.getName().endsWith("txt")) {
+                if (archivo.getName().endsWith("txt") || archivo.getName().endsWith("doc") || archivo.getName().endsWith("pdf")) {
                     String contenido = gestion.AbrirATexto(archivo);
-                    //txtAreaTexto.setText(contenido);
+                    jLabelNombreArchivoPre.setText(archivo.getName());
                 } else {
                     if (archivo.getName().endsWith("jpg") || archivo.getName().endsWith("png") || archivo.getName().endsWith("gif")) {
                         bytesImg = gestion.AbrirAImagen(archivo);
-                        //  lblImagen.setIcon(new ImageIcon(bytesImg));
+                        jLabelNombreArchivoPre.setText(archivo.getName());
                     } else {
                         JOptionPane.showMessageDialog(null, "Por favor seleccione un archivo de texto o de imagen.");
                     }
