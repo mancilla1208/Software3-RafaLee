@@ -5,6 +5,9 @@
  */
 package GUI;
 
+import com.sun.awt.AWTUtilities;
+import java.awt.Color;
+
 /**
  *
  * @author andre
@@ -17,7 +20,11 @@ public class CrearActividad extends javax.swing.JFrame {
     public CrearActividad() {
         initComponents();
         this.setLocationRelativeTo(null);
-
+        AWTUtilities.setWindowOpaque(this, false);
+        
+        jPanelTipoPreguntas.setBackground(new Color(254, 227, 198, 200));
+        jPanel2.setBackground(new Color(254, 227, 198, 200));
+        
         jButtonExaminarPre.setVisible(false);
         jLabelNombreArchivoPre.setVisible(false);
         jTextAreaRespuesta.setVisible(false);
@@ -30,19 +37,23 @@ public class CrearActividad extends javax.swing.JFrame {
         jTextFieldRespuesta2.setVisible(false);
         jTextFieldRespuesta3.setVisible(false);
         jTextFieldRespuesta4.setVisible(false);
-
+        
         jButtonSiguientePre.setOpaque(false);
         jButtonSiguientePre.setContentAreaFilled(false);
         jButtonSiguientePre.setBorderPainted(false);
-
+        
+        jButtonAñadirTipoPre.setOpaque(false);
+        jButtonAñadirTipoPre.setContentAreaFilled(false);
+        jButtonAñadirTipoPre.setBorderPainted(false);
+        
         jButtonGuardarTarea.setOpaque(false);
         jButtonGuardarTarea.setContentAreaFilled(false);
         jButtonGuardarTarea.setBorderPainted(false);
-
+        
         jButtonVolver.setOpaque(false);
         jButtonVolver.setContentAreaFilled(false);
         jButtonVolver.setBorderPainted(false);
-
+        
     }
 
     /**
@@ -57,7 +68,6 @@ public class CrearActividad extends javax.swing.JFrame {
         jPanelTipoPreguntas = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jComboBoxTipoPreguntas = new javax.swing.JComboBox<>();
-        jButtonTipoPre = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreaPregunta = new javax.swing.JTextArea();
@@ -79,6 +89,7 @@ public class CrearActividad extends javax.swing.JFrame {
         jLabelNombreArchivoGeneral = new javax.swing.JLabel();
         jButtonGuardarTarea = new javax.swing.JButton();
         jButtonSiguientePre = new javax.swing.JButton();
+        jButtonAñadirTipoPre = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -86,45 +97,16 @@ public class CrearActividad extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanelTipoPreguntas.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tipos de preguntas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 14))); // NOI18N
+        jPanelTipoPreguntas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         jLabel2.setText("Seleccione un tipo de pregunta:");
+        jPanelTipoPreguntas.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, 23));
 
         jComboBoxTipoPreguntas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Icfes", "Abierta", "Completar" }));
+        jPanelTipoPreguntas.add(jComboBoxTipoPreguntas, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 30, 110, -1));
 
-        jButtonTipoPre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonTipoPreActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanelTipoPreguntasLayout = new javax.swing.GroupLayout(jPanelTipoPreguntas);
-        jPanelTipoPreguntas.setLayout(jPanelTipoPreguntasLayout);
-        jPanelTipoPreguntasLayout.setHorizontalGroup(
-            jPanelTipoPreguntasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelTipoPreguntasLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBoxTipoPreguntas, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addComponent(jButtonTipoPre, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
-        );
-        jPanelTipoPreguntasLayout.setVerticalGroup(
-            jPanelTipoPreguntasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelTipoPreguntasLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelTipoPreguntasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxTipoPreguntas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
-            .addGroup(jPanelTipoPreguntasLayout.createSequentialGroup()
-                .addComponent(jButtonTipoPre, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(jPanelTipoPreguntas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 530, 80));
+        getContentPane().add(jPanelTipoPreguntas, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 370, 70));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Preguntas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 14))); // NOI18N
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -175,7 +157,7 @@ public class CrearActividad extends javax.swing.JFrame {
 
         jPanel2.add(jScrollPaneRespuesta, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 480, 120));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 530, 280));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 530, 280));
 
         jButtonVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Exit.png"))); // NOI18N
         jButtonVolver.addActionListener(new java.awt.event.ActionListener() {
@@ -183,21 +165,36 @@ public class CrearActividad extends javax.swing.JFrame {
                 jButtonVolverActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 460, 70, 50));
+        getContentPane().add(jButtonVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 480, 70, 50));
 
         jButtonExaminarGeneral.setText("Examinar");
-        getContentPane().add(jButtonExaminarGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 100, -1));
+        jButtonExaminarGeneral.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExaminarGeneralActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonExaminarGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 100, -1));
 
         jLabelNombreArchivoGeneral.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         jLabelNombreArchivoGeneral.setText("Nombre de archivo de lectura general");
-        getContentPane().add(jLabelNombreArchivoGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 290, 20));
+        getContentPane().add(jLabelNombreArchivoGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 150, 290, 20));
 
         jButtonGuardarTarea.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/GuardarTarea.png"))); // NOI18N
-        getContentPane().add(jButtonGuardarTarea, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 460, 70, 50));
+        getContentPane().add(jButtonGuardarTarea, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 480, 70, 50));
 
         jButtonSiguientePre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/siguiente.png"))); // NOI18N
-        getContentPane().add(jButtonSiguientePre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 460, 70, 50));
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 0, 570, 530));
+        getContentPane().add(jButtonSiguientePre, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 480, 70, 50));
+
+        jButtonAñadirTipoPre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/AgregarTarea.png"))); // NOI18N
+        jButtonAñadirTipoPre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAñadirTipoPreActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonAñadirTipoPre, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 80, 50, 60));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoBordeCT2.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 580));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -206,53 +203,57 @@ public class CrearActividad extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldRespuesta1ActionPerformed
 
-    private void jButtonTipoPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTipoPreActionPerformed
-
+    private void jButtonAñadirTipoPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAñadirTipoPreActionPerformed
+        
         if (jComboBoxTipoPreguntas.getSelectedItem() == "Icfes") {
             jTextAreaRespuesta.setVisible(false);
             jScrollPaneRespuesta.setVisible(false);
-
+            
             jLabelPreguntaA.setVisible(true);
             jLabelPreguntaB.setVisible(true);
             jLabelPreguntaC.setVisible(true);
             jLabelPreguntaD.setVisible(true);
-
+            
             jTextFieldRespuesta1.setVisible(true);
             jTextFieldRespuesta2.setVisible(true);
             jTextFieldRespuesta3.setVisible(true);
             jTextFieldRespuesta4.setVisible(true);
-
+            
             jButtonExaminarPre.setVisible(true);
             jLabelNombreArchivoPre.setVisible(true);
-
+            
         } else if (jComboBoxTipoPreguntas.getSelectedItem() == "Abierta") {
-
+            
             jTextAreaRespuesta.setVisible(true);
             jScrollPaneRespuesta.setVisible(true);
-
+            
             jLabelPreguntaA.setVisible(false);
             jLabelPreguntaB.setVisible(false);
             jLabelPreguntaC.setVisible(false);
             jLabelPreguntaD.setVisible(false);
-
+            
             jTextFieldRespuesta1.setVisible(false);
             jTextFieldRespuesta2.setVisible(false);
             jTextFieldRespuesta3.setVisible(false);
             jTextFieldRespuesta4.setVisible(false);
-
+            
             jButtonExaminarPre.setVisible(true);
             jLabelNombreArchivoPre.setVisible(true);
-
+            
         } else if (jComboBoxTipoPreguntas.getSelectedItem() == "Completar") {
-
+            
         }
+        
 
-
-    }//GEN-LAST:event_jButtonTipoPreActionPerformed
+    }//GEN-LAST:event_jButtonAñadirTipoPreActionPerformed
 
     private void jButtonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolverActionPerformed
         dispose();
     }//GEN-LAST:event_jButtonVolverActionPerformed
+
+    private void jButtonExaminarGeneralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExaminarGeneralActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonExaminarGeneralActionPerformed
 
     /**
      * @param args the command line arguments
@@ -290,11 +291,11 @@ public class CrearActividad extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAñadirTipoPre;
     private javax.swing.JButton jButtonExaminarGeneral;
     private javax.swing.JButton jButtonExaminarPre;
     private javax.swing.JButton jButtonGuardarTarea;
     private javax.swing.JButton jButtonSiguientePre;
-    private javax.swing.JButton jButtonTipoPre;
     private javax.swing.JButton jButtonVolver;
     private javax.swing.JComboBox<String> jComboBoxTipoPreguntas;
     private javax.swing.JLabel jLabel1;
