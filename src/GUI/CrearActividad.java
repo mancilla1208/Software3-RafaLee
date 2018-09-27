@@ -195,8 +195,6 @@ public class CrearActividad extends javax.swing.JFrame {
 
         jButtonGuardarTarea.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/GuardarTarea.png"))); // NOI18N
         getContentPane().add(jButtonGuardarTarea, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 460, 70, 50));
-
-        jButtonSiguientePre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/siguiente.png"))); // NOI18N
         getContentPane().add(jButtonSiguientePre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 460, 70, 50));
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 0, 570, 530));
 
