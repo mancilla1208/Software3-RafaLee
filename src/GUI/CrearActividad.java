@@ -25,7 +25,7 @@ public class CrearActividad extends javax.swing.JFrame {
         jPanelTipoPreguntas.setBackground(new Color(254, 227, 198, 200));
         jPanel2.setBackground(new Color(254, 227, 198, 200));
         
-        jButtonExaminarPre.setVisible(false);
+        jButtonCargarPre.setVisible(false);
         jLabelNombreArchivoPre.setVisible(false);
         jTextAreaRespuesta.setVisible(false);
         jScrollPaneRespuesta.setVisible(false);
@@ -80,12 +80,12 @@ public class CrearActividad extends javax.swing.JFrame {
         jTextFieldRespuesta2 = new javax.swing.JTextField();
         jTextFieldRespuesta3 = new javax.swing.JTextField();
         jTextFieldRespuesta4 = new javax.swing.JTextField();
-        jButtonExaminarPre = new javax.swing.JButton();
+        jButtonCargarPre = new javax.swing.JButton();
         jLabelNombreArchivoPre = new javax.swing.JLabel();
         jScrollPaneRespuesta = new javax.swing.JScrollPane();
         jTextAreaRespuesta = new javax.swing.JTextArea();
         jButtonVolver = new javax.swing.JButton();
-        jButtonExaminarGeneral = new javax.swing.JButton();
+        jButtonCargarArchivoGeneral = new javax.swing.JButton();
         jLabelNombreArchivoGeneral = new javax.swing.JLabel();
         jButtonGuardarTarea = new javax.swing.JButton();
         jButtonSiguientePre = new javax.swing.JButton();
@@ -142,8 +142,8 @@ public class CrearActividad extends javax.swing.JFrame {
         jPanel2.add(jTextFieldRespuesta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(67, 160, 447, -1));
         jPanel2.add(jTextFieldRespuesta4, new org.netbeans.lib.awtextra.AbsoluteConstraints(67, 191, 447, -1));
 
-        jButtonExaminarPre.setText("Examinar");
-        jPanel2.add(jButtonExaminarPre, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 229, 101, -1));
+        jButtonCargarPre.setText("Examinar");
+        jPanel2.add(jButtonCargarPre, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 229, 101, -1));
 
         jLabelNombreArchivoPre.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         jLabelNombreArchivoPre.setText("Nombre de archivo cargado");
@@ -167,13 +167,13 @@ public class CrearActividad extends javax.swing.JFrame {
         });
         getContentPane().add(jButtonVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 480, 70, 50));
 
-        jButtonExaminarGeneral.setText("Examinar");
-        jButtonExaminarGeneral.addActionListener(new java.awt.event.ActionListener() {
+        jButtonCargarArchivoGeneral.setText("Examinar");
+        jButtonCargarArchivoGeneral.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonExaminarGeneralActionPerformed(evt);
+                jButtonCargarArchivoGeneralActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonExaminarGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 100, -1));
+        getContentPane().add(jButtonCargarArchivoGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 100, -1));
 
         jLabelNombreArchivoGeneral.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         jLabelNombreArchivoGeneral.setText("Nombre de archivo de lectura general");
@@ -183,6 +183,11 @@ public class CrearActividad extends javax.swing.JFrame {
         getContentPane().add(jButtonGuardarTarea, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 480, 70, 50));
 
         jButtonSiguientePre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/siguiente.png"))); // NOI18N
+        jButtonSiguientePre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSiguientePreActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButtonSiguientePre, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 480, 70, 50));
 
         jButtonAñadirTipoPre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/AgregarTarea.png"))); // NOI18N
@@ -219,7 +224,7 @@ public class CrearActividad extends javax.swing.JFrame {
             jTextFieldRespuesta3.setVisible(true);
             jTextFieldRespuesta4.setVisible(true);
             
-            jButtonExaminarPre.setVisible(true);
+            jButtonCargarPre.setVisible(true);
             jLabelNombreArchivoPre.setVisible(true);
             
         } else if (jComboBoxTipoPreguntas.getSelectedItem() == "Abierta") {
@@ -237,7 +242,7 @@ public class CrearActividad extends javax.swing.JFrame {
             jTextFieldRespuesta3.setVisible(false);
             jTextFieldRespuesta4.setVisible(false);
             
-            jButtonExaminarPre.setVisible(true);
+            jButtonCargarPre.setVisible(true);
             jLabelNombreArchivoPre.setVisible(true);
             
         } else if (jComboBoxTipoPreguntas.getSelectedItem() == "Completar") {
@@ -251,9 +256,13 @@ public class CrearActividad extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButtonVolverActionPerformed
 
-    private void jButtonExaminarGeneralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExaminarGeneralActionPerformed
+    private void jButtonCargarArchivoGeneralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCargarArchivoGeneralActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonExaminarGeneralActionPerformed
+    }//GEN-LAST:event_jButtonCargarArchivoGeneralActionPerformed
+
+    private void jButtonSiguientePreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSiguientePreActionPerformed
+        
+    }//GEN-LAST:event_jButtonSiguientePreActionPerformed
 
     /**
      * @param args the command line arguments
@@ -292,8 +301,8 @@ public class CrearActividad extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAñadirTipoPre;
-    private javax.swing.JButton jButtonExaminarGeneral;
-    private javax.swing.JButton jButtonExaminarPre;
+    private javax.swing.JButton jButtonCargarArchivoGeneral;
+    private javax.swing.JButton jButtonCargarPre;
     private javax.swing.JButton jButtonGuardarTarea;
     private javax.swing.JButton jButtonSiguientePre;
     private javax.swing.JButton jButtonVolver;
