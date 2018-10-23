@@ -7,7 +7,7 @@ package Logica;
 
 /**
  *
- * @author andre
+ * @author Andres Mancilla
  */
 public class Pregunta_Icfes {
 
