@@ -67,7 +67,7 @@ public class Principal extends javax.swing.JFrame {
         jLabelEstudiante = new javax.swing.JLabel();
         jLabelDocente = new javax.swing.JLabel();
         jButtonExit = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("RafaLee");
@@ -107,10 +107,10 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Probar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setText("jButton2");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -120,7 +120,7 @@ public class Principal extends javax.swing.JFrame {
         VentaPrincipal.setLayer(jLabelEstudiante, javax.swing.JLayeredPane.DEFAULT_LAYER);
         VentaPrincipal.setLayer(jLabelDocente, javax.swing.JLayeredPane.DEFAULT_LAYER);
         VentaPrincipal.setLayer(jButtonExit, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        VentaPrincipal.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        VentaPrincipal.setLayer(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout VentaPrincipalLayout = new javax.swing.GroupLayout(VentaPrincipal);
         VentaPrincipal.setLayout(VentaPrincipalLayout);
@@ -143,8 +143,8 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(jLabelBienvenidos, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(176, 176, 176))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VentaPrincipalLayout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(29, 29, 29)
+                        .addComponent(jButton2)
+                        .addGap(53, 53, 53)
                         .addComponent(jButtonExit)
                         .addContainerGap())))
         );
@@ -152,9 +152,9 @@ public class Principal extends javax.swing.JFrame {
             VentaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VentaPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(VentaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonExit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(VentaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButtonExit)
+                    .addComponent(jButton2))
                 .addGap(18, 18, 18)
                 .addComponent(jLabelBienvenidos, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -219,7 +219,8 @@ public class Principal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jButtonExitActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
         Pool metodospool = new Pool();
         java.sql.Connection cn = null;
         try {
@@ -236,7 +237,8 @@ public class Principal extends javax.swing.JFrame {
                 System.out.println(ex);
             }
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -282,7 +284,7 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JDesktopPane VentaPrincipal;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonExit;
     public static javax.swing.JLabel jLabelBienvenidos;
     public static javax.swing.JLabel jLabelDocente;

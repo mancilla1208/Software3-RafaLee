@@ -15,7 +15,7 @@ import org.apache.commons.dbcp.BasicDataSource;
 public class Pool {
 
     public DataSource dataSource;
-    public String db = "RafaLee_DB";
+    public String db = "rafalee_bd";
     public String url = "jdbc:mysql://localhost/" + db;
     public String user = "andres";
     public String pass = "0702";
