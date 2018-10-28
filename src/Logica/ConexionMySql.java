@@ -22,8 +22,8 @@ public class ConexionMySql {
 
     public String BD = "RafaLee_BD";
     public String url = "jdbc:mysql://localhost/" + BD;
-    public String usuario = "root";
-    public String contraseña = "1234";
+    public String usuario = "andres";
+    public String contraseña = "0702";
 
     public Connection Conectar() {
         Connection link = null;

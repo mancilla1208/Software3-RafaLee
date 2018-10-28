@@ -181,8 +181,8 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelFondo;
     private javax.swing.JLabel jLabelLogin;
     private javax.swing.JLabel jLabelUser;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextFieldUsuario;
+    public static javax.swing.JPasswordField jPasswordField1;
+    public static javax.swing.JTextField jTextFieldUsuario;
     // End of variables declaration//GEN-END:variables
 
     private static class RoundedBorder implements Border {

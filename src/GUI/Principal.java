@@ -6,6 +6,7 @@
 package GUI;
 
 import Logica.ConexionMySql;
+import Logica.Pool;
 import java.awt.Image;
 import java.awt.Graphics;
 import java.sql.SQLException;
@@ -219,18 +220,22 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonExitActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        ConexionMySql mysql = new ConexionMySql();
-        java.sql.Connection cn = mysql.Conectar();
-        if (!cn.equals(null)) {
-            JOptionPane.showMessageDialog(null, "Conectado");
+        Pool metodospool = new Pool();
+        java.sql.Connection cn = null;
+        try {
+            cn = metodospool.dataSource.getConnection();
+            if (cn != null) {
+                JOptionPane.showMessageDialog(null, "Conectado");
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
             try {
                 cn.close();
             } catch (SQLException ex) {
-                System.out.println("Error al desconectar " + ex);
+                System.out.println(ex);
             }
         }
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
