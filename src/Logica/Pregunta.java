@@ -11,14 +11,9 @@ package Logica;
  */
 public class Pregunta {
 
-    private String enumciado;
-    private int num_pregunta;
-
-    public Pregunta(String enumciado, int num_pregunta) {
-        super();
-        this.enumciado = enumciado;
-        this.num_pregunta = num_pregunta;
-    }
+    public String enumciado;
+    public int num_pregunta;
+    public int documento;
 
     public String getEnumciado() {
         return enumciado;
@@ -34,6 +29,20 @@ public class Pregunta {
 
     public void setNum_pregunta(int num_pregunta) {
         this.num_pregunta = num_pregunta;
+    }
+
+    public int getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(int documento) {
+        this.documento = documento;
+    }
+
+    public Pregunta(String enumciado, int num_pregunta, int documento) {
+        this.enumciado = enumciado;
+        this.num_pregunta = num_pregunta;
+        this.documento = documento;
     }
 
 }
