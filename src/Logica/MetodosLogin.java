@@ -24,7 +24,7 @@ public class MetodosLogin {
         String usuario = Login.jTextFieldUsuario.getText();
         String clave = String.valueOf(Login.jPasswordField1.getPassword());
         int resultado = 0;
-        String SSQL = "SELECT * FROM usuarios WHERE usuario='" + usuario + "' AND clave=sha1('" + clave + "')";
+        String SSQL = "SELECT * FROM rafalee_bd.docente WHERE nombre_usuario='" + usuario + "' AND clave='" + clave + "'";
         Connection conect = null;
         try {
             conect = metodospool.dataSource.getConnection();
@@ -32,6 +32,7 @@ public class MetodosLogin {
             ResultSet rs = st.executeQuery(SSQL);
             if (rs.next()) {
                 resultado = 1;
+                System.out.println("entro a la conexión");
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
