@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import Logica.MetodosLogin;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Insets;
@@ -103,12 +104,11 @@ public class Login extends javax.swing.JFrame {
         Principal.jLabelEstudiante.setVisible(true);
     }//GEN-LAST:event_jB_CancelarLoginActionPerformed
 
+    MetodosLogin metodos = new MetodosLogin();
     private void jB_AceptarLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_AceptarLoginActionPerformed
 
-        char clave[] = jPasswordField1.getPassword();
-        String claseProfe = new String(clave);
-
-        if (jTextFieldUsuario.getText().equals("pensil") && claseProfe.equals("1234")) {
+        if (metodos.validar_ingreso()==1) {
+            System.out.println("entro a la conexión 2");
             this.dispose();
 
             try {
@@ -125,8 +125,10 @@ public class Login extends javax.swing.JFrame {
             }
 
         } else {
+            System.out.println(metodos.validar_ingreso());
+            System.out.println();
             JOptionPane.showMessageDialog(null, "Usuario y/o contraseña incorrectos\n"
-                + "Verifique sus datos y vuelva a intentarlo", "Error", JOptionPane.ERROR_MESSAGE);
+                    + "Verifique sus datos y vuelva a intentarlo", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jB_AceptarLoginActionPerformed
 
@@ -181,8 +183,8 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelFondo;
     private javax.swing.JLabel jLabelLogin;
     private javax.swing.JLabel jLabelUser;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextFieldUsuario;
+    public static javax.swing.JPasswordField jPasswordField1;
+    public static javax.swing.JTextField jTextFieldUsuario;
     // End of variables declaration//GEN-END:variables
 
     private static class RoundedBorder implements Border {
