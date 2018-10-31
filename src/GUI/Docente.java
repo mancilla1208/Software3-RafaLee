@@ -439,7 +439,6 @@ public class Docente extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jButtonCrearTareaActionPerformed
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCrearTarea;
     private javax.swing.JButton jButtonGuardarTarea;
