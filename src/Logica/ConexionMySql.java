@@ -20,16 +20,16 @@ import javax.swing.JOptionPane;
  */
 public class ConexionMySql {
 
-    public String BD = "RafaLee_BD";
+    public String BD = "rafalee_bd";
     public String url = "jdbc:mysql://localhost/" + BD;
     public String usuario = "andres";
-    public String contraseña = "0702";
+    public String clave = "0702";
 
     public Connection Conectar() {
         Connection link = null;
         try {
             Class.forName("org.gjt.mm.mysql.Driver");
-            link = DriverManager.getConnection(this.url, this.usuario, this.contraseña);
+            link = DriverManager.getConnection(this.url, this.usuario, this.clave);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }

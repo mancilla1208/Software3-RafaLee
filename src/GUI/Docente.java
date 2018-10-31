@@ -5,14 +5,25 @@
  */
 package GUI;
 
+import static GUI.GestionarEstudiante.jTableListaEstu;
+import Logica.ConexionMySql;
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author andre
  */
 public class Docente extends javax.swing.JInternalFrame {
+
+    DefaultTableModel modelo = new DefaultTableModel();
+    ConexionMySql cc = new ConexionMySql();
+    Connection cn = cc.Conectar();
 
     /**
      * Creates new form Docente
@@ -369,6 +380,29 @@ public class Docente extends javax.swing.JInternalFrame {
         GestionarEstudiante gestion = new GestionarEstudiante();
         gestion.show();
 
+        String sqlMostrar = "SELECT * FROM rafalee_bd.estudiante";
+        Statement st;
+
+        modelo.addColumn("Id");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Grado");
+
+        jTableListaEstu.setModel(modelo);
+
+        String[] Dato = new String[3];
+        try {
+            st = cn.createStatement();
+            ResultSet result = st.executeQuery(sqlMostrar);
+            while (result.next()) {
+                Dato[0] = result.getString(1);
+                Dato[1] = result.getString(2);
+                Dato[2] = result.getString(3);
+                modelo.addRow(Dato);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
@@ -404,7 +438,6 @@ public class Docente extends javax.swing.JInternalFrame {
         nueva.show();
 
     }//GEN-LAST:event_jButtonCrearTareaActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCrearTarea;
