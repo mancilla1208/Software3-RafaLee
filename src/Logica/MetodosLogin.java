@@ -18,7 +18,8 @@ import javax.swing.JOptionPane;
  */
 public class MetodosLogin {
 
-    Pool metodospool = new Pool();
+    //Pool metodospool = new Pool();
+    ConexionMySql cc = new ConexionMySql();
 
     public int validar_ingreso() {
         String usuario = Login.jTextFieldUsuario.getText();
@@ -27,7 +28,7 @@ public class MetodosLogin {
         String SSQL = "SELECT * FROM rafalee_bd.docente WHERE nombre_usuario='" + usuario + "' AND clave='" + clave + "'";
         Connection conect = null;
         try {
-            conect = metodospool.dataSource.getConnection();
+            conect = cc.Conectar();
             Statement st = conect.createStatement();
             ResultSet rs = st.executeQuery(SSQL);
             if (rs.next()) {

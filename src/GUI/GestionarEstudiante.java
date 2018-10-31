@@ -5,7 +5,12 @@
  */
 package GUI;
 
+import Logica.ConexionMySql;
+import Logica.Pool;
 import java.awt.Color;
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -59,8 +64,8 @@ public class GestionarEstudiante extends javax.swing.JFrame {
         jPanelAddEstu = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtNombre = new javax.swing.JTextField();
-        txtGrado = new javax.swing.JTextField();
+        txtNombreCompletoEstu = new javax.swing.JTextField();
+        txtGradoEstu = new javax.swing.JTextField();
         jPanelEliModiEstu = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableListaEstu = new javax.swing.JTable();
@@ -83,20 +88,20 @@ public class GestionarEstudiante extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
         jLabel3.setText("Grado:");
 
-        txtNombre.addActionListener(new java.awt.event.ActionListener() {
+        txtNombreCompletoEstu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreActionPerformed(evt);
+                txtNombreCompletoEstuActionPerformed(evt);
             }
         });
-        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtNombreCompletoEstu.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtNombreKeyTyped(evt);
+                txtNombreCompletoEstuKeyTyped(evt);
             }
         });
 
-        txtGrado.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtGradoEstu.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtGradoKeyTyped(evt);
+                txtGradoEstuKeyTyped(evt);
             }
         });
 
@@ -111,12 +116,9 @@ public class GestionarEstudiante extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelAddEstuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelAddEstuLayout.createSequentialGroup()
-                        .addComponent(txtGrado, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanelAddEstuLayout.createSequentialGroup()
-                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(txtGradoEstu, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombreCompletoEstu, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelAddEstuLayout.setVerticalGroup(
             jPanelAddEstuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,11 +126,11 @@ public class GestionarEstudiante extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanelAddEstuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNombreCompletoEstu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(jPanelAddEstuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txtGrado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtGradoEstu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22))
         );
 
@@ -227,9 +229,9 @@ public class GestionarEstudiante extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreActionPerformed
+    private void txtNombreCompletoEstuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreCompletoEstuActionPerformed
+        txtNombreCompletoEstu.transferFocus();
+    }//GEN-LAST:event_txtNombreCompletoEstuActionPerformed
 
     private void jButtonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolverActionPerformed
 
@@ -238,31 +240,36 @@ public class GestionarEstudiante extends javax.swing.JFrame {
 
     private void jButtonAñadirEstuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAñadirEstuActionPerformed
 
-        String nombre;
-        String grado;
+        ConexionMySql cc = new ConexionMySql();
+        Connection cn = cc.Conectar();
 
-        nombre = txtNombre.getText();
-        grado = txtGrado.getText();
+        String nombre, grado;
+        String sql = "";
+        nombre = txtNombreCompletoEstu.getText();
+        grado = txtGradoEstu.getText();
 
-        if (nombre.equals("") || grado.equals("")) {
-            JOptionPane.showMessageDialog(null, "Verifique los campos y vuelva a intentarlo");
-        } else {
-            String Dato[] = new String[2];
+        sql = "INSERT INTO rafalee_bd.estudiante(nombre_completo, grado) VALUES (?,?)";
+        try {
+            PreparedStatement psd = cn.prepareStatement(sql);
+            psd.setString(1, nombre);
+            psd.setString(2, grado);
+            int n = psd.executeUpdate();
 
-            Dato[0] = txtNombre.getText();
-            Dato[1] = txtGrado.getText();
-            modelo.addRow(Dato);
+            if (n > 0) {
+                JOptionPane.showMessageDialog(null, "Guardado con exito");
+            }
 
-            txtGrado.setText(null);
-            txtNombre.setText(null);
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }//GEN-LAST:event_jButtonAñadirEstuActionPerformed
 
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
         int filaSelec = jTableListaEstu.getSelectedRow();
         if (filaSelec >= 0) {
-            txtNombre.setText(jTableListaEstu.getValueAt(filaSelec, 0).toString());
-            txtGrado.setText(jTableListaEstu.getValueAt(filaSelec, 1).toString());
+            txtNombreCompletoEstu.setText(jTableListaEstu.getValueAt(filaSelec, 0).toString());
+            txtGradoEstu.setText(jTableListaEstu.getValueAt(filaSelec, 1).toString());
             modelo.removeRow(filaSelec);
         } else {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una estudiante primero");
@@ -278,16 +285,16 @@ public class GestionarEstudiante extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 
-    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+    private void txtNombreCompletoEstuKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreCompletoEstuKeyTyped
 
-    }//GEN-LAST:event_txtNombreKeyTyped
+    }//GEN-LAST:event_txtNombreCompletoEstuKeyTyped
 
-    private void txtGradoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGradoKeyTyped
+    private void txtGradoEstuKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGradoEstuKeyTyped
         char v = evt.getKeyChar();
         if (v < '0' || v > '9') {
             evt.consume();
         }
-    }//GEN-LAST:event_txtGradoKeyTyped
+    }//GEN-LAST:event_txtGradoEstuKeyTyped
 
     /**
      * @param args the command line arguments
@@ -339,7 +346,7 @@ public class GestionarEstudiante extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelEliModiEstu;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableListaEstu;
-    private javax.swing.JTextField txtGrado;
-    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtGradoEstu;
+    private javax.swing.JTextField txtNombreCompletoEstu;
     // End of variables declaration//GEN-END:variables
 }
