@@ -108,7 +108,6 @@ public class Login extends javax.swing.JFrame {
     private void jB_AceptarLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_AceptarLoginActionPerformed
 
         if (metodos.validar_ingreso()==1) {
-            System.out.println("entro a la conexión 2");
             this.dispose();
 
             try {

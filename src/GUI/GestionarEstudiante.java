@@ -21,6 +21,8 @@ import javax.swing.table.DefaultTableModel;
 public class GestionarEstudiante extends javax.swing.JFrame {
 
     DefaultTableModel modelo = new DefaultTableModel();
+    ConexionMySql cc = new ConexionMySql();
+    Connection cn = cc.Conectar();
 
     /**
      * Creates new form AgregarEstudiante
@@ -47,9 +49,6 @@ public class GestionarEstudiante extends javax.swing.JFrame {
         jButtonVolver.setContentAreaFilled(false);
         jButtonVolver.setBorderPainted(false);
 
-        modelo.addColumn("Nombre");
-        modelo.addColumn("Grado");
-        jTableListaEstu.setModel(modelo);
     }
 
     /**
@@ -139,56 +138,32 @@ public class GestionarEstudiante extends javax.swing.JFrame {
         jPanelEliModiEstu.setBackground(new java.awt.Color(222, 243, 252));
         jPanelEliModiEstu.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Eliminar/Modificar", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
-        jTableListaEstu.setAutoCreateRowSorter(true);
         jTableListaEstu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
-                "Nombre", "Grado"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
             }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         jScrollPane1.setViewportView(jTableListaEstu);
 
         javax.swing.GroupLayout jPanelEliModiEstuLayout = new javax.swing.GroupLayout(jPanelEliModiEstu);
         jPanelEliModiEstu.setLayout(jPanelEliModiEstuLayout);
         jPanelEliModiEstuLayout.setHorizontalGroup(
             jPanelEliModiEstuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
+            .addGroup(jPanelEliModiEstuLayout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanelEliModiEstuLayout.setVerticalGroup(
             jPanelEliModiEstuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelEliModiEstuLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanelEliModiEstu, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 460, 240));
+        getContentPane().add(jPanelEliModiEstu, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 540, 240));
 
         jButtonEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Eliminar.png"))); // NOI18N
         jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -244,13 +219,12 @@ public class GestionarEstudiante extends javax.swing.JFrame {
         Connection cn = cc.Conectar();
 
         String nombre, grado;
-        String sql = "";
         nombre = txtNombreCompletoEstu.getText();
         grado = txtGradoEstu.getText();
 
-        sql = "INSERT INTO rafalee_bd.estudiante(nombre_completo, grado) VALUES (?,?)";
         try {
-            PreparedStatement psd = cn.prepareStatement(sql);
+            String sqlAgregar = "INSERT INTO rafalee_bd.estudiante(nombre_completo, grado) VALUES (?,?)";
+            PreparedStatement psd = cn.prepareStatement(sqlAgregar);
             psd.setString(1, nombre);
             psd.setString(2, grado);
             int n = psd.executeUpdate();
@@ -261,6 +235,28 @@ public class GestionarEstudiante extends javax.swing.JFrame {
 
         } catch (SQLException ex) {
             Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        String sqlMostrar = "SELECT * FROM rafalee_bd.estudiante";
+        Statement st;
+        modelo.addColumn("Id");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Grado");
+
+        jTableListaEstu.setModel(modelo);
+
+        String[] Dato = new String[3];
+        try {
+            st = cn.createStatement();
+            ResultSet result = st.executeQuery(sqlMostrar);
+            while (result.next()) {
+                Dato[0] = result.getString(1);
+                Dato[1] = result.getString(2);
+                Dato[2] = result.getString(3);
+                modelo.addRow(Dato);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
 
     }//GEN-LAST:event_jButtonAñadirEstuActionPerformed
@@ -339,13 +335,13 @@ public class GestionarEstudiante extends javax.swing.JFrame {
     private javax.swing.JButton jButtonEditar;
     private javax.swing.JButton jButtonEliminar;
     private javax.swing.JButton jButtonVolver;
-    private javax.swing.JLabel jLabel1;
+    public static javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanelAddEstu;
     private javax.swing.JPanel jPanelEliModiEstu;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableListaEstu;
+    public static javax.swing.JTable jTableListaEstu;
     private javax.swing.JTextField txtGradoEstu;
     private javax.swing.JTextField txtNombreCompletoEstu;
     // End of variables declaration//GEN-END:variables
