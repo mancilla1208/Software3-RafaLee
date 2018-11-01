@@ -5,6 +5,7 @@
  */
 package Logica;
 
+import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -52,4 +53,33 @@ public class MetodosBD {
 
     }
 
+    public void Eliminar(String id) {
+        Connection conexion = null;
+
+        try {
+
+            String sql = "DELETE FROM rafalee_bd.estudiante WHERE idEstudiante=?";
+            conexion = metodoPool.dataSource.getConnection();
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setString(1, id);
+
+            if (ps.executeUpdate() > 0) {
+                JOptionPane.showMessageDialog(null, "Se ha eliminado de forma exitosa");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se ha podido eliminar el registro");
+            }
+
+        } catch (HeadlessException | SQLException e) {
+            JOptionPane.showMessageDialog(null, "No se ha podido eliminar el registro");
+        } finally {
+            if (conexion != null) {
+                try {
+                    conexion.close();
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Se produjo un error al cerrar la conexion");
+                }
+            }
+        }
+
+    }
 }
