@@ -266,6 +266,7 @@ public class GestionarEstudiante extends javax.swing.JFrame {
             ps.setString(2, txtGradoEstu.getText());
             ps.executeUpdate();
             JOptionPane.showMessageDialog(null, "Estudiante registrado");
+            mostrarTabla();
         } catch (SQLException ex) {
             Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -301,11 +302,12 @@ public class GestionarEstudiante extends javax.swing.JFrame {
 
         int fila = jTableListaEstu.getSelectedRow();
         String valor = jTableListaEstu.getValueAt(fila, 0).toString();
-        if (fila > 0) {
+        if (fila >= 0) {
             try {
                 PreparedStatement ps = cn.prepareStatement("DELETE FROM rafalee_bd.estudiante WHERE idEstudiante='" + valor + "'");
                 ps.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Estudiante eliminado");
+                mostrarTabla();
             } catch (SQLException ex) {
                 Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
             }
