@@ -380,28 +380,6 @@ public class Docente extends javax.swing.JInternalFrame {
         GestionarEstudiante gestion = new GestionarEstudiante();
         gestion.show();
 
-        String sqlMostrar = "SELECT * FROM rafalee_bd.estudiante";
-        Statement st;
-
-        modelo.addColumn("Id");
-        modelo.addColumn("Nombre");
-        modelo.addColumn("Grado");
-
-        jTableListaEstu.setModel(modelo);
-
-        String[] Dato = new String[3];
-        try {
-            st = cn.createStatement();
-            ResultSet result = st.executeQuery(sqlMostrar);
-            while (result.next()) {
-                Dato[0] = result.getString(1);
-                Dato[1] = result.getString(2);
-                Dato[2] = result.getString(3);
-                modelo.addRow(Dato);
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 

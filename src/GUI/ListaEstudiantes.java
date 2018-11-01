@@ -10,7 +10,16 @@ import static GUI.Principal.jLabelDocente;
 import static GUI.Principal.jLabelEstudiante;
 import static GUI.Principal.jbDocente;
 import static GUI.Principal.jbEstudiante;
+import Logica.ConexionMySql;
+import Logica.Pool;
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,20 +27,41 @@ import javax.swing.JOptionPane;
  * @author andre
  */
 public class ListaEstudiantes extends javax.swing.JFrame {
+    
+    Pool metodoPool = new Pool();
+    ConexionMySql cc = new ConexionMySql();
+    Connection cn = cc.Conectar();
 
     /**
      * Creates new form ListaEstudiantes
      */
     public ListaEstudiantes() {
         initComponents();
+        this.jComboBoxListaEstu.removeAllItems();
+        Connection conect = null;
+        
+        String sql = "SELECT * FROM rafalee_bd.estudiante";
+        try {
+            conect = cc.Conectar();
+            Statement st = conect.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                this.jComboBoxListaEstu.addItem(rs.getString("nombre_completo"));
+                
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ListaEstudiantes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         this.setLocationRelativeTo(null);
-
+        
         jComboBoxListaEstu.setBackground(new Color(222, 243, 252, 40));
-
+        
         jButtonAceptarEstu.setOpaque(false);
         jButtonAceptarEstu.setContentAreaFilled(false);
         jButtonAceptarEstu.setBorderPainted(false);
-
+        
         jButtonCancelarEstu.setOpaque(false);
         jButtonCancelarEstu.setContentAreaFilled(false);
         jButtonCancelarEstu.setBorderPainted(false);
@@ -95,7 +125,7 @@ public class ListaEstudiantes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     //Validar selección de nombre al momento de un estudiante escoger
     private void jButtonAceptarEstuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarEstuActionPerformed
-
+        
         if (jComboBoxListaEstu.getSelectedItem() == "Seleccione") {
             jComboBoxListaEstu.setOpaque(true);
             JOptionPane.showMessageDialog(null, "Seleccione un nombre válido");
@@ -109,16 +139,16 @@ public class ListaEstudiantes extends javax.swing.JFrame {
             estudiante.setLocation(0, 0);
             estudiante.show();
             Estudiante.jLabelNombreEstudiante.setText((String) jComboBoxListaEstu.getSelectedItem());
-
+            
         }
-
+        
 
     }//GEN-LAST:event_jButtonAceptarEstuActionPerformed
 
     private void jButtonCancelarEstuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarEstuActionPerformed
-
+        
         dispose();
-
+        
         jbDocente.setVisible(true);
         jbEstudiante.setVisible(true);
         jLabelDocente.setVisible(true);

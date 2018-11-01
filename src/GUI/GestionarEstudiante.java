@@ -22,7 +22,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class GestionarEstudiante extends javax.swing.JFrame {
 
-    DefaultTableModel modelo = new DefaultTableModel();
     ConexionMySql cc = new ConexionMySql();
     Connection cn = cc.Conectar();
     MetodosBD metodobd = new MetodosBD();
@@ -33,13 +32,11 @@ public class GestionarEstudiante extends javax.swing.JFrame {
      */
     public GestionarEstudiante() {
         initComponents();
+        mostrarTabla();
         this.setLocationRelativeTo(null);
         jPanelAddEstu.setBackground(new Color(222, 243, 252, 30));
 
         jButtonAñadirEstu.setBackground(new Color(222, 243, 252, 0));
-//        jButtonAñadirEstu.setOpaque(false);
-//        jButtonAñadirEstu.setContentAreaFilled(false);
-//        jButtonAñadirEstu.setBorderPainted(false);
 
         jButtonEditar.setOpaque(false);
         jButtonEditar.setContentAreaFilled(false);
@@ -57,6 +54,38 @@ public class GestionarEstudiante extends javax.swing.JFrame {
         jButtonActualizar.setContentAreaFilled(false);
         jButtonActualizar.setBorderPainted(false);
 
+    }
+
+    void mostrarTabla() {
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Id");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Grado");
+        jTableListaEstu.setModel(modelo);
+
+        String sql = "SELECT * FROM rafalee_bd.estudiante";
+        String[] datos = new String[3];
+        Statement st;
+        try {
+            st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                datos[0] = rs.getString(1);
+                datos[1] = rs.getString(2);
+                datos[2] = rs.getString(3);
+                modelo.addRow(datos);
+            }
+            jTableListaEstu.setModel(modelo);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    void limpiar() {
+        txtNombreCompletoEstu.setText("");
+        txtGradoEstu.setText("");
     }
 
     /**
@@ -231,53 +260,17 @@ public class GestionarEstudiante extends javax.swing.JFrame {
 
     private void jButtonAñadirEstuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAñadirEstuActionPerformed
 
-        ConexionMySql cc = new ConexionMySql();
-        Connection cn = cc.Conectar();
-
-        String nombre, grado;
-        nombre = txtNombreCompletoEstu.getText();
-        grado = txtGradoEstu.getText();
-
         try {
-            String sqlAgregar = "INSERT INTO rafalee_bd.estudiante(nombre_completo, grado) VALUES (?,?)";
-            PreparedStatement psd = cn.prepareStatement(sqlAgregar);
-            psd.setString(1, nombre);
-            psd.setString(2, grado);
-            int n = psd.executeUpdate();
-            psd.close();
-
-            if (n > 0) {
-                JOptionPane.showMessageDialog(null, "Guardado con exito");
-
-                txtNombreCompletoEstu.setText("");
-                txtGradoEstu.setText("");
-            }
-
+            PreparedStatement ps = cn.prepareStatement("INSERT INTO rafalee_bd.estudiante(nombre_completo,grado) VALUES (?,?)");
+            ps.setString(1, txtNombreCompletoEstu.getText());
+            ps.setString(2, txtGradoEstu.getText());
+            ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Estudiante registrado");
+            mostrarTabla();
         } catch (SQLException ex) {
             Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        String sqlMostrar = "SELECT * FROM rafalee_bd.estudiante";
-        Statement st;
-        modelo.addColumn("Id");
-        modelo.addColumn("Nombre");
-        modelo.addColumn("Grado");
-
-        jTableListaEstu.setModel(modelo);
-
-        String[] Dato = new String[3];
-        try {
-            st = cn.createStatement();
-            ResultSet result = st.executeQuery(sqlMostrar);
-            while (result.next()) {
-                Dato[0] = result.getString(1);
-                Dato[1] = result.getString(2);
-                Dato[2] = result.getString(3);
-                modelo.addRow(Dato);
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
 
     }//GEN-LAST:event_jButtonAñadirEstuActionPerformed
 
@@ -286,43 +279,45 @@ public class GestionarEstudiante extends javax.swing.JFrame {
         int filaseleccionada;
 
         try {
-
             filaseleccionada = jTableListaEstu.getSelectedRow();
-
             if (filaseleccionada == -1) {
-
                 JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
-
             } else {
-
                 DefaultTableModel modelotabla = (DefaultTableModel) jTableListaEstu.getModel();
-
                 String codigo = (String) modelotabla.getValueAt(filaseleccionada, 0);
                 String nombre = (String) modelotabla.getValueAt(filaseleccionada, 1);
                 String apellido = (String) modelotabla.getValueAt(filaseleccionada, 2);
-
                 idEstudiante = codigo;
                 txtNombreCompletoEstu.setText(nombre);
                 txtGradoEstu.setText(apellido);
 
             }
-
         } catch (HeadlessException ex) {
-
             JOptionPane.showMessageDialog(null, "Error: " + ex + "\nInténtelo nuevamente", " .::Error En la Operacion::.", JOptionPane.ERROR_MESSAGE);
-
         }
-
 
     }//GEN-LAST:event_jButtonEditarActionPerformed
 
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
-        int filaSelec = jTableListaEstu.getSelectedRow();
-        if (filaSelec >= 0) {
-            modelo.removeRow(filaSelec);
-        } else {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar una estudiante primero");
+
+        int fila = jTableListaEstu.getSelectedRow();
+        String valor = jTableListaEstu.getValueAt(fila, 0).toString();
+        if (fila >= 0) {
+            try {
+                PreparedStatement ps = cn.prepareStatement("DELETE FROM rafalee_bd.estudiante WHERE idEstudiante='" + valor + "'");
+                ps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Estudiante eliminado");
+                mostrarTabla();
+            } catch (SQLException ex) {
+                Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+//        if (idEstudiante.isEmpty()) {
+//            JOptionPane.showMessageDialog(null, "No se ha seleccionado ningun estudiante para eliminar");
+//        }else{
+//            metodobd.Eliminar(idEstudiante);
+//        }
+
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 
     private void txtNombreCompletoEstuKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreCompletoEstuKeyTyped
@@ -342,6 +337,8 @@ public class GestionarEstudiante extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Dede seleccionar un estudiante de la tabla para modificar");
         } else {
             metodobd.Actualizar(txtNombreCompletoEstu.getText(), txtGradoEstu.getText(), idEstudiante);
+            mostrarTabla();
+            limpiar();
         }
     }//GEN-LAST:event_jButtonActualizarActionPerformed
 
