@@ -240,7 +240,7 @@ public class GestionarEstudiante extends javax.swing.JFrame {
                 jButtonActualizarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 60, 50, 50));
+        getContentPane().add(jButtonActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 50, 50, 50));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoGestionEstu.jpg"))); // NOI18N
         jLabel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 255), 2, true));
