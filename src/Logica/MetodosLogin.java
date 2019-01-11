@@ -33,7 +33,7 @@ public class MetodosLogin {
             ResultSet rs = st.executeQuery(SSQL);
             if (rs.next()) {
                 resultado = 1;
-                System.out.println("entro a la conexión");
+                System.out.println("Entro a la conexión");
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
