@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import static GUI.Principal.jbEstudiante;
 import Logica.MetodosLogin;
 import java.awt.Component;
 import java.awt.Graphics;
@@ -27,6 +28,11 @@ public class Login extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         jTextFieldUsuario.setBorder(new EmptyBorder(0, 5, 0, 2));
         jPasswordField1.setBorder(new EmptyBorder(0, 5, 0, 2));
+
+        jB_Registro.setOpaque(false);
+        jB_Registro.setContentAreaFilled(false);
+        jB_Registro.setBorderPainted(false);
+
     }
 
     /**
@@ -45,6 +51,7 @@ public class Login extends javax.swing.JFrame {
         jTextFieldUsuario = new javax.swing.JTextField();
         jLabelLogin = new javax.swing.JLabel();
         jPasswordField1 = new javax.swing.JPasswordField();
+        jB_Registro = new javax.swing.JButton();
         jLabelFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -58,7 +65,7 @@ public class Login extends javax.swing.JFrame {
                 jB_CancelarLoginActionPerformed(evt);
             }
         });
-        getContentPane().add(jB_CancelarLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 250, -1, -1));
+        getContentPane().add(jB_CancelarLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 250, -1, -1));
 
         jB_AceptarLogin.setText("Aceptar");
         jB_AceptarLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -66,13 +73,13 @@ public class Login extends javax.swing.JFrame {
                 jB_AceptarLoginActionPerformed(evt);
             }
         });
-        getContentPane().add(jB_AceptarLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 250, 80, -1));
+        getContentPane().add(jB_AceptarLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, 80, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/001-bloquear-1.png"))); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 40, 40));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 40, 40));
 
         jLabelUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icon_login_orange.png"))); // NOI18N
-        getContentPane().add(jLabelUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, -1, 50));
+        getContentPane().add(jLabelUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, -1, 50));
 
         jTextFieldUsuario.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
         jTextFieldUsuario.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -81,11 +88,21 @@ public class Login extends javax.swing.JFrame {
                 jTextFieldUsuarioActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextFieldUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 180, 30));
+        getContentPane().add(jTextFieldUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, 180, 30));
 
         jLabelLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/profeLogin.png"))); // NOI18N
         getContentPane().add(jLabelLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, 110, 110));
-        getContentPane().add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, 180, 30));
+        getContentPane().add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 180, 30));
+
+        jB_Registro.setFont(new java.awt.Font("Comic Sans MS", 2, 14)); // NOI18N
+        jB_Registro.setForeground(new java.awt.Color(51, 102, 255));
+        jB_Registro.setText("Registrarse");
+        jB_Registro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_RegistroActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jB_Registro, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 220, 120, 20));
 
         jLabelFondo.setBackground(new java.awt.Color(255, 255, 255));
         jLabelFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoLogin.jpg"))); // NOI18N
@@ -107,7 +124,7 @@ public class Login extends javax.swing.JFrame {
     MetodosLogin metodos = new MetodosLogin();
     private void jB_AceptarLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_AceptarLoginActionPerformed
 
-        if (metodos.validar_ingreso()==1) {
+        if (metodos.validar_ingreso() == 1) {
             this.dispose();
 
             try {
@@ -138,6 +155,10 @@ public class Login extends javax.swing.JFrame {
     private void jTextFieldUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldUsuarioActionPerformed
 
     }//GEN-LAST:event_jTextFieldUsuarioActionPerformed
+
+    private void jB_RegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_RegistroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jB_RegistroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -178,6 +199,7 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_AceptarLogin;
     private javax.swing.JButton jB_CancelarLogin;
+    private javax.swing.JButton jB_Registro;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelFondo;
     private javax.swing.JLabel jLabelLogin;
