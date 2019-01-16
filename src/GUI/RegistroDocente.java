@@ -10,6 +10,12 @@ import static GUI.Principal.jLabelDocente;
 import static GUI.Principal.jLabelEstudiante;
 import static GUI.Principal.jbDocente;
 import static GUI.Principal.jbEstudiante;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,6 +26,9 @@ public class RegistroDocente extends javax.swing.JFrame {
     /**
      * Creates new form RegistroDocente
      */
+    Connection con = null;
+    Statement stmt = null;
+
     public RegistroDocente() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -51,9 +60,9 @@ public class RegistroDocente extends javax.swing.JFrame {
         jTextRegis_Edad = new javax.swing.JTextField();
         jTextRegis_Sede = new javax.swing.JTextField();
         jTextRegis_Usuario = new javax.swing.JTextField();
-        jTextRegis_Contraseña = new javax.swing.JTextField();
         jB_RegistrarDoce = new javax.swing.JButton();
         jB_CancelarRegistro = new javax.swing.JButton();
+        jTextRegis_Clave = new javax.swing.JPasswordField();
         jLabelFondoRegistro = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -105,7 +114,6 @@ public class RegistroDocente extends javax.swing.JFrame {
         getContentPane().add(jTextRegis_Edad, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 250, 80, -1));
         getContentPane().add(jTextRegis_Sede, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 290, 180, -1));
         getContentPane().add(jTextRegis_Usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 330, 220, -1));
-        getContentPane().add(jTextRegis_Contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, 140, -1));
 
         jB_RegistrarDoce.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Aceptar.png"))); // NOI18N
         jB_RegistrarDoce.addActionListener(new java.awt.event.ActionListener() {
@@ -122,6 +130,7 @@ public class RegistroDocente extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jB_CancelarRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 440, -1, -1));
+        getContentPane().add(jTextRegis_Clave, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, 180, -1));
 
         jLabelFondoRegistro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/RegistrarDocente.jpg"))); // NOI18N
         getContentPane().add(jLabelFondoRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 460, 560));
@@ -140,6 +149,64 @@ public class RegistroDocente extends javax.swing.JFrame {
     }//GEN-LAST:event_jB_CancelarRegistroActionPerformed
 
     private void jB_RegistrarDoceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_RegistrarDoceActionPerformed
+
+        String cadena2, cadena3, cadena4, cadena5, cadena6;
+
+        cadena2 = jTextRegis_Nombre.getText();
+        cadena3 = jTextRegis_Edad.getText();
+        cadena4 = jTextRegis_Sede.getText();
+        cadena5 = jTextRegis_Usuario.getText();
+        cadena6 = jTextRegis_Clave.getText().toString();
+
+        if (jTextRegis_Nombre.getText().equals("") || (jTextRegis_Edad.getText().equals("")) || (jTextRegis_Sede.getText().equals("")) || (jTextRegis_Usuario.getText().equals(""))
+                || (jTextRegis_Clave.getText().equals(""))) {
+
+            javax.swing.JOptionPane.showMessageDialog(this, "Debe llenar todos los campos \n", "AVISO!", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            jTextRegis_Nombre.requestFocus();
+        } else {
+            try {
+
+                String url = "jdbc:mysql://localhost:3306/rafalee_bd";
+                String usuario = "andres";
+                String contraseña = "0702";
+
+                Class.forName("com.mysql.jdbc.Driver").newInstance();
+                con = DriverManager.getConnection(url, usuario, contraseña);
+                if (con != null) {
+                    System.out.println("Se ha establecido una conexión a la base de datos "
+                            + "\n " + url);
+                }
+
+                stmt = con.createStatement();
+                stmt.executeUpdate("INSERT INTO docente VALUES('" + 0 + "','" + cadena2 + "','" + cadena3 + "','" + cadena4 + "','" + cadena5 + "','" + cadena6 + "')");
+                System.out.println("Los valores han sido agregados a la base de datos ");
+
+            } catch (InstantiationException ex) {
+                Logger.getLogger(RegistroDocente.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                Logger.getLogger(RegistroDocente.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(RegistroDocente.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(RegistroDocente.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                if (con != null) {
+                    try {
+                        con.close();
+                        stmt.close();
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+                }
+            }
+            javax.swing.JOptionPane.showMessageDialog(this, "Registro exitoso! \n", "AVISO!", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        }
+        this.jTextRegis_Nombre.setText("");
+        this.jTextRegis_Edad.setText("");
+        this.jTextRegis_Sede.setText("");
+        this.jTextRegis_Usuario.setText("");
+        this.jTextRegis_Clave.setText("");
+
         this.dispose();
 
         Login login = new Login();
@@ -209,7 +276,7 @@ public class RegistroDocente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelFondoRegistro;
-    private javax.swing.JTextField jTextRegis_Contraseña;
+    private javax.swing.JPasswordField jTextRegis_Clave;
     private javax.swing.JTextField jTextRegis_Edad;
     private javax.swing.JTextField jTextRegis_Nombre;
     private javax.swing.JTextField jTextRegis_Sede;
