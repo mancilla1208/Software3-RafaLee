@@ -24,6 +24,7 @@ public class Login extends javax.swing.JFrame {
      * Creates new form Login
      */
     public Login() {
+
         initComponents();
         this.setLocationRelativeTo(null);
         jTextFieldUsuario.setBorder(new EmptyBorder(0, 5, 0, 2));
@@ -157,7 +158,9 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldUsuarioActionPerformed
 
     private void jB_RegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_RegistroActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        RegistroDocente registro = new RegistroDocente();
+        registro.show();
     }//GEN-LAST:event_jB_RegistroActionPerformed
 
     /**
