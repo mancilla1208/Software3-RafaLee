@@ -10,6 +10,7 @@ import static GUI.Principal.jLabelDocente;
 import static GUI.Principal.jLabelEstudiante;
 import static GUI.Principal.jbDocente;
 import static GUI.Principal.jbEstudiante;
+import Logica.ConexionMySql;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -165,7 +166,7 @@ public class RegistroDocente extends javax.swing.JFrame {
             jTextRegis_Nombre.requestFocus();
         } else {
             try {
-
+              //  ConexionMySql con= new ConexionMySql();
                 String url = "jdbc:mysql://localhost:3306/rafalee_bd";
                 String usuario = "andres";
                 String contraseña = "0702";

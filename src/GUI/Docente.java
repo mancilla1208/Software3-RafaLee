@@ -58,6 +58,7 @@ public class Docente extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jButtonGuardarTarea = new javax.swing.JButton();
+        jButtonExit = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel4 = new javax.swing.JPanel();
@@ -110,7 +111,7 @@ public class Docente extends javax.swing.JInternalFrame {
                 jButtonCrearTareaActionPerformed(evt);
             }
         });
-        jPanelBarraDocente.add(jButtonCrearTarea, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 20, 54, -1));
+        jPanelBarraDocente.add(jButtonCrearTarea, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 20, 54, -1));
 
         jLabel3.setFont(new java.awt.Font("Monotype Corsiva", 0, 18)); // NOI18N
         jLabel3.setText("2018");
@@ -125,7 +126,15 @@ public class Docente extends javax.swing.JInternalFrame {
                 jButtonGuardarTareaActionPerformed(evt);
             }
         });
-        jPanelBarraDocente.add(jButtonGuardarTarea, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, 60, 60));
+        jPanelBarraDocente.add(jButtonGuardarTarea, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 20, 60, 60));
+
+        jButtonExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Exit.png"))); // NOI18N
+        jButtonExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExitActionPerformed(evt);
+            }
+        });
+        jPanelBarraDocente.add(jButtonExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 30, -1, -1));
 
         getContentPane().add(jPanelBarraDocente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 100));
 
@@ -401,8 +410,6 @@ public class Docente extends javax.swing.JInternalFrame {
             Principal.jLabelDocente.setVisible(true);
             Principal.jLabelEstudiante.setVisible(true);
 
-        } else if (msjSalir == JOptionPane.NO_OPTION) {
-
         }
     }//GEN-LAST:event_jMenuItemInicioActionPerformed
 
@@ -417,8 +424,13 @@ public class Docente extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jButtonCrearTareaActionPerformed
 
+    private void jButtonExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExitActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jButtonExitActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCrearTarea;
+    private javax.swing.JButton jButtonExit;
     private javax.swing.JButton jButtonGuardarTarea;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
