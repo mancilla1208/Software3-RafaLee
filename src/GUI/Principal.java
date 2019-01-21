@@ -7,10 +7,15 @@ package GUI;
 
 import Logica.ConexionMySql;
 import Logica.Pool;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.Graphics;
+import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -24,17 +29,11 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
-        transparenciaBoton();
         this.setLocationRelativeTo(null);
 
         jButtonExit.setOpaque(false);
         jButtonExit.setContentAreaFilled(false);
         jButtonExit.setBorderPainted(false);
-
-        setIconImage(new ImageIcon(getClass().getResource("/Imagenes/imgLogo.png")).getImage());
-    }
-
-    public void transparenciaBoton() {
 
         jbEstudiante.setOpaque(false);
         jbEstudiante.setContentAreaFilled(false);
@@ -43,6 +42,18 @@ public class Principal extends javax.swing.JFrame {
         jbDocente.setOpaque(false);
         jbDocente.setContentAreaFilled(false);
         jbDocente.setBorderPainted(false);
+
+        setIconImage(new ImageIcon(getClass().getResource("/Imagenes/imgLogo.png")).getImage());
+
+        ConexionMySql c = new ConexionMySql();
+        if (c.Conectar() != null) {
+            jLabel_Conexion.setText("Conectado");
+            jLabel_Conexion.setForeground(Color.GREEN);
+        } else {
+            jLabel_Conexion.setText("Desconectado");
+            jLabel_Conexion.setForeground(Color.RED);
+        }
+
     }
 
     /**
@@ -68,13 +79,16 @@ public class Principal extends javax.swing.JFrame {
         jLabelDocente = new javax.swing.JLabel();
         jButtonExit = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel_Conexion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("RafaLee");
         setUndecorated(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         VentaPrincipal.setBackground(new java.awt.Color(255, 255, 255));
         VentaPrincipal.setForeground(new java.awt.Color(255, 255, 255));
+        VentaPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jbEstudiante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Estudiantes.png"))); // NOI18N
         jbEstudiante.addActionListener(new java.awt.event.ActionListener() {
@@ -82,6 +96,7 @@ public class Principal extends javax.swing.JFrame {
                 jbEstudianteActionPerformed(evt);
             }
         });
+        VentaPrincipal.add(jbEstudiante, new org.netbeans.lib.awtextra.AbsoluteConstraints(219, 154, 257, 245));
 
         jbDocente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/docente.png"))); // NOI18N
         jbDocente.addActionListener(new java.awt.event.ActionListener() {
@@ -89,16 +104,20 @@ public class Principal extends javax.swing.JFrame {
                 jbDocenteActionPerformed(evt);
             }
         });
+        VentaPrincipal.add(jbDocente, new org.netbeans.lib.awtextra.AbsoluteConstraints(551, 156, -1, -1));
 
         jLabelBienvenidos.setFont(new java.awt.Font("Comic Sans MS", 0, 48)); // NOI18N
         jLabelBienvenidos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelBienvenidos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Bienvenidos.png"))); // NOI18N
+        VentaPrincipal.add(jLabelBienvenidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(308, 70, 424, 73));
 
         jLabelEstudiante.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
         jLabelEstudiante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Estudiante.png"))); // NOI18N
+        VentaPrincipal.add(jLabelEstudiante, new org.netbeans.lib.awtextra.AbsoluteConstraints(219, 420, -1, 35));
 
         jLabelDocente.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
         jLabelDocente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Docente_1.png"))); // NOI18N
+        VentaPrincipal.add(jLabelDocente, new org.netbeans.lib.awtextra.AbsoluteConstraints(592, 410, -1, 34));
 
         jButtonExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Exit.png"))); // NOI18N
         jButtonExit.addActionListener(new java.awt.event.ActionListener() {
@@ -106,6 +125,7 @@ public class Principal extends javax.swing.JFrame {
                 jButtonExitActionPerformed(evt);
             }
         });
+        VentaPrincipal.add(jButtonExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(833, 11, -1, -1));
 
         jButton2.setText("jButton2");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -113,77 +133,10 @@ public class Principal extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
+        VentaPrincipal.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(707, 29, -1, -1));
+        VentaPrincipal.add(jLabel_Conexion, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, 120, 20));
 
-        VentaPrincipal.setLayer(jbEstudiante, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        VentaPrincipal.setLayer(jbDocente, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        VentaPrincipal.setLayer(jLabelBienvenidos, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        VentaPrincipal.setLayer(jLabelEstudiante, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        VentaPrincipal.setLayer(jLabelDocente, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        VentaPrincipal.setLayer(jButtonExit, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        VentaPrincipal.setLayer(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        javax.swing.GroupLayout VentaPrincipalLayout = new javax.swing.GroupLayout(VentaPrincipal);
-        VentaPrincipal.setLayout(VentaPrincipalLayout);
-        VentaPrincipalLayout.setHorizontalGroup(
-            VentaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VentaPrincipalLayout.createSequentialGroup()
-                .addGap(219, 219, 219)
-                .addGroup(VentaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jbEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelEstudiante))
-                .addGap(75, 75, 75)
-                .addGroup(VentaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbDocente, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabelDocente, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap(90, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VentaPrincipalLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(VentaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VentaPrincipalLayout.createSequentialGroup()
-                        .addComponent(jLabelBienvenidos, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(176, 176, 176))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VentaPrincipalLayout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addGap(53, 53, 53)
-                        .addComponent(jButtonExit)
-                        .addContainerGap())))
-        );
-        VentaPrincipalLayout.setVerticalGroup(
-            VentaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VentaPrincipalLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(VentaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonExit)
-                    .addComponent(jButton2))
-                .addGap(18, 18, 18)
-                .addComponent(jLabelBienvenidos, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(VentaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(VentaPrincipalLayout.createSequentialGroup()
-                        .addGap(0, 2, Short.MAX_VALUE)
-                        .addComponent(jbDocente))
-                    .addComponent(jbEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGroup(VentaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(VentaPrincipalLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabelDocente, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(136, 136, 136))
-                    .addGroup(VentaPrincipalLayout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jLabelEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(VentaPrincipal)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(VentaPrincipal)
-        );
+        getContentPane().add(VentaPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -289,6 +242,7 @@ public class Principal extends javax.swing.JFrame {
     public static javax.swing.JLabel jLabelBienvenidos;
     public static javax.swing.JLabel jLabelDocente;
     public static javax.swing.JLabel jLabelEstudiante;
+    private javax.swing.JLabel jLabel_Conexion;
     public static javax.swing.JButton jbDocente;
     public static javax.swing.JButton jbEstudiante;
     // End of variables declaration//GEN-END:variables
