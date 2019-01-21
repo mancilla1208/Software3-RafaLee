@@ -31,7 +31,7 @@ public class ConexionMySql {
             Class.forName("org.gjt.mm.mysql.Driver");
             link = DriverManager.getConnection(this.url, this.usuario, this.clave);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
+
         }
         return link;
     }
