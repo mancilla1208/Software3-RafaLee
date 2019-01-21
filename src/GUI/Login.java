@@ -142,7 +142,6 @@ public class Login extends javax.swing.JFrame {
                 docente.show();
                 
                 docente.jLabel_NombreDocente.setText(metodos.nombreDocente());
-                System.out.println("Acaa " + metodos.nombreDocente());
                 
             } catch (Exception e) {
                 e.printStackTrace();
