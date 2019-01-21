@@ -143,7 +143,6 @@ public class Login extends javax.swing.JFrame {
 
         } else {
             System.out.println(metodos.validar_ingreso());
-            System.out.println();
             JOptionPane.showMessageDialog(null, "Usuario y/o contraseña incorrectos\n"
                     + "Verifique sus datos y vuelva a intentarlo", "Error", JOptionPane.ERROR_MESSAGE);
         }

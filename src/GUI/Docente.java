@@ -40,6 +40,10 @@ public class Docente extends javax.swing.JInternalFrame {
         jButtonGuardarTarea.setOpaque(false);
         jButtonGuardarTarea.setContentAreaFilled(false);
         jButtonGuardarTarea.setBorderPainted(false);
+
+        jButtonExitDocente.setOpaque(false);
+        jButtonExitDocente.setContentAreaFilled(false);
+        jButtonExitDocente.setBorderPainted(false);
     }
 
     /**
@@ -58,7 +62,7 @@ public class Docente extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jButtonGuardarTarea = new javax.swing.JButton();
-        jButtonExit = new javax.swing.JButton();
+        jButtonExitDocente = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel4 = new javax.swing.JPanel();
@@ -128,13 +132,13 @@ public class Docente extends javax.swing.JInternalFrame {
         });
         jPanelBarraDocente.add(jButtonGuardarTarea, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 20, 60, 60));
 
-        jButtonExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Exit.png"))); // NOI18N
-        jButtonExit.addActionListener(new java.awt.event.ActionListener() {
+        jButtonExitDocente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Exit.png"))); // NOI18N
+        jButtonExitDocente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonExitActionPerformed(evt);
+                jButtonExitDocenteActionPerformed(evt);
             }
         });
-        jPanelBarraDocente.add(jButtonExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 30, -1, -1));
+        jPanelBarraDocente.add(jButtonExitDocente, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 30, -1, -1));
 
         getContentPane().add(jPanelBarraDocente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 100));
 
@@ -401,16 +405,28 @@ public class Docente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jMenuItemInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemInicioActionPerformed
-        int msjSalir = JOptionPane.showConfirmDialog(null, "Esta seguro que desea ir a inicio?");
-        if (msjSalir == JOptionPane.YES_OPTION) {
+
+        int seleccion = JOptionPane.showOptionDialog(
+                null, // Componente padre
+                "Esta seguro que desea salir.?", //Mensaje
+                "Seleccione una opción", // Título
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null, // null para icono por defecto.
+                new Object[]{"Si", "No"}, // null para YES, NO y CANCEL
+                "Si");
+
+        if (seleccion == JOptionPane.YES_OPTION) {
             this.dispose();
             Principal.jbDocente.setVisible(true);
             Principal.jbEstudiante.setVisible(true);
             Principal.jLabelBienvenidos.setVisible(true);
             Principal.jLabelDocente.setVisible(true);
             Principal.jLabelEstudiante.setVisible(true);
+        } else {
 
         }
+
     }//GEN-LAST:event_jMenuItemInicioActionPerformed
 
     private void jButtonGuardarTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarTareaActionPerformed
@@ -424,13 +440,13 @@ public class Docente extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jButtonCrearTareaActionPerformed
 
-    private void jButtonExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExitActionPerformed
+    private void jButtonExitDocenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExitDocenteActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_jButtonExitActionPerformed
+    }//GEN-LAST:event_jButtonExitDocenteActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCrearTarea;
-    private javax.swing.JButton jButtonExit;
+    private javax.swing.JButton jButtonExitDocente;
     private javax.swing.JButton jButtonGuardarTarea;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
