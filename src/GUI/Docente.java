@@ -56,7 +56,7 @@ public class Docente extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanelBarraDocente = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel_NombreDocente = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jButtonCrearTarea = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -101,9 +101,8 @@ public class Docente extends javax.swing.JInternalFrame {
         jPanelBarraDocente.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanelBarraDocente.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Benilda Villa Montes");
-        jPanelBarraDocente.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 14, 248, -1));
+        jLabel_NombreDocente.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jPanelBarraDocente.add(jLabel_NombreDocente, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 4, 290, 30));
 
         jLabel2.setFont(new java.awt.Font("Monotype Corsiva", 0, 18)); // NOI18N
         jLabel2.setText("Docente");
@@ -448,7 +447,6 @@ public class Docente extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButtonCrearTarea;
     private javax.swing.JButton jButtonExitDocente;
     private javax.swing.JButton jButtonGuardarTarea;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -460,6 +458,7 @@ public class Docente extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    public javax.swing.JLabel jLabel_NombreDocente;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;

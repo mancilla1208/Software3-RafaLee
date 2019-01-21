@@ -6,10 +6,14 @@
 package GUI;
 
 import static GUI.Principal.jbEstudiante;
+import Logica.ConexionMySql;
 import Logica.MetodosLogin;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Insets;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
@@ -24,16 +28,16 @@ public class Login extends javax.swing.JFrame {
      * Creates new form Login
      */
     public Login() {
-
+        
         initComponents();
         this.setLocationRelativeTo(null);
         jTextFieldUsuario.setBorder(new EmptyBorder(0, 5, 0, 2));
         jPasswordField1.setBorder(new EmptyBorder(0, 5, 0, 2));
-
+        
         jB_Registro.setOpaque(false);
         jB_Registro.setContentAreaFilled(false);
         jB_Registro.setBorderPainted(false);
-
+        
     }
 
     /**
@@ -121,26 +125,29 @@ public class Login extends javax.swing.JFrame {
         Principal.jLabelDocente.setVisible(true);
         Principal.jLabelEstudiante.setVisible(true);
     }//GEN-LAST:event_jB_CancelarLoginActionPerformed
-
+    
     MetodosLogin metodos = new MetodosLogin();
     private void jB_AceptarLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_AceptarLoginActionPerformed
-
+        
         if (metodos.validar_ingreso() == 1) {
             this.dispose();
-
+            
             try {
-
+                
                 Docente docente = new Docente();
                 Principal.VentaPrincipal.add(docente);
                 Principal.VentaPrincipal.moveToFront(docente);
                 docente.setSize(Principal.VentaPrincipal.getWidth(), Principal.VentaPrincipal.getHeight());
                 docente.setLocation(0, 0);
                 docente.show();
-
+                
+                docente.jLabel_NombreDocente.setText(metodos.nombreDocente());
+                System.out.println("Acaa " + metodos.nombreDocente());
+                
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
+            
         } else {
             System.out.println(metodos.validar_ingreso());
             JOptionPane.showMessageDialog(null, "Usuario y/o contraseña incorrectos\n"
@@ -211,21 +218,21 @@ public class Login extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private static class RoundedBorder implements Border {
-
+        
         private int radius;
-
+        
         RoundedBorder(int radius) {
             this.radius = radius;
         }
-
+        
         public Insets getBorderInsets(Component c) {
             return new Insets(this.radius + 1, this.radius + 1, this.radius + 2, this.radius);
         }
-
+        
         public boolean isBorderOpaque() {
             return true;
         }
-
+        
         public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
             g.drawRoundRect(x, y, width - 1, height - 1, radius, radius);
         }

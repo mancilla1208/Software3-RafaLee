@@ -5,6 +5,7 @@
  */
 package Logica;
 
+import GUI.Docente;
 import GUI.Login;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -33,8 +34,8 @@ public class MetodosLogin {
             ResultSet rs = st.executeQuery(SSQL);
             if (rs.next()) {
                 resultado = 1;
-                System.out.println("Entro a la conexión");
             }
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
         } finally {
@@ -45,6 +46,30 @@ public class MetodosLogin {
             }
         }
         return resultado;
+    }
+
+    public String nombreDocente() {
+        String usuario = Login.jTextFieldUsuario.getText();
+        String clave = String.valueOf(Login.jPasswordField1.getPassword());
+        String variableNombreDocente = "";
+        String SSQL1 = "SELECT * FROM rafalee_bd.docente WHERE nombre_usuario='" + usuario + "' AND clave='" + clave + "'";
+        Connection conect = null;
+
+        try {
+            conect = cc.Conectar();
+            Statement st = conect.createStatement();
+            ResultSet rs1 = st.executeQuery(SSQL1);
+            if (rs1.next()) {
+                rs1.getString(2);
+                variableNombreDocente = rs1.getString(2);
+                System.out.println("Esoooo " + variableNombreDocente);
+
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
+        }
+        return variableNombreDocente;
     }
 
 }
