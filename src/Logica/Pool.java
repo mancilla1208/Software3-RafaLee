@@ -16,9 +16,9 @@ public class Pool {
 
     public DataSource dataSource;
     public String db = "rafalee_bd";
-    public String url = "jdbc:mysql://localhost/" + db;
-    public String user = "andres";
-    public String pass = "0702";
+    public String url = "jdbc:mysql://192.168.1.60/" + db;
+    public String user = "rafalee";
+    public String pass = "1234";
 
     public Pool() {
         inicializaDataSource();
