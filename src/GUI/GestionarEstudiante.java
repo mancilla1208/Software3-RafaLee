@@ -7,7 +7,6 @@ package GUI;
 
 import Logica.ConexionMySql;
 import Logica.MetodosBD;
-import Logica.Pool;
 import java.awt.Color;
 import java.awt.HeadlessException;
 import java.sql.*;
@@ -18,7 +17,9 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author andre
+ * @author Andres Mancilla Oliver
+ * @author Andres Felipe Otalvaro
+ *
  */
 public class GestionarEstudiante extends javax.swing.JFrame {
 
@@ -56,6 +57,10 @@ public class GestionarEstudiante extends javax.swing.JFrame {
 
     }
 
+    /*
+    * Metodo encargado de crear la tabla con sus respectivas columnas y la consulta
+    * para que muestre los estudiantes que se encuentran registrados en la base de datos.
+     */
     void mostrarTabla() {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("Id");
@@ -83,6 +88,9 @@ public class GestionarEstudiante extends javax.swing.JFrame {
 
     }
 
+    /*
+    * Metodo encargado de limpiar los campos de nombre y grado del estudiante.
+     */
     void limpiar() {
         txtNombreCompletoEstu.setText("");
         txtGradoEstu.setText("");

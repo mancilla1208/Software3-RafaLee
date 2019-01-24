@@ -12,7 +12,8 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Andres Mancilla
+ * @author Andres Mancilla Oliver
+ * @author Andres Felipe Otalvaro
  *
  * Clase que se encargara de realizar la conexión entre la aplicación y la base
  * de datos.
@@ -21,10 +22,17 @@ import javax.swing.JOptionPane;
 public class ConexionMySql {
 
     public String BD = "rafalee_bd";
-    public String url = "jdbc:mysql://192.168.1.60/" + BD;
-    public String usuario = "rafalee";
-    public String clave = "1234";
+    public String url = "jdbc:mysql://localhost/" + BD;
+    public String usuario = "andres";
+    public String clave = "0702";
+//    public String url = "jdbc:mysql://192.168.1.60/" + BD;
+//    public String usuario = "rafalee";
+//    public String clave = "1234";
 
+    /*
+    * Metodo encargado de crear la conexión con sus respectivos parametros (nombre, contraseña)
+    * ya establecidos.
+     */
     public Connection Conectar() {
         Connection link = null;
         try {

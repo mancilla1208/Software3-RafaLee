@@ -15,13 +15,23 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author andre
+ * @author Andres Mancilla Oliver
+ * @author Andres Felipe Otalvaro
+ *
+ * Clase que contiene los metodos para el logueo del docente ya registrado en la
+ * aplicación y para obtener el nombre respectivo del docente que inicia sesion
+ * para su perfil en la aplicación.
+ *
  */
 public class MetodosLogin {
 
     //Pool metodospool = new Pool();
     ConexionMySql cc = new ConexionMySql();
 
+    /*
+    * Metodo que se encarga de verificar si los datos ingresados del docente son correctos
+    * para el inicio de sesion a la aplicación.
+     */
     public int validar_ingreso() {
         String usuario = Login.jTextFieldUsuario.getText();
         String clave = String.valueOf(Login.jPasswordField1.getPassword());
@@ -48,6 +58,10 @@ public class MetodosLogin {
         return resultado;
     }
 
+    /*
+    * Metodo que se encarga de capturar de la base de datos el nombre completo del docente logueado
+    * para ubicarlo en su perfil correspondiente.
+      */
     public String nombreDocente() {
         String usuario = Login.jTextFieldUsuario.getText();
         String clave = String.valueOf(Login.jPasswordField1.getPassword());

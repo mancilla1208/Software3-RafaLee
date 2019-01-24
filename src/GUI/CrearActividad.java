@@ -14,8 +14,11 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
+ * @author Andres Mancilla Oliver
+ * @author Andres Felipe Otalvaro
  *
- * @author andre
+ * Interfaz para la ventana CrearActividad, en la cual el docente podra hacer la
+ * gestion de tareas y actividades para los estudiantes.
  */
 public class CrearActividad extends javax.swing.JFrame {
 

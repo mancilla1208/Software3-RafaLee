@@ -13,18 +13,26 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author andre
+ * @author Andres Mancilla Oliver
+ * @author Andres Felipe Otalvaro
+ *
+ * Clase que contiene los metodos basicos para insertar, eliminar y modificar
+ * estudiantes de la lista y base de datos.
  */
 public class MetodosBD {
 
-    Pool metodoPool = new Pool();
+    ConexionMySql con = new ConexionMySql();
 
+    /*
+    * Metodo encargado de actualizar los datos del estudiante seleccionado 
+    * en la lista y base de datos.
+     */
     public void Actualizar(String nombreCompleto, String grado, String idEstudiante) {
 
         Connection conexion = null;
 
         try {
-            conexion = metodoPool.dataSource.getConnection();
+            conexion = con.Conectar();
             String sql = "UPDATE rafalee_bd.estudiante SET nombre_completo=?, grado=? WHERE idEstudiante=?";
 
             PreparedStatement ps = conexion.prepareStatement(sql);
@@ -53,13 +61,16 @@ public class MetodosBD {
 
     }
 
+    /*
+    * Metodo encargado de eliminar un estudiante seleccionado en la lista y base de datos.
+     */
     public void Eliminar(String id) {
         Connection conexion = null;
 
         try {
 
             String sql = "DELETE FROM rafalee_bd.estudiante WHERE idEstudiante=?";
-            conexion = metodoPool.dataSource.getConnection();
+            conexion = con.Conectar();
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setString(1, id);
 

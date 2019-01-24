@@ -11,6 +11,7 @@ import static GUI.Principal.jLabelEstudiante;
 import static GUI.Principal.jbDocente;
 import static GUI.Principal.jbEstudiante;
 import Logica.ConexionMySql;
+import Logica.MetodosBD;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -19,8 +20,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * @author Andres Mancilla Oliver
+ * @author Andres Felipe Otalvaro
  *
- * @author andre
  */
 public class RegistroDocente extends javax.swing.JFrame {
 
@@ -149,6 +151,11 @@ public class RegistroDocente extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jB_CancelarRegistroActionPerformed
 
+    /*
+    * Metodo que tiene como función realizar el registro de un docente.
+    * Realiza la conexión a la base de datos y por medio de la consulta establecida 
+    * guarda el registro del docente.
+     */
     private void jB_RegistrarDoceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_RegistrarDoceActionPerformed
 
         String cadena2, cadena3, cadena4, cadena5, cadena6;
@@ -166,28 +173,13 @@ public class RegistroDocente extends javax.swing.JFrame {
             jTextRegis_Nombre.requestFocus();
         } else {
             try {
-              //  ConexionMySql con= new ConexionMySql();
-                String url = "jdbc:mysql://192.168.1.60/rafalee_bd";
-                String usuario = "rafalee";
-                String contraseña = "1234";
-
-                Class.forName("com.mysql.jdbc.Driver").newInstance();
-                con = DriverManager.getConnection(url, usuario, contraseña);
-                if (con != null) {
-                    System.out.println("Se ha establecido una conexión a la base de datos "
-                            + "\n " + url);
-                }
+                ConexionMySql cc = new ConexionMySql();
+                Connection con = cc.Conectar();
 
                 stmt = con.createStatement();
                 stmt.executeUpdate("INSERT INTO docente VALUES('" + 0 + "','" + cadena2 + "','" + cadena3 + "','" + cadena4 + "','" + cadena5 + "','" + cadena6 + "')");
                 System.out.println("Los valores han sido agregados a la base de datos ");
 
-            } catch (InstantiationException ex) {
-                Logger.getLogger(RegistroDocente.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalAccessException ex) {
-                Logger.getLogger(RegistroDocente.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(RegistroDocente.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {
                 Logger.getLogger(RegistroDocente.class.getName()).log(Level.SEVERE, null, ex);
             } finally {
