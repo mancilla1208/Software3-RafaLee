@@ -11,7 +11,11 @@ import java.io.FileOutputStream;
 
 /**
  *
- * @author andre
+ * @author Andres Mancilla Oliver
+ * @author Andres Felipe Otalvaro
+ *
+ * Clase que contiene los metodos para la gestion de archivos en la aplicación.
+ *
  */
 public class GestionArchivos {
 
@@ -23,7 +27,7 @@ public class GestionArchivos {
 
     }
 
-    /*Abrir un archivo de texto*/
+    /*Metodo para abrir un archivo de texto*/
     public String AbrirATexto(File archivo) {
         String contenido = "";
         try {
@@ -38,7 +42,7 @@ public class GestionArchivos {
         return contenido;
     }
 
-    /*Abrir una imagen*/
+    /*Metodo para abrir una imagen*/
     public byte[] AbrirAImagen(File archivo) {
         byte[] bytesImg = new byte[1024 * 100];
         try {

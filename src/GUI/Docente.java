@@ -17,7 +17,11 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author andre
+ * @author Andres Mancilla Oliver
+ * @author Andres Felipe Otalvaro
+ *
+ * Interfaz para la ventana Docente, donde se realiza toda la administración de
+ * tareas para el estudiante por parte del docente y demas funciones.
  */
 public class Docente extends javax.swing.JInternalFrame {
 

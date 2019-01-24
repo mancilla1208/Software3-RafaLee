@@ -13,8 +13,10 @@ import static GUI.Principal.jbEstudiante;
 import javax.swing.JOptionPane;
 
 /**
+ * @author Andres Mancilla Oliver
+ * @author Andres Felipe Otalvaro
  *
- * @author andre
+ * Interfaz para la ventana Estudiante.
  */
 public class Estudiante extends javax.swing.JInternalFrame {
 

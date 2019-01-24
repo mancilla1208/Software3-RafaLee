@@ -6,7 +6,6 @@
 package GUI;
 
 import Logica.ConexionMySql;
-import Logica.Pool;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Graphics;
@@ -20,7 +19,10 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author andre
+ * @author Andres Mancilla Oliver
+ * @author Andres Felipe Otalvaro
+ *
+ * Vista principal de la aplicación RafaLee
  */
 public class Principal extends javax.swing.JFrame {
 
