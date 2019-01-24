@@ -60,9 +60,7 @@ public class MetodosLogin {
             Statement st = conect.createStatement();
             ResultSet rs1 = st.executeQuery(SSQL1);
             if (rs1.next()) {
-                rs1.getString(2);
                 variableNombreDocente = rs1.getString(2);
-                System.out.println("Esoooo " + variableNombreDocente);
 
             }
 

@@ -167,9 +167,9 @@ public class RegistroDocente extends javax.swing.JFrame {
         } else {
             try {
               //  ConexionMySql con= new ConexionMySql();
-                String url = "jdbc:mysql://localhost:3306/rafalee_bd";
-                String usuario = "andres";
-                String contraseña = "0702";
+                String url = "jdbc:mysql://192.168.1.60/rafalee_bd";
+                String usuario = "rafalee";
+                String contraseña = "1234";
 
                 Class.forName("com.mysql.jdbc.Driver").newInstance();
                 con = DriverManager.getConnection(url, usuario, contraseña);
