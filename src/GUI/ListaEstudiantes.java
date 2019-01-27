@@ -126,7 +126,7 @@ public class ListaEstudiantes extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     //Validar selección de nombre al momento de un estudiante escoger
-    
+
     private void jButtonAceptarEstuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarEstuActionPerformed
 
         if (jComboBoxListaEstu.getSelectedItem() == "Seleccione") {
@@ -142,6 +142,27 @@ public class ListaEstudiantes extends javax.swing.JFrame {
             estudiante.setLocation(0, 0);
             estudiante.show();
             Estudiante.jLabelNombreEstudiante.setText((String) jComboBoxListaEstu.getSelectedItem());
+
+            // Codigo para obtener el grado del estudiante y redireccionarlo a su perfil o grado correspondiente
+            String gradoEstudiante = "";
+            String SSQL1 = "SELECT e.grado FROM rafalee_bd.estudiante e WHERE nombre_completo='" + jComboBoxListaEstu.getSelectedItem().toString() + "'";
+            Connection conect = null;
+
+            try {
+                conect = cc.Conectar();
+                Statement st = conect.createStatement();
+                ResultSet rs1 = st.executeQuery(SSQL1);
+                if (rs1.next()) {
+                    gradoEstudiante = rs1.getString(1);
+
+                }
+
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
+
+            }
+
+            estudiante.jLabel_GradoEstu.setText("Grado " + gradoEstudiante);
 
         }
 
@@ -178,16 +199,24 @@ public class ListaEstudiantes extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ListaEstudiantes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListaEstudiantes.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ListaEstudiantes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListaEstudiantes.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ListaEstudiantes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListaEstudiantes.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ListaEstudiantes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListaEstudiantes.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>

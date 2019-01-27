@@ -48,14 +48,13 @@ public class Estudiante extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList_Actividades = new javax.swing.JList<>();
         jPanel2 = new javax.swing.JPanel();
         jLabelNombreEstudiante = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabel_GradoEstu = new javax.swing.JLabel();
         jButtonSalirEstudiante = new javax.swing.JButton();
         jButtonVolverEstu = new javax.swing.JButton();
-        jLabelSalirEstu = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollBar1 = new javax.swing.JScrollBar();
@@ -81,11 +80,8 @@ public class Estudiante extends javax.swing.JInternalFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Lista de actividades");
 
-        jLabel4.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
-        jLabel4.setText("Tarea - Lectura sobre animales");
-
-        jLabel5.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
-        jLabel5.setText("Evaluación - Vocales");
+        jList_Actividades.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        jScrollPane1.setViewportView(jList_Actividades);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -99,12 +95,10 @@ public class Estudiante extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jSeparator1)
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(18, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,10 +107,8 @@ public class Estudiante extends javax.swing.JInternalFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -124,13 +116,11 @@ public class Estudiante extends javax.swing.JInternalFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabelNombreEstudiante.setFont(new java.awt.Font("Comic Sans MS", 1, 20)); // NOI18N
-        jLabelNombreEstudiante.setText("Pepito Perez");
-        jPanel2.add(jLabelNombreEstudiante, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 13, -1, 21));
+        jLabelNombreEstudiante.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        jPanel2.add(jLabelNombreEstudiante, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 13, 310, 30));
 
-        jLabel2.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
-        jLabel2.setText("Grado 1");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+        jLabel_GradoEstu.setFont(new java.awt.Font("Comic Sans MS", 1, 20)); // NOI18N
+        jPanel2.add(jLabel_GradoEstu, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 240, 30));
 
         jButtonSalirEstudiante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Salir.png"))); // NOI18N
         jButtonSalirEstudiante.addActionListener(new java.awt.event.ActionListener() {
@@ -147,7 +137,6 @@ public class Estudiante extends javax.swing.JInternalFrame {
             }
         });
         jPanel2.add(jButtonVolverEstu, new org.netbeans.lib.awtextra.AbsoluteConstraints(779, 18, 57, 45));
-        jPanel2.add(jLabelSalirEstu, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 13, 119, 45));
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/barraEstudiantes.png"))); // NOI18N
         jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, 170, 90));
@@ -222,7 +211,7 @@ public class Estudiante extends javax.swing.JInternalFrame {
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(102, 102, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jScrollBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -234,7 +223,7 @@ public class Estudiante extends javax.swing.JInternalFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -276,16 +265,14 @@ public class Estudiante extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButtonSalirEstudiante;
     private javax.swing.JButton jButtonVolverEstu;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     public static javax.swing.JLabel jLabelNombreEstudiante;
-    private javax.swing.JLabel jLabelSalirEstu;
+    public static javax.swing.JLabel jLabel_GradoEstu;
+    private javax.swing.JList<String> jList_Actividades;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -293,6 +280,7 @@ public class Estudiante extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JScrollBar jScrollBar1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
