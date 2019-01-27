@@ -18,6 +18,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -47,6 +48,7 @@ public class Docente extends javax.swing.JInternalFrame {
      */
     public Docente() {
         initComponents();
+//        cargarActividades();
 
         jLabelNombreArchivoPre.setVisible(false);
         jTextAreaRespuesta.setVisible(false);
@@ -686,15 +688,10 @@ public class Docente extends javax.swing.JInternalFrame {
             ResultSet rs1 = st.executeQuery(SSQL1);
             if (rs1.next()) {
                 idDocente = rs1.getString(1);
-
             }
-
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
-
         }
-        System.out.println(idDocente);
-
         try {
             PreparedStatement ps = cn.prepareStatement("INSERT INTO rafalee_bd.actividad (nombre,grado,id_Docente1) VALUES (?,?,?)");
             ps.setString(1, jTextField_NombreActivi.getText());
@@ -704,12 +701,32 @@ public class Docente extends javax.swing.JInternalFrame {
         } catch (SQLException ex) {
             Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
-        
-        
+
     }//GEN-LAST:event_jB_SiguientePreActionPerformed
+
+    public void cargarActividades() {
+        DefaultListModel modeloLista = new DefaultListModel();
+        String[] grados = {"0", "1", "2", "3", "4", "5"};
+        String[] consultas = new String[5];
+        Statement st;
+
+        for (int i = 0; i < grados.length; i++) {
+            String sql = "SELECT a.nombre FROM rafalee_bd.actividad a WHERE grado=" + grados[i] + " ";
+            consultas[i] = sql;
+            try {
+                st = cn.createStatement();
+                ResultSet rs = st.executeQuery(sql);
+                while (rs.next()) {
+                    jList_ActividadesG3.setModel(modeloLista);
+                }
+
+            } catch (SQLException ex) {
+                Logger.getLogger(Docente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+
+    }
 
     private void jB_GuardarTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_GuardarTareaActionPerformed
         // TODO add your handling code here:
