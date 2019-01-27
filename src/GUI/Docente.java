@@ -7,11 +7,19 @@ package GUI;
 
 import static GUI.GestionarEstudiante.jTableListaEstu;
 import Logica.ConexionMySql;
+import Logica.GestionArchivos;
+import Logica.MetodosBD;
 import java.awt.Color;
+import java.io.File;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -28,18 +36,34 @@ public class Docente extends javax.swing.JInternalFrame {
     DefaultTableModel modelo = new DefaultTableModel();
     ConexionMySql cc = new ConexionMySql();
     Connection cn = cc.Conectar();
+    MetodosBD metodobd = new MetodosBD();
+
+    JFileChooser seleccionado = new JFileChooser();
+    File archivo;
+    byte[] bytesImg;
+    GestionArchivos gestion = new GestionArchivos();
 
     /**
      * Creates new form Docente
      */
     public Docente() {
         initComponents();
+//        cargarActividades();
+
+        jLabelNombreArchivoPre.setVisible(false);
+        jTextAreaRespuesta.setVisible(false);
+        jScrollPaneRespuesta.setVisible(false);
+        jLabelPreguntaA.setVisible(false);
+        jLabelPreguntaB.setVisible(false);
+        jLabelPreguntaC.setVisible(false);
+        jLabelPreguntaD.setVisible(false);
+        jTextFieldRespuesta1.setVisible(false);
+        jTextFieldRespuesta2.setVisible(false);
+        jTextFieldRespuesta3.setVisible(false);
+        jTextFieldRespuesta4.setVisible(false);
 
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
 
-        jButtonExitDocente.setOpaque(false);
-        jButtonExitDocente.setContentAreaFilled(false);
-        jButtonExitDocente.setBorderPainted(false);
     }
 
     /**
@@ -79,6 +103,33 @@ public class Docente extends javax.swing.JInternalFrame {
         jScrollPane6 = new javax.swing.JScrollPane();
         jList_ActividadesG5 = new javax.swing.JList<>();
         jPanel3 = new javax.swing.JPanel();
+        jB_AñadirTipoPre = new javax.swing.JButton();
+        jPanel11 = new javax.swing.JPanel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jTextAreaPregunta = new javax.swing.JTextArea();
+        jLabelNumPregunta = new javax.swing.JLabel();
+        jLabelPreguntaA = new javax.swing.JLabel();
+        jLabelPreguntaB = new javax.swing.JLabel();
+        jLabelPreguntaC = new javax.swing.JLabel();
+        jLabelPreguntaD = new javax.swing.JLabel();
+        jTextFieldRespuesta1 = new javax.swing.JTextField();
+        jTextFieldRespuesta2 = new javax.swing.JTextField();
+        jTextFieldRespuesta3 = new javax.swing.JTextField();
+        jTextFieldRespuesta4 = new javax.swing.JTextField();
+        jButtonCargarPre = new javax.swing.JButton();
+        jLabelNombreArchivoPre = new javax.swing.JLabel();
+        jScrollPaneRespuesta = new javax.swing.JScrollPane();
+        jTextAreaRespuesta = new javax.swing.JTextArea();
+        jB_GuardarTarea = new javax.swing.JButton();
+        jB_SiguientePre = new javax.swing.JButton();
+        jB_CargarArchivoGeneral = new javax.swing.JButton();
+        jLabelNombreArchivoGeneral = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jComboBox_TipoPreguntas = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jTextField_NombreActivi = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jTextField_GradoActividad = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItemInicio = new javax.swing.JMenuItem();
@@ -90,6 +141,7 @@ public class Docente extends javax.swing.JInternalFrame {
         setResizable(true);
         setTitle("Docente");
         setAutoscrolls(true);
+        setPreferredSize(new java.awt.Dimension(900, 700));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanelBarraDocente.setBackground(new java.awt.Color(255, 220, 184));
@@ -108,15 +160,17 @@ public class Docente extends javax.swing.JInternalFrame {
         jPanelBarraDocente.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 61, 65, -1));
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/docenteNiños.png"))); // NOI18N
-        jPanelBarraDocente.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 340, 100));
+        jPanelBarraDocente.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 340, 100));
 
         jButtonExitDocente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Exit.png"))); // NOI18N
+        jButtonExitDocente.setBorderPainted(false);
+        jButtonExitDocente.setContentAreaFilled(false);
         jButtonExitDocente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonExitDocenteActionPerformed(evt);
             }
         });
-        jPanelBarraDocente.add(jButtonExitDocente, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 30, -1, -1));
+        jPanelBarraDocente.add(jButtonExitDocente, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 30, -1, -1));
 
         getContentPane().add(jPanelBarraDocente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 100));
 
@@ -139,8 +193,8 @@ public class Docente extends javax.swing.JInternalFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Grado 0", jPanel5);
@@ -160,7 +214,7 @@ public class Docente extends javax.swing.JInternalFrame {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -181,7 +235,7 @@ public class Docente extends javax.swing.JInternalFrame {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -202,7 +256,7 @@ public class Docente extends javax.swing.JInternalFrame {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -223,7 +277,7 @@ public class Docente extends javax.swing.JInternalFrame {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -244,7 +298,7 @@ public class Docente extends javax.swing.JInternalFrame {
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -258,42 +312,212 @@ public class Docente extends javax.swing.JInternalFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane2)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Crear actividad", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 12))); // NOI18N
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 528, Short.MAX_VALUE)
+        jB_AñadirTipoPre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/AgregarTarea.png"))); // NOI18N
+        jB_AñadirTipoPre.setBorderPainted(false);
+        jB_AñadirTipoPre.setContentAreaFilled(false);
+        jB_AñadirTipoPre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_AñadirTipoPreActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jB_AñadirTipoPre, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 60, 40, 50));
+
+        jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Preguntas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 14))); // NOI18N
+
+        jTextAreaPregunta.setColumns(20);
+        jTextAreaPregunta.setRows(5);
+        jScrollPane7.setViewportView(jTextAreaPregunta);
+
+        jLabelNumPregunta.setText("No.");
+
+        jLabelPreguntaA.setText("a)");
+
+        jLabelPreguntaB.setText("b)");
+
+        jLabelPreguntaC.setText("c)");
+
+        jLabelPreguntaD.setText("d)");
+
+        jTextFieldRespuesta1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldRespuesta1ActionPerformed(evt);
+            }
+        });
+
+        jButtonCargarPre.setText("Examinar");
+        jButtonCargarPre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCargarPreActionPerformed(evt);
+            }
+        });
+
+        jLabelNombreArchivoPre.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabelNombreArchivoPre.setText("Nombre de archivo");
+
+        jScrollPaneRespuesta.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Respuesta", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 0, 12))); // NOI18N
+
+        jTextAreaRespuesta.setColumns(20);
+        jTextAreaRespuesta.setRows(5);
+        jScrollPaneRespuesta.setViewportView(jTextAreaRespuesta);
+
+        jB_GuardarTarea.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/GuardarTarea.png"))); // NOI18N
+        jB_GuardarTarea.setBorderPainted(false);
+        jB_GuardarTarea.setContentAreaFilled(false);
+        jB_GuardarTarea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_GuardarTareaActionPerformed(evt);
+            }
+        });
+
+        jB_SiguientePre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/siguientePre.png"))); // NOI18N
+        jB_SiguientePre.setBorderPainted(false);
+        jB_SiguientePre.setContentAreaFilled(false);
+        jB_SiguientePre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_SiguientePreActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabelNumPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(9, 9, 9)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41))
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelPreguntaA)
+                            .addComponent(jLabelPreguntaB))
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldRespuesta1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldRespuesta2, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldRespuesta3, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldRespuesta4, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabelPreguntaC)
+                    .addComponent(jLabelPreguntaD)
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addComponent(jButtonCargarPre, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(9, 9, 9)
+                        .addComponent(jLabelNombreArchivoPre, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(16, 16, 16)
+                        .addComponent(jB_SiguientePre, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jB_GuardarTarea, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPaneRespuesta))
+                .addGap(24, 24, 24))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(jLabelNumPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabelPreguntaA)
+                        .addGap(16, 16, 16)
+                        .addComponent(jLabelPreguntaB))
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jTextFieldRespuesta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(jTextFieldRespuesta2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(jTextFieldRespuesta3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(jTextFieldRespuesta4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addComponent(jLabelPreguntaC))
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addGap(100, 100, 100)
+                        .addComponent(jLabelPreguntaD))
+                    .addComponent(jScrollPaneRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonCargarPre, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelNombreArchivoPre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jB_SiguientePre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jB_GuardarTarea)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jPanel3.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 130, 460, 250));
+
+        jB_CargarArchivoGeneral.setText("Examinar");
+        jB_CargarArchivoGeneral.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_CargarArchivoGeneralActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jB_CargarArchivoGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 96, 100, 27));
+
+        jLabelNombreArchivoGeneral.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabelNombreArchivoGeneral.setText("Nombre de archivo ");
+        jPanel3.add(jLabelNombreArchivoGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 100, 310, 20));
+
+        jLabel4.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel4.setText("Seleccione un tipo de pregunta:");
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, 23));
+
+        jComboBox_TipoPreguntas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Icfes", "Abierta", "Completar" }));
+        jPanel3.add(jComboBox_TipoPreguntas, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, 110, 20));
+
+        jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel1.setText("Nombre de actividad:");
+        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 20, -1, -1));
+        jPanel3.add(jTextField_NombreActivi, new org.netbeans.lib.awtextra.AbsoluteConstraints(173, 22, 297, -1));
+
+        jLabel5.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel5.setText("Grado:");
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
+        jPanel3.add(jTextField_GradoActividad, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 62, -1));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(7, 7, 7)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(348, 348, 348)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(3, 3, 3)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 101, 900, 470));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 101, 900, 410));
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/archivo.png"))); // NOI18N
         jMenu1.setText("Archivo");
@@ -366,11 +590,169 @@ public class Docente extends javax.swing.JInternalFrame {
         System.exit(0);
     }//GEN-LAST:event_jButtonExitDocenteActionPerformed
 
+    private void jB_AñadirTipoPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_AñadirTipoPreActionPerformed
+
+        if (jComboBox_TipoPreguntas.getSelectedItem() == "Icfes") {
+            jTextAreaRespuesta.setVisible(false);
+            jScrollPaneRespuesta.setVisible(false);
+
+            jLabelPreguntaA.setVisible(true);
+            jLabelPreguntaB.setVisible(true);
+            jLabelPreguntaC.setVisible(true);
+            jLabelPreguntaD.setVisible(true);
+
+            jTextFieldRespuesta1.setVisible(true);
+            jTextFieldRespuesta2.setVisible(true);
+            jTextFieldRespuesta3.setVisible(true);
+            jTextFieldRespuesta4.setVisible(true);
+
+            jButtonCargarPre.setVisible(true);
+            jLabelNombreArchivoPre.setVisible(true);
+
+        } else if (jComboBox_TipoPreguntas.getSelectedItem() == "Abierta") {
+
+            jTextAreaRespuesta.setVisible(true);
+            jScrollPaneRespuesta.setVisible(true);
+
+            jLabelPreguntaA.setVisible(false);
+            jLabelPreguntaB.setVisible(false);
+            jLabelPreguntaC.setVisible(false);
+            jLabelPreguntaD.setVisible(false);
+
+            jTextFieldRespuesta1.setVisible(false);
+            jTextFieldRespuesta2.setVisible(false);
+            jTextFieldRespuesta3.setVisible(false);
+            jTextFieldRespuesta4.setVisible(false);
+
+            jButtonCargarPre.setVisible(true);
+            jLabelNombreArchivoPre.setVisible(true);
+
+        } else if (jComboBox_TipoPreguntas.getSelectedItem() == "Completar") {
+
+        }
+
+    }//GEN-LAST:event_jB_AñadirTipoPreActionPerformed
+
+    private void jTextFieldRespuesta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldRespuesta1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldRespuesta1ActionPerformed
+
+    private void jButtonCargarPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCargarPreActionPerformed
+        if (seleccionado.showDialog(null, "ABRIR ARCHIVO") == JFileChooser.APPROVE_OPTION) {
+            archivo = seleccionado.getSelectedFile();
+            if (archivo.canRead()) {
+                if (archivo.getName().endsWith("txt") || archivo.getName().endsWith("doc") || archivo.getName().endsWith("pdf")) {
+                    String contenido = gestion.AbrirATexto(archivo);
+                    jLabelNombreArchivoPre.setText(archivo.getName());
+                } else {
+                    if (archivo.getName().endsWith("jpg") || archivo.getName().endsWith("png") || archivo.getName().endsWith("gif") || archivo.getName().endsWith("jpeg")) {
+                        bytesImg = gestion.AbrirAImagen(archivo);
+                        jLabelNombreArchivoPre.setText(archivo.getName());
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Por favor seleccione un archivo de texto o de imagen.");
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_jButtonCargarPreActionPerformed
+
+    private void jB_CargarArchivoGeneralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_CargarArchivoGeneralActionPerformed
+        if (seleccionado.showDialog(null, "ABRIR ARCHIVO") == JFileChooser.APPROVE_OPTION) {
+            archivo = seleccionado.getSelectedFile();
+            if (archivo.canRead()) {
+                if (archivo.getName().endsWith("txt") || archivo.getName().endsWith("doc") || archivo.getName().endsWith("pdf")) {
+                    String contenido = gestion.AbrirATexto(archivo);
+                    jLabelNombreArchivoGeneral.setText(archivo.getName());
+                } else {
+                    if (archivo.getName().endsWith("jpg") || archivo.getName().endsWith("png") || archivo.getName().endsWith("gif") || archivo.getName().endsWith("jpeg")) {
+                        bytesImg = gestion.AbrirAImagen(archivo);
+                        jLabelNombreArchivoGeneral.setText(archivo.getName());
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Por favor seleccione un archivo de texto o de imagen.");
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_jB_CargarArchivoGeneralActionPerformed
+
+    private void jB_SiguientePreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_SiguientePreActionPerformed
+
+        String idDocente = "";
+        String SSQL1 = "SELECT d.idDocente FROM rafalee_bd.docente d WHERE nombre_completo='" + jLabel_NombreDocente.getText() + "'";
+        Connection conect = null;
+
+        try {
+            conect = cc.Conectar();
+            Statement st = conect.createStatement();
+            ResultSet rs1 = st.executeQuery(SSQL1);
+            if (rs1.next()) {
+                idDocente = rs1.getString(1);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
+        }
+        try {
+            PreparedStatement ps = cn.prepareStatement("INSERT INTO rafalee_bd.actividad (nombre,grado,id_Docente1) VALUES (?,?,?)");
+            ps.setString(1, jTextField_NombreActivi.getText());
+            ps.setString(2, jTextField_GradoActividad.getText());
+            ps.setString(3, idDocente);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jB_SiguientePreActionPerformed
+
+    public void cargarActividades() {
+        DefaultListModel modeloLista = new DefaultListModel();
+        String[] grados = {"0", "1", "2", "3", "4", "5"};
+        String[] consultas = new String[5];
+        Statement st;
+
+        for (int i = 0; i < grados.length; i++) {
+            String sql = "SELECT a.nombre FROM rafalee_bd.actividad a WHERE grado=" + grados[i] + " ";
+            consultas[i] = sql;
+            try {
+                st = cn.createStatement();
+                ResultSet rs = st.executeQuery(sql);
+                while (rs.next()) {
+                    jList_ActividadesG3.setModel(modeloLista);
+                }
+
+            } catch (SQLException ex) {
+                Logger.getLogger(Docente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+
+    }
+
+    private void jB_GuardarTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_GuardarTareaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jB_GuardarTareaActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jB_AñadirTipoPre;
+    private javax.swing.JButton jB_CargarArchivoGeneral;
+    private javax.swing.JButton jB_GuardarTarea;
+    private javax.swing.JButton jB_SiguientePre;
+    private javax.swing.JButton jButtonCargarPre;
     private javax.swing.JButton jButtonExitDocente;
+    private javax.swing.JComboBox<String> jComboBox_TipoPreguntas;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabelNombreArchivoGeneral;
+    private javax.swing.JLabel jLabelNombreArchivoPre;
+    private javax.swing.JLabel jLabelNumPregunta;
+    private javax.swing.JLabel jLabelPreguntaA;
+    private javax.swing.JLabel jLabelPreguntaB;
+    private javax.swing.JLabel jLabelPreguntaC;
+    private javax.swing.JLabel jLabelPreguntaD;
     public javax.swing.JLabel jLabel_NombreDocente;
     private javax.swing.JList<String> jList_ActividadesG0;
     private javax.swing.JList<String> jList_ActividadesG1;
@@ -385,9 +767,9 @@ public class Docente extends javax.swing.JInternalFrame {
     private javax.swing.JMenuItem jMenuItemInicio;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
@@ -400,7 +782,16 @@ public class Docente extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPaneRespuesta;
     private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTextArea jTextAreaPregunta;
+    private javax.swing.JTextArea jTextAreaRespuesta;
+    private javax.swing.JTextField jTextFieldRespuesta1;
+    private javax.swing.JTextField jTextFieldRespuesta2;
+    private javax.swing.JTextField jTextFieldRespuesta3;
+    private javax.swing.JTextField jTextFieldRespuesta4;
+    private javax.swing.JTextField jTextField_GradoActividad;
+    private javax.swing.JTextField jTextField_NombreActivi;
     // End of variables declaration//GEN-END:variables
 }

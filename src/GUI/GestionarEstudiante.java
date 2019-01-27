@@ -35,6 +35,7 @@ public class GestionarEstudiante extends javax.swing.JFrame {
         initComponents();
         mostrarTabla();
         this.setLocationRelativeTo(null);
+        
         jPanelAddEstu.setBackground(new Color(222, 243, 252, 30));
 
         jButtonAñadirEstu.setBackground(new Color(222, 243, 252, 0));
