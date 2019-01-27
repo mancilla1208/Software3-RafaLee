@@ -25,8 +25,8 @@ public class ConexionMySql {
     public String url = "jdbc:mysql://localhost/" + BD;
     public String usuario = "andres";
     public String clave = "0702";
-//    public String url = "jdbc:mysql://192.168.1.60/" + BD;
-//    public String usuario = "rafalee";
+//    public String url = "jdbc:mysql://10.10.0.2/" + BD;
+//    public String usuario = "rafaleePensil";
 //    public String clave = "1234";
 
     /*
