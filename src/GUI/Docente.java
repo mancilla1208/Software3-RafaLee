@@ -48,7 +48,8 @@ public class Docente extends javax.swing.JInternalFrame {
      */
     public Docente() {
         initComponents();
-//        cargarActividades();
+
+        cargarActividades();
 
         jLabelNombreArchivoPre.setVisible(false);
         jTextAreaRespuesta.setVisible(false);
@@ -160,7 +161,7 @@ public class Docente extends javax.swing.JInternalFrame {
         jPanelBarraDocente.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 61, 65, -1));
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/docenteNiños.png"))); // NOI18N
-        jPanelBarraDocente.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 340, 100));
+        jPanelBarraDocente.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 330, 100));
 
         jButtonExitDocente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Exit.png"))); // NOI18N
         jButtonExitDocente.setBorderPainted(false);
@@ -178,6 +179,7 @@ public class Docente extends javax.swing.JInternalFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Actividades", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 12))); // NOI18N
 
+        jList_ActividadesG0.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         jScrollPane1.setViewportView(jList_ActividadesG0);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -199,6 +201,7 @@ public class Docente extends javax.swing.JInternalFrame {
 
         jTabbedPane2.addTab("Grado 0", jPanel5);
 
+        jList_ActividadesG1.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         jScrollPane2.setViewportView(jList_ActividadesG1);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -220,6 +223,7 @@ public class Docente extends javax.swing.JInternalFrame {
 
         jTabbedPane2.addTab("Grado 1", jPanel6);
 
+        jList_ActividadesG2.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         jScrollPane3.setViewportView(jList_ActividadesG2);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -241,6 +245,7 @@ public class Docente extends javax.swing.JInternalFrame {
 
         jTabbedPane2.addTab("Grado 2", jPanel7);
 
+        jList_ActividadesG3.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         jScrollPane4.setViewportView(jList_ActividadesG3);
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
@@ -262,6 +267,7 @@ public class Docente extends javax.swing.JInternalFrame {
 
         jTabbedPane2.addTab("Grado 3", jPanel8);
 
+        jList_ActividadesG4.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         jScrollPane5.setViewportView(jList_ActividadesG4);
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
@@ -283,6 +289,7 @@ public class Docente extends javax.swing.JInternalFrame {
 
         jTabbedPane2.addTab("Grado 4", jPanel9);
 
+        jList_ActividadesG5.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         jScrollPane6.setViewportView(jList_ActividadesG5);
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
@@ -698,6 +705,8 @@ public class Docente extends javax.swing.JInternalFrame {
             ps.setString(2, jTextField_GradoActividad.getText());
             ps.setString(3, idDocente);
             ps.executeUpdate();
+
+            JOptionPane.showMessageDialog(null, "Actividad creada con exito");
         } catch (SQLException ex) {
             Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -706,24 +715,19 @@ public class Docente extends javax.swing.JInternalFrame {
 
     public void cargarActividades() {
         DefaultListModel modeloLista = new DefaultListModel();
-        String[] grados = {"0", "1", "2", "3", "4", "5"};
-        String[] consultas = new String[5];
+        String sql = "SELECT a.nombre FROM rafalee_bd.actividad a WHERE grado=3";
         Statement st;
-
-        for (int i = 0; i < grados.length; i++) {
-            String sql = "SELECT a.nombre FROM rafalee_bd.actividad a WHERE grado=" + grados[i] + " ";
-            consultas[i] = sql;
-            try {
-                st = cn.createStatement();
-                ResultSet rs = st.executeQuery(sql);
-                while (rs.next()) {
-                    jList_ActividadesG3.setModel(modeloLista);
-                }
-
-            } catch (SQLException ex) {
-                Logger.getLogger(Docente.class.getName()).log(Level.SEVERE, null, ex);
+        try {
+            st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                modeloLista.addElement(rs.getString(1));
+                jList_ActividadesG3.setModel(modeloLista);
+                System.out.println(modeloLista);
             }
 
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

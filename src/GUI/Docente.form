@@ -155,7 +155,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="250" y="0" width="340" height="100"/>
+              <AbsoluteConstraints x="260" y="0" width="330" height="100"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -293,6 +293,9 @@
                       <SubComponents>
                         <Component class="javax.swing.JList" name="jList_ActividadesG0">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Comic Sans MS" size="14" style="1"/>
+                            </Property>
                             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
                               <StringArray count="0"/>
                             </Property>
@@ -344,6 +347,9 @@
                       <SubComponents>
                         <Component class="javax.swing.JList" name="jList_ActividadesG1">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Comic Sans MS" size="14" style="1"/>
+                            </Property>
                             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
                               <StringArray count="0"/>
                             </Property>
@@ -395,6 +401,9 @@
                       <SubComponents>
                         <Component class="javax.swing.JList" name="jList_ActividadesG2">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Comic Sans MS" size="14" style="1"/>
+                            </Property>
                             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
                               <StringArray count="0"/>
                             </Property>
@@ -446,6 +455,9 @@
                       <SubComponents>
                         <Component class="javax.swing.JList" name="jList_ActividadesG3">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Comic Sans MS" size="14" style="1"/>
+                            </Property>
                             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
                               <StringArray count="0"/>
                             </Property>
@@ -497,6 +509,9 @@
                       <SubComponents>
                         <Component class="javax.swing.JList" name="jList_ActividadesG4">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Comic Sans MS" size="14" style="1"/>
+                            </Property>
                             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
                               <StringArray count="0"/>
                             </Property>
@@ -548,6 +563,9 @@
                       <SubComponents>
                         <Component class="javax.swing.JList" name="jList_ActividadesG5">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Comic Sans MS" size="14" style="1"/>
+                            </Property>
                             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
                               <StringArray count="0"/>
                             </Property>
