@@ -8,6 +8,7 @@ package Logica;
 import static java.lang.Class.forName;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
 
 /**
@@ -42,5 +43,9 @@ public class ConexionMySql {
 
         }
         return link;
+    }
+
+    PreparedStatement Conectar(String select_archivopdf_FROM_pdf_WHERE_codigopd) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
