@@ -713,21 +713,61 @@ public class Docente extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jB_SiguientePreActionPerformed
 
+    /**
+     * Metodo encargado de cargar cada una de las listaas de actividades en el
+     * grado correspondiente
+     */
     public void cargarActividades() {
-        DefaultListModel modeloLista = new DefaultListModel();
-        String sql = "SELECT a.nombre FROM rafalee_bd.actividad a WHERE grado=3";
-        Statement st;
-        try {
-            st = cn.createStatement();
-            ResultSet rs = st.executeQuery(sql);
-            while (rs.next()) {
-                modeloLista.addElement(rs.getString(1));
-                jList_ActividadesG3.setModel(modeloLista);
-                System.out.println(modeloLista);
-            }
+        DefaultListModel ListaG0 = new DefaultListModel();
+        DefaultListModel ListaG1 = new DefaultListModel();
+        DefaultListModel ListaG2 = new DefaultListModel();
+        DefaultListModel ListaG3 = new DefaultListModel();
+        DefaultListModel ListaG4 = new DefaultListModel();
+        DefaultListModel ListaG5 = new DefaultListModel();
 
-        } catch (SQLException ex) {
-            Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+        int[] grados = {0, 1, 2, 3, 4, 5};
+        String[] consultas = new String[6];
+
+        for (int i = 0; i < grados.length; i++) {
+            String sql = "SELECT a.nombre FROM rafalee_bd.actividad a WHERE grado=" + grados[i] + "";
+            consultas[i] = sql;
+            Statement st;
+
+            try {
+                st = cn.createStatement();
+                ResultSet rs = st.executeQuery(consultas[i]);
+                System.out.println("Aca 1" + consultas[i]);
+                while (rs.next()) {
+                    if (grados[i] == 0) {
+                        ListaG0.addElement(rs.getString(1));
+                        jList_ActividadesG0.setModel(ListaG0);
+                    }
+                    if (grados[i] == 1) {
+                        ListaG1.addElement(rs.getString(1));
+                        jList_ActividadesG1.setModel(ListaG1);
+                    }
+                    if (grados[i] == 2) {
+                        ListaG2.addElement(rs.getString(1));
+                        jList_ActividadesG2.setModel(ListaG2);
+                    }
+                    if (grados[i] == 3) {
+                        ListaG3.addElement(rs.getString(1));
+                        jList_ActividadesG3.setModel(ListaG3);
+                    }
+                    if (grados[i] == 4) {
+                        ListaG4.addElement(rs.getString(1));
+                        jList_ActividadesG4.setModel(ListaG4);
+                    }
+                    if (grados[i] == 5) {
+                        ListaG5.addElement(rs.getString(1));
+                        jList_ActividadesG5.setModel(ListaG5);
+                    }
+
+                }
+
+            } catch (SQLException ex) {
+                Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
     }
