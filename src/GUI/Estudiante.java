@@ -114,7 +114,7 @@ public class Estudiante extends javax.swing.JInternalFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Lista de actividades");
 
-        jList_Actividades.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        jList_Actividades.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         jScrollPane1.setViewportView(jList_Actividades);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -154,7 +154,7 @@ public class Estudiante extends javax.swing.JInternalFrame {
         jPanel2.add(jLabelNombreEstudiante, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 13, 310, 30));
 
         jLabel_texGra.setFont(new java.awt.Font("Comic Sans MS", 1, 20)); // NOI18N
-        jLabel_texGra.setText("Grado");
+        jLabel_texGra.setText("Grado ");
         jPanel2.add(jLabel_texGra, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 70, 30));
 
         jButtonSalirEstudiante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Salir.png"))); // NOI18N
@@ -177,7 +177,7 @@ public class Estudiante extends javax.swing.JInternalFrame {
         jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, 170, 90));
 
         jLabel_Grado.setFont(new java.awt.Font("Comic Sans MS", 1, 20)); // NOI18N
-        jPanel2.add(jLabel_Grado, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 50, 30));
+        jPanel2.add(jLabel_Grado, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 50, 30));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
