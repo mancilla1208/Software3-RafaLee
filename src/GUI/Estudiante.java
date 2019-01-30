@@ -10,6 +10,12 @@ import static GUI.Principal.jLabelDocente;
 import static GUI.Principal.jLabelEstudiante;
 import static GUI.Principal.jbDocente;
 import static GUI.Principal.jbEstudiante;
+import Logica.ConexionMySql;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,11 +26,15 @@ import javax.swing.JOptionPane;
  */
 public class Estudiante extends javax.swing.JInternalFrame {
 
+    ConexionMySql cc = new ConexionMySql();
+    Connection cn = cc.Conectar();
+
     /**
      * Creates new form Estudiante
      */
     public Estudiante() {
         initComponents();
+        listaActividades();
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
 
         jButtonSalirEstudiante.setOpaque(false);
@@ -34,6 +44,24 @@ public class Estudiante extends javax.swing.JInternalFrame {
         jButtonVolverEstu.setOpaque(false);
         jButtonVolverEstu.setContentAreaFilled(false);
         jButtonVolverEstu.setBorderPainted(false);
+    }
+
+    public void listaActividades() {
+        DefaultListModel Lista = new DefaultListModel();
+        String SSQL1 = "SELECT a.nombre FROM rafalee_bd.actividad a WHERE grado='" + jLabel_Grado.getText() + "'";
+        Connection conect = null;
+
+        try {
+            conect = cc.Conectar();
+            Statement st = conect.createStatement();
+            ResultSet rs = st.executeQuery(SSQL1);
+            while (rs.next()) {
+                Lista.addElement(rs.getString(1));
+                jList_Actividades.setModel(Lista);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -52,10 +80,11 @@ public class Estudiante extends javax.swing.JInternalFrame {
         jList_Actividades = new javax.swing.JList<>();
         jPanel2 = new javax.swing.JPanel();
         jLabelNombreEstudiante = new javax.swing.JLabel();
-        jLabel_GradoEstu = new javax.swing.JLabel();
+        jLabel_texGra = new javax.swing.JLabel();
         jButtonSalirEstudiante = new javax.swing.JButton();
         jButtonVolverEstu = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
+        jLabel_Grado = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollBar1 = new javax.swing.JScrollBar();
         jLabel6 = new javax.swing.JLabel();
@@ -119,8 +148,9 @@ public class Estudiante extends javax.swing.JInternalFrame {
         jLabelNombreEstudiante.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
         jPanel2.add(jLabelNombreEstudiante, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 13, 310, 30));
 
-        jLabel_GradoEstu.setFont(new java.awt.Font("Comic Sans MS", 1, 20)); // NOI18N
-        jPanel2.add(jLabel_GradoEstu, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 240, 30));
+        jLabel_texGra.setFont(new java.awt.Font("Comic Sans MS", 1, 20)); // NOI18N
+        jLabel_texGra.setText("Grado");
+        jPanel2.add(jLabel_texGra, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 70, 30));
 
         jButtonSalirEstudiante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Salir.png"))); // NOI18N
         jButtonSalirEstudiante.addActionListener(new java.awt.event.ActionListener() {
@@ -140,6 +170,7 @@ public class Estudiante extends javax.swing.JInternalFrame {
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/barraEstudiantes.png"))); // NOI18N
         jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, 170, 90));
+        jPanel2.add(jLabel_Grado, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 50, 30));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -271,7 +302,8 @@ public class Estudiante extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     public static javax.swing.JLabel jLabelNombreEstudiante;
-    public static javax.swing.JLabel jLabel_GradoEstu;
+    public static javax.swing.JLabel jLabel_Grado;
+    public static javax.swing.JLabel jLabel_texGra;
     private javax.swing.JList<String> jList_Actividades;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
