@@ -718,6 +718,7 @@ public class Docente extends javax.swing.JInternalFrame {
      * grado correspondiente
      */
     public void cargarActividades() {
+        
         DefaultListModel ListaG0 = new DefaultListModel();
         DefaultListModel ListaG1 = new DefaultListModel();
         DefaultListModel ListaG2 = new DefaultListModel();
@@ -736,7 +737,6 @@ public class Docente extends javax.swing.JInternalFrame {
             try {
                 st = cn.createStatement();
                 ResultSet rs = st.executeQuery(consultas[i]);
-                System.out.println("Aca 1" + consultas[i]);
                 while (rs.next()) {
                     if (grados[i] == 0) {
                         ListaG0.addElement(rs.getString(1));

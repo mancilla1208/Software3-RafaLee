@@ -33,6 +33,8 @@ public class ListaEstudiantes extends javax.swing.JFrame {
 
     ConexionMySql cc = new ConexionMySql();
     Connection cn = cc.Conectar();
+    String SSQL1 = "";
+    String gradoEstudiante = "";
 
     /**
      * Creates new form ListaEstudiantes
@@ -144,8 +146,7 @@ public class ListaEstudiantes extends javax.swing.JFrame {
             Estudiante.jLabelNombreEstudiante.setText((String) jComboBoxListaEstu.getSelectedItem());
 
             // Codigo para obtener el grado del estudiante y redireccionarlo a su perfil o grado correspondiente
-            String gradoEstudiante = "";
-            String SSQL1 = "SELECT e.grado FROM rafalee_bd.estudiante e WHERE nombre_completo='" + jComboBoxListaEstu.getSelectedItem().toString() + "'";
+            SSQL1 = "SELECT e.grado FROM rafalee_bd.estudiante e WHERE nombre_completo='" + jComboBoxListaEstu.getSelectedItem().toString() + "'";
             Connection conect = null;
 
             try {
@@ -162,7 +163,7 @@ public class ListaEstudiantes extends javax.swing.JFrame {
 
             }
 
-            estudiante.jLabel_GradoEstu.setText("Grado " + gradoEstudiante);
+            estudiante.jLabel_Grado.setText(gradoEstudiante);
 
         }
 
