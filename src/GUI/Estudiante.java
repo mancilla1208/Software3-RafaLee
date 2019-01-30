@@ -28,11 +28,14 @@ public class Estudiante extends javax.swing.JInternalFrame {
 
     ConexionMySql cc = new ConexionMySql();
     Connection cn = cc.Conectar();
+    String grado;
 
     /**
      * Creates new form Estudiante
      */
-    public Estudiante() {
+    public Estudiante(String grado) {
+
+        this.grado = grado;
         initComponents();
         listaActividades();
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
@@ -47,8 +50,9 @@ public class Estudiante extends javax.swing.JInternalFrame {
     }
 
     public void listaActividades() {
+
         DefaultListModel Lista = new DefaultListModel();
-        String SSQL1 = "SELECT a.nombre FROM rafalee_bd.actividad a WHERE grado='" + jLabel_Grado.getText() + "'";
+        String SSQL1 = "SELECT a.nombre FROM rafalee_bd.actividad a WHERE grado='" + grado + "'";
         Connection conect = null;
 
         try {
@@ -58,6 +62,7 @@ public class Estudiante extends javax.swing.JInternalFrame {
             while (rs.next()) {
                 Lista.addElement(rs.getString(1));
                 jList_Actividades.setModel(Lista);
+                System.out.println("hjkl" + rs.getString(1));
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
@@ -170,6 +175,8 @@ public class Estudiante extends javax.swing.JInternalFrame {
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/barraEstudiantes.png"))); // NOI18N
         jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, 170, 90));
+
+        jLabel_Grado.setFont(new java.awt.Font("Comic Sans MS", 1, 20)); // NOI18N
         jPanel2.add(jLabel_Grado, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 50, 30));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
