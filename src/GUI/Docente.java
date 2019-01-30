@@ -711,6 +711,24 @@ public class Docente extends javax.swing.JInternalFrame {
             Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        if (jComboBox_TipoPreguntas.getSelectedItem().toString().equals("Icfes")) {
+
+            try {
+                PreparedStatement ps = cn.prepareStatement("INSERT INTO rafalee_bd.tipo_icfes(enunciado,respuesta1,respuesta2,respuesta3,respuesta4,id_Actividad3) VALUES (?,?,?,?,?,?)");
+                ps.setString(1, jTextAreaPregunta.getText());                
+                ps.setString(2, jTextFieldRespuesta1.getText());
+                ps.setString(3, jTextFieldRespuesta2.getText());
+                ps.setString(4, jTextFieldRespuesta3.getText());
+                ps.setString(5, jTextFieldRespuesta4.getText());
+                ps.setString(6, jTextFieldRespuesta1.getText());
+                ps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Estudiante registrado");
+            } catch (SQLException ex) {
+                Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+
     }//GEN-LAST:event_jB_SiguientePreActionPerformed
 
     /**
@@ -718,7 +736,7 @@ public class Docente extends javax.swing.JInternalFrame {
      * grado correspondiente
      */
     public void cargarActividades() {
-        
+
         DefaultListModel ListaG0 = new DefaultListModel();
         DefaultListModel ListaG1 = new DefaultListModel();
         DefaultListModel ListaG2 = new DefaultListModel();
