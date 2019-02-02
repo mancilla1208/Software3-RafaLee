@@ -7,6 +7,7 @@ package GUI;
 
 import Logica.ConexionMySql;
 import Logica.MetodosBD;
+import Logica.MetodosLogica;
 import java.awt.Color;
 import java.awt.HeadlessException;
 import java.sql.*;
@@ -27,6 +28,7 @@ public class GestionarEstudiante extends javax.swing.JFrame {
     Connection cn = cc.Conectar();
     MetodosBD metodobd = new MetodosBD();
     String idEstudiante = "";
+    MetodosLogica metodos = new MetodosLogica();
 
     /**
      * Creates new form AgregarEstudiante
@@ -35,7 +37,7 @@ public class GestionarEstudiante extends javax.swing.JFrame {
         initComponents();
         mostrarTabla();
         this.setLocationRelativeTo(null);
-        
+
         jPanelAddEstu.setBackground(new Color(222, 243, 252, 30));
 
         jButtonAñadirEstu.setBackground(new Color(222, 243, 252, 0));
@@ -87,14 +89,6 @@ public class GestionarEstudiante extends javax.swing.JFrame {
             Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-    }
-
-    /*
-    * Metodo encargado de limpiar los campos de nombre y grado del estudiante.
-     */
-    void limpiar() {
-        txtNombreCompletoEstu.setText("");
-        txtGradoEstu.setText("");
     }
 
     /**
@@ -274,6 +268,7 @@ public class GestionarEstudiante extends javax.swing.JFrame {
             ps.setString(1, txtNombreCompletoEstu.getText());
             ps.setString(2, txtGradoEstu.getText());
             ps.executeUpdate();
+            metodos.limpiarCamposGEstudiantes();
             JOptionPane.showMessageDialog(null, "Estudiante registrado");
             mostrarTabla();
         } catch (SQLException ex) {
@@ -347,7 +342,7 @@ public class GestionarEstudiante extends javax.swing.JFrame {
         } else {
             metodobd.Actualizar(txtNombreCompletoEstu.getText(), txtGradoEstu.getText(), idEstudiante);
             mostrarTabla();
-            limpiar();
+            metodos.limpiarCamposGEstudiantes();
         }
     }//GEN-LAST:event_jButtonActualizarActionPerformed
 
@@ -410,7 +405,7 @@ public class GestionarEstudiante extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelEliModiEstu;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable jTableListaEstu;
-    private javax.swing.JTextField txtGradoEstu;
-    private javax.swing.JTextField txtNombreCompletoEstu;
+    public static javax.swing.JTextField txtGradoEstu;
+    public static javax.swing.JTextField txtNombreCompletoEstu;
     // End of variables declaration//GEN-END:variables
 }

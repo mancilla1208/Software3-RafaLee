@@ -9,6 +9,7 @@ import static GUI.GestionarEstudiante.jTableListaEstu;
 import Logica.ConexionMySql;
 import Logica.GestionArchivos;
 import Logica.MetodosBD;
+import Logica.MetodosLogica;
 import java.awt.Color;
 import java.io.File;
 import java.sql.Connection;
@@ -37,6 +38,7 @@ public class Docente extends javax.swing.JInternalFrame {
     ConexionMySql cc = new ConexionMySql();
     Connection cn = cc.Conectar();
     MetodosBD metodobd = new MetodosBD();
+    MetodosLogica logica = new MetodosLogica();
     String idDocente = "";
 
     JFileChooser seleccionado = new JFileChooser();
@@ -49,8 +51,7 @@ public class Docente extends javax.swing.JInternalFrame {
      */
     public Docente() {
         initComponents();
-
-        cargarActividades();
+        metodobd.cargarActividades();
 
         jLabelNombreArchivoPre.setVisible(false);
         jTextAreaRespuesta.setVisible(false);
@@ -720,64 +721,6 @@ public class Docente extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jB_SiguientePreActionPerformed
 
-    /**
-     * Metodo encargado de cargar cada una de las listaas de actividades en el
-     * grado correspondiente
-     */
-    public void cargarActividades() {
-
-        DefaultListModel ListaG0 = new DefaultListModel();
-        DefaultListModel ListaG1 = new DefaultListModel();
-        DefaultListModel ListaG2 = new DefaultListModel();
-        DefaultListModel ListaG3 = new DefaultListModel();
-        DefaultListModel ListaG4 = new DefaultListModel();
-        DefaultListModel ListaG5 = new DefaultListModel();
-
-        int[] grados = {0, 1, 2, 3, 4, 5};
-        String[] consultas = new String[6];
-
-        for (int i = 0; i < grados.length; i++) {
-            String sql = "SELECT a.nombre FROM rafalee_bd.actividad a WHERE grado=" + grados[i] + "";
-            consultas[i] = sql;
-            Statement st;
-
-            try {
-                st = cn.createStatement();
-                ResultSet rs = st.executeQuery(consultas[i]);
-                while (rs.next()) {
-                    if (grados[i] == 0) {
-                        ListaG0.addElement(rs.getString(1));
-                        jList_ActividadesG0.setModel(ListaG0);
-                    }
-                    if (grados[i] == 1) {
-                        ListaG1.addElement(rs.getString(1));
-                        jList_ActividadesG1.setModel(ListaG1);
-                    }
-                    if (grados[i] == 2) {
-                        ListaG2.addElement(rs.getString(1));
-                        jList_ActividadesG2.setModel(ListaG2);
-                    }
-                    if (grados[i] == 3) {
-                        ListaG3.addElement(rs.getString(1));
-                        jList_ActividadesG3.setModel(ListaG3);
-                    }
-                    if (grados[i] == 4) {
-                        ListaG4.addElement(rs.getString(1));
-                        jList_ActividadesG4.setModel(ListaG4);
-                    }
-                    if (grados[i] == 5) {
-                        ListaG5.addElement(rs.getString(1));
-                        jList_ActividadesG5.setModel(ListaG5);
-                    }
-
-                }
-
-            } catch (SQLException ex) {
-                Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
-    }
 
     private void jB_GuardarTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_GuardarTareaActionPerformed
         try {
@@ -786,6 +729,7 @@ public class Docente extends javax.swing.JInternalFrame {
             ps.setString(2, jTextField_GradoActividad.getText());
             ps.setString(3, idDocente);
             ps.executeUpdate();
+            logica.limpiarCamposCrearActi();
 
         } catch (SQLException ex) {
             Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
@@ -814,12 +758,12 @@ public class Docente extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabelPreguntaC;
     private javax.swing.JLabel jLabelPreguntaD;
     public javax.swing.JLabel jLabel_NombreDocente;
-    private javax.swing.JList<String> jList_ActividadesG0;
-    private javax.swing.JList<String> jList_ActividadesG1;
-    private javax.swing.JList<String> jList_ActividadesG2;
-    private javax.swing.JList<String> jList_ActividadesG3;
-    private javax.swing.JList<String> jList_ActividadesG4;
-    private javax.swing.JList<String> jList_ActividadesG5;
+    public static javax.swing.JList<String> jList_ActividadesG0;
+    public static javax.swing.JList<String> jList_ActividadesG1;
+    public static javax.swing.JList<String> jList_ActividadesG2;
+    public static javax.swing.JList<String> jList_ActividadesG3;
+    public static javax.swing.JList<String> jList_ActividadesG4;
+    public static javax.swing.JList<String> jList_ActividadesG5;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -845,13 +789,13 @@ public class Docente extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPaneRespuesta;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTextArea jTextAreaPregunta;
-    private javax.swing.JTextArea jTextAreaRespuesta;
-    private javax.swing.JTextField jTextFieldRespuesta1;
-    private javax.swing.JTextField jTextFieldRespuesta2;
-    private javax.swing.JTextField jTextFieldRespuesta3;
-    private javax.swing.JTextField jTextFieldRespuesta4;
-    private javax.swing.JTextField jTextField_GradoActividad;
-    private javax.swing.JTextField jTextField_NombreActivi;
+    public static javax.swing.JTextArea jTextAreaPregunta;
+    public static javax.swing.JTextArea jTextAreaRespuesta;
+    public static javax.swing.JTextField jTextFieldRespuesta1;
+    public static javax.swing.JTextField jTextFieldRespuesta2;
+    public static javax.swing.JTextField jTextFieldRespuesta3;
+    public static javax.swing.JTextField jTextFieldRespuesta4;
+    public static javax.swing.JTextField jTextField_GradoActividad;
+    public static javax.swing.JTextField jTextField_NombreActivi;
     // End of variables declaration//GEN-END:variables
 }
