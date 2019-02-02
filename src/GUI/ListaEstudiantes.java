@@ -135,15 +135,6 @@ public class ListaEstudiantes extends javax.swing.JFrame {
             jComboBoxListaEstu.setOpaque(true);
             JOptionPane.showMessageDialog(null, "Seleccione un nombre válido");
         } else {
-            jComboBoxListaEstu.setOpaque(false);
-            dispose();
-            Estudiante estudiante = new Estudiante();
-            Principal.VentaPrincipal.add(estudiante);
-            Principal.VentaPrincipal.moveToFront(estudiante);
-            estudiante.setSize(Principal.VentaPrincipal.getWidth(), Principal.VentaPrincipal.getHeight());
-            estudiante.setLocation(0, 0);
-            estudiante.show();
-            Estudiante.jLabelNombreEstudiante.setText((String) jComboBoxListaEstu.getSelectedItem());
 
             // Codigo para obtener el grado del estudiante y redireccionarlo a su perfil o grado correspondiente
             SSQL1 = "SELECT e.grado FROM rafalee_bd.estudiante e WHERE nombre_completo='" + jComboBoxListaEstu.getSelectedItem().toString() + "'";
@@ -155,19 +146,25 @@ public class ListaEstudiantes extends javax.swing.JFrame {
                 ResultSet rs1 = st.executeQuery(SSQL1);
                 if (rs1.next()) {
                     gradoEstudiante = rs1.getString(1);
-
                 }
 
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
-
             }
+
+            jComboBoxListaEstu.setOpaque(false);
+            dispose();
+            Estudiante estudiante = new Estudiante(gradoEstudiante);
+            Principal.VentaPrincipal.add(estudiante);
+            Principal.VentaPrincipal.moveToFront(estudiante);
+            estudiante.setSize(Principal.VentaPrincipal.getWidth(), Principal.VentaPrincipal.getHeight());
+            estudiante.setLocation(0, 0);
+            estudiante.show();
+            Estudiante.jLabelNombreEstudiante.setText((String) jComboBoxListaEstu.getSelectedItem());
 
             estudiante.jLabel_Grado.setText(gradoEstudiante);
 
         }
-
-
     }//GEN-LAST:event_jButtonAceptarEstuActionPerformed
 
     private void jButtonCancelarEstuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarEstuActionPerformed

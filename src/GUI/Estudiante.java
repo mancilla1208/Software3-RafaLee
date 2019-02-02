@@ -28,11 +28,14 @@ public class Estudiante extends javax.swing.JInternalFrame {
 
     ConexionMySql cc = new ConexionMySql();
     Connection cn = cc.Conectar();
+    String grado;
 
     /**
      * Creates new form Estudiante
      */
-    public Estudiante() {
+    public Estudiante(String grado) {
+
+        this.grado = grado;
         initComponents();
         listaActividades();
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
@@ -47,8 +50,9 @@ public class Estudiante extends javax.swing.JInternalFrame {
     }
 
     public void listaActividades() {
+
         DefaultListModel Lista = new DefaultListModel();
-        String SSQL1 = "SELECT a.nombre FROM rafalee_bd.actividad a WHERE grado='" + jLabel_Grado.getText() + "'";
+        String SSQL1 = "SELECT a.nombre FROM rafalee_bd.actividad a WHERE grado='" + grado + "'";
         Connection conect = null;
 
         try {
@@ -58,6 +62,7 @@ public class Estudiante extends javax.swing.JInternalFrame {
             while (rs.next()) {
                 Lista.addElement(rs.getString(1));
                 jList_Actividades.setModel(Lista);
+                System.out.println("hjkl" + rs.getString(1));
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
@@ -109,7 +114,7 @@ public class Estudiante extends javax.swing.JInternalFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Lista de actividades");
 
-        jList_Actividades.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        jList_Actividades.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         jScrollPane1.setViewportView(jList_Actividades);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -149,7 +154,7 @@ public class Estudiante extends javax.swing.JInternalFrame {
         jPanel2.add(jLabelNombreEstudiante, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 13, 310, 30));
 
         jLabel_texGra.setFont(new java.awt.Font("Comic Sans MS", 1, 20)); // NOI18N
-        jLabel_texGra.setText("Grado");
+        jLabel_texGra.setText("Grado ");
         jPanel2.add(jLabel_texGra, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 70, 30));
 
         jButtonSalirEstudiante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Salir.png"))); // NOI18N
@@ -170,7 +175,9 @@ public class Estudiante extends javax.swing.JInternalFrame {
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/barraEstudiantes.png"))); // NOI18N
         jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, 170, 90));
-        jPanel2.add(jLabel_Grado, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 50, 30));
+
+        jLabel_Grado.setFont(new java.awt.Font("Comic Sans MS", 1, 20)); // NOI18N
+        jPanel2.add(jLabel_Grado, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 50, 30));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());

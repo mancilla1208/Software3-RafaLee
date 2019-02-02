@@ -37,6 +37,7 @@ public class Docente extends javax.swing.JInternalFrame {
     ConexionMySql cc = new ConexionMySql();
     Connection cn = cc.Conectar();
     MetodosBD metodobd = new MetodosBD();
+    String idDocente = "";
 
     JFileChooser seleccionado = new JFileChooser();
     File archivo;
@@ -685,7 +686,6 @@ public class Docente extends javax.swing.JInternalFrame {
 
     private void jB_SiguientePreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_SiguientePreActionPerformed
 
-        String idDocente = "";
         String SSQL1 = "SELECT d.idDocente FROM rafalee_bd.docente d WHERE nombre_completo='" + jLabel_NombreDocente.getText() + "'";
         Connection conect = null;
 
@@ -699,16 +699,23 @@ public class Docente extends javax.swing.JInternalFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
         }
-        try {
-            PreparedStatement ps = cn.prepareStatement("INSERT INTO rafalee_bd.actividad (nombre,grado,id_Docente1) VALUES (?,?,?)");
-            ps.setString(1, jTextField_NombreActivi.getText());
-            ps.setString(2, jTextField_GradoActividad.getText());
-            ps.setString(3, idDocente);
-            ps.executeUpdate();
 
-            JOptionPane.showMessageDialog(null, "Actividad creada con exito");
-        } catch (SQLException ex) {
-            Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+        if (jComboBox_TipoPreguntas.getSelectedItem().toString().equals("Icfes")) {
+
+            try {
+                PreparedStatement ps = cn.prepareStatement("INSERT INTO rafalee_bd.tipo_icfes(enunciado,respuesta1,respuesta2,respuesta3,respuesta4,id_Actividad3) VALUES (?,?,?,?,?,?)");
+                ps.setString(1, jTextAreaPregunta.getText());
+                ps.setString(2, jTextFieldRespuesta1.getText());
+                ps.setString(3, jTextFieldRespuesta2.getText());
+                ps.setString(4, jTextFieldRespuesta3.getText());
+                ps.setString(5, jTextFieldRespuesta4.getText());
+                ps.setString(6, jTextFieldRespuesta1.getText());
+                ps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Estudiante registrado");
+            } catch (SQLException ex) {
+                Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         }
 
     }//GEN-LAST:event_jB_SiguientePreActionPerformed
@@ -718,7 +725,7 @@ public class Docente extends javax.swing.JInternalFrame {
      * grado correspondiente
      */
     public void cargarActividades() {
-        
+
         DefaultListModel ListaG0 = new DefaultListModel();
         DefaultListModel ListaG1 = new DefaultListModel();
         DefaultListModel ListaG2 = new DefaultListModel();
@@ -773,7 +780,16 @@ public class Docente extends javax.swing.JInternalFrame {
     }
 
     private void jB_GuardarTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_GuardarTareaActionPerformed
-        // TODO add your handling code here:
+        try {
+            PreparedStatement ps = cn.prepareStatement("INSERT INTO rafalee_bd.actividad (nombre,grado,id_Docente1) VALUES (?,?,?)");
+            ps.setString(1, jTextField_NombreActivi.getText());
+            ps.setString(2, jTextField_GradoActividad.getText());
+            ps.setString(3, idDocente);
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jB_GuardarTareaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

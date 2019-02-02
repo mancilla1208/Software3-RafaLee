@@ -7,7 +7,7 @@ package GUI;
 
 import static GUI.Principal.jbEstudiante;
 import Logica.ConexionMySql;
-import Logica.MetodosLogin;
+import Logica.MetodosBD;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Insets;
@@ -27,6 +27,8 @@ import javax.swing.border.EmptyBorder;
  * aplicación por parte del docente o estudiante.
  */
 public class Login extends javax.swing.JFrame {
+
+    MetodosBD metodos = new MetodosBD();
 
     /**
      * Metodo que crea la vista de Login
@@ -137,7 +139,7 @@ public class Login extends javax.swing.JFrame {
      * Boton aceptar para la ventana Login y verificación para el inicio se
      * sesion.
      */
-    MetodosLogin metodos = new MetodosLogin();
+
     private void jB_AceptarLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_AceptarLoginActionPerformed
 
         if (metodos.validar_ingreso() == 1) {
