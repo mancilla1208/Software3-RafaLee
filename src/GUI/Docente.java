@@ -82,7 +82,6 @@ public class Docente extends javax.swing.JInternalFrame {
         jLabel_NombreDocente = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
         jButtonExitDocente = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -165,9 +164,6 @@ public class Docente extends javax.swing.JInternalFrame {
         jLabel3.setText("2018");
         jPanelBarraDocente.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 61, 65, -1));
 
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/docenteNiños.png"))); // NOI18N
-        jPanelBarraDocente.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 330, 100));
-
         jButtonExitDocente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Exit.png"))); // NOI18N
         jButtonExitDocente.setBorderPainted(false);
         jButtonExitDocente.setContentAreaFilled(false);
@@ -178,7 +174,7 @@ public class Docente extends javax.swing.JInternalFrame {
         });
         jPanelBarraDocente.add(jButtonExitDocente, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 30, -1, -1));
 
-        getContentPane().add(jPanelBarraDocente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 100));
+        getContentPane().add(jPanelBarraDocente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 100));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel2.setPreferredSize(new java.awt.Dimension(898, 580));
@@ -701,6 +697,7 @@ public class Docente extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
+        //Consulta SQL
         String SSQL1 = "SELECT d.idDocente FROM rafalee_bd.docente d WHERE nombre_completo='" + jLabel_NombreDocente.getText() + "'";
         Connection conect = null;
 
@@ -737,7 +734,6 @@ public class Docente extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButtonExitDocente;
     private javax.swing.JComboBox<String> jComboBox_TipoPreguntas;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
