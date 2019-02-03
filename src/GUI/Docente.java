@@ -700,31 +700,31 @@ public class Docente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jB_GuardarTareaActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // Consulta SQL
-//        String SSQL1 = "SELECT d.idDocente FROM rafalee_bd.docente d WHERE nombre_completo='" + jLabel_NombreDocente.getText() + "'";
-//        Connection conect = null;
-//
-//        try {
-//            conect = cc.Conectar();
-//            Statement st = conect.createStatement();
-//            ResultSet rs1 = st.executeQuery(SSQL1);
-//            if (rs1.next()) {
-//                idDocente = rs1.getString(1);
-//            }
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
-//        }
-//        try {
-//            PreparedStatement ps = cn.prepareStatement("INSERT INTO rafalee_bd.actividad (nombre,grado,id_Docente1) VALUES (?,?,?)");
-//            ps.setString(1, jTextField_NombreActivi.getText());
-//            ps.setString(2, jTextField_GradoActividad.getText());
-//            ps.setString(3, idDocente);
-//            ps.executeUpdate();
-//            logica.limpiarCamposCrearActi();
-//
-//        } catch (SQLException ex) {
-//            Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+
+        String SSQL1 = "SELECT d.idDocente FROM rafalee_bd.docente d WHERE nombre_completo='" + jLabel_NombreDocente.getText() + "'";
+        Connection conect = null;
+
+        try {
+            conect = cc.Conectar();
+            Statement st = conect.createStatement();
+            ResultSet rs1 = st.executeQuery(SSQL1);
+            if (rs1.next()) {
+                idDocente = rs1.getString(1);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
+        }
+        try {
+            PreparedStatement ps = cn.prepareStatement("INSERT INTO rafalee_bd.actividad (nombre,grado,id_Docente1) VALUES (?,?,?)");
+            ps.setString(1, jTextField_NombreActivi.getText());
+            ps.setString(2, jTextField_GradoActividad.getText());
+            ps.setString(3, idDocente);
+            ps.executeUpdate();
+            logica.limpiarCamposCrearActi();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
