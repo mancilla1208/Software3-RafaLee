@@ -29,7 +29,6 @@ import javax.swing.JOptionPane;
  */
 public class MetodosBD {
 
-    Docente doce = new Docente();
     ConexionMySql con = new ConexionMySql();
     Connection cn = con.Conectar();
 
@@ -187,27 +186,27 @@ public class MetodosBD {
                 while (rs.next()) {
                     if (grados[i] == 0) {
                         ListaG0.addElement(rs.getString(1));
-                        doce.jList_ActividadesG0.setModel(ListaG0);
+                        Docente.jList_ActividadesG0.setModel(ListaG0);
                     }
                     if (grados[i] == 1) {
                         ListaG1.addElement(rs.getString(1));
-                        doce.jList_ActividadesG1.setModel(ListaG1);
+                        Docente.jList_ActividadesG1.setModel(ListaG1);
                     }
                     if (grados[i] == 2) {
                         ListaG2.addElement(rs.getString(1));
-                        doce.jList_ActividadesG2.setModel(ListaG2);
+                        Docente.jList_ActividadesG2.setModel(ListaG2);
                     }
                     if (grados[i] == 3) {
                         ListaG3.addElement(rs.getString(1));
-                        doce.jList_ActividadesG3.setModel(ListaG3);
+                        Docente.jList_ActividadesG3.setModel(ListaG3);
                     }
                     if (grados[i] == 4) {
                         ListaG4.addElement(rs.getString(1));
-                        doce.jList_ActividadesG4.setModel(ListaG4);
+                        Docente.jList_ActividadesG4.setModel(ListaG4);
                     }
                     if (grados[i] == 5) {
                         ListaG5.addElement(rs.getString(1));
-                        doce.jList_ActividadesG5.setModel(ListaG5);
+                        Docente.jList_ActividadesG5.setModel(ListaG5);
                     }
 
                 }

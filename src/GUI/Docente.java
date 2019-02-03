@@ -133,6 +133,8 @@ public class Docente extends javax.swing.JInternalFrame {
         jTextField_NombreActivi = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jTextField_GradoActividad = new javax.swing.JTextField();
+        jPanel4 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItemInicio = new javax.swing.JMenuItem();
@@ -145,6 +147,7 @@ public class Docente extends javax.swing.JInternalFrame {
         setTitle("Docente");
         setAutoscrolls(true);
         setPreferredSize(new java.awt.Dimension(900, 700));
+        setRequestFocusEnabled(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanelBarraDocente.setBackground(new java.awt.Color(255, 220, 184));
@@ -178,6 +181,7 @@ public class Docente extends javax.swing.JInternalFrame {
         getContentPane().add(jPanelBarraDocente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 100));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel2.setPreferredSize(new java.awt.Dimension(898, 580));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Actividades", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 12))); // NOI18N
 
@@ -197,8 +201,8 @@ public class Docente extends javax.swing.JInternalFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPane2.addTab("Grado 0", jPanel5);
@@ -219,7 +223,7 @@ public class Docente extends javax.swing.JInternalFrame {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -241,7 +245,7 @@ public class Docente extends javax.swing.JInternalFrame {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -263,7 +267,7 @@ public class Docente extends javax.swing.JInternalFrame {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -285,7 +289,7 @@ public class Docente extends javax.swing.JInternalFrame {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -307,7 +311,7 @@ public class Docente extends javax.swing.JInternalFrame {
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -322,8 +326,8 @@ public class Docente extends javax.swing.JInternalFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jTabbedPane2)
+                .addContainerGap())
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Crear actividad", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 12))); // NOI18N
@@ -337,29 +341,41 @@ public class Docente extends javax.swing.JInternalFrame {
                 jB_AñadirTipoPreActionPerformed(evt);
             }
         });
-        jPanel3.add(jB_AñadirTipoPre, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 60, 40, 50));
+        jPanel3.add(jB_AñadirTipoPre, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, 40, 40));
 
         jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Preguntas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 14))); // NOI18N
+        jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTextAreaPregunta.setColumns(20);
         jTextAreaPregunta.setRows(5);
         jScrollPane7.setViewportView(jTextAreaPregunta);
 
+        jPanel11.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 383, 40));
+
         jLabelNumPregunta.setText("No.");
+        jPanel11.add(jLabelNumPregunta, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 34, 25, 31));
 
         jLabelPreguntaA.setText("a)");
+        jPanel11.add(jLabelPreguntaA, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
 
         jLabelPreguntaB.setText("b)");
+        jPanel11.add(jLabelPreguntaB, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
 
         jLabelPreguntaC.setText("c)");
+        jPanel11.add(jLabelPreguntaC, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
 
         jLabelPreguntaD.setText("d)");
+        jPanel11.add(jLabelPreguntaD, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
 
         jTextFieldRespuesta1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldRespuesta1ActionPerformed(evt);
             }
         });
+        jPanel11.add(jTextFieldRespuesta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 400, -1));
+        jPanel11.add(jTextFieldRespuesta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 400, -1));
+        jPanel11.add(jTextFieldRespuesta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 400, -1));
+        jPanel11.add(jTextFieldRespuesta4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 400, -1));
 
         jButtonCargarPre.setText("Examinar");
         jButtonCargarPre.addActionListener(new java.awt.event.ActionListener() {
@@ -367,15 +383,19 @@ public class Docente extends javax.swing.JInternalFrame {
                 jButtonCargarPreActionPerformed(evt);
             }
         });
+        jPanel11.add(jButtonCargarPre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 101, 26));
 
         jLabelNombreArchivoPre.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         jLabelNombreArchivoPre.setText("Nombre de archivo");
+        jPanel11.add(jLabelNombreArchivoPre, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 186, 30));
 
         jScrollPaneRespuesta.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Respuesta", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 0, 12))); // NOI18N
 
         jTextAreaRespuesta.setColumns(20);
         jTextAreaRespuesta.setRows(5);
         jScrollPaneRespuesta.setViewportView(jTextAreaRespuesta);
+
+        jPanel11.add(jScrollPaneRespuesta, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 420, 120));
 
         jB_GuardarTarea.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/GuardarTarea.png"))); // NOI18N
         jB_GuardarTarea.setBorderPainted(false);
@@ -385,6 +405,7 @@ public class Docente extends javax.swing.JInternalFrame {
                 jB_GuardarTareaActionPerformed(evt);
             }
         });
+        jPanel11.add(jB_GuardarTarea, new org.netbeans.lib.awtextra.AbsoluteConstraints(403, 200, 45, -1));
 
         jB_SiguientePre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/siguientePre.png"))); // NOI18N
         jB_SiguientePre.setBorderPainted(false);
@@ -394,85 +415,9 @@ public class Docente extends javax.swing.JInternalFrame {
                 jB_SiguientePreActionPerformed(evt);
             }
         });
+        jPanel11.add(jB_SiguientePre, new org.netbeans.lib.awtextra.AbsoluteConstraints(342, 200, 55, -1));
 
-        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jLabelNumPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(9, 9, 9)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41))
-            .addGroup(jPanel11Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelPreguntaA)
-                            .addComponent(jLabelPreguntaB))
-                        .addGap(10, 10, 10)
-                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldRespuesta1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldRespuesta2, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldRespuesta3, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldRespuesta4, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabelPreguntaC)
-                    .addComponent(jLabelPreguntaD)
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addComponent(jButtonCargarPre, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(9, 9, 9)
-                        .addComponent(jLabelNombreArchivoPre, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(16, 16, 16)
-                        .addComponent(jB_SiguientePre, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jB_GuardarTarea, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPaneRespuesta))
-                .addGap(24, 24, 24))
-        );
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
-                .addGap(7, 7, 7)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(jLabelNumPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabelPreguntaA)
-                        .addGap(16, 16, 16)
-                        .addComponent(jLabelPreguntaB))
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jTextFieldRespuesta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(jTextFieldRespuesta2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(jTextFieldRespuesta3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(jTextFieldRespuesta4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addComponent(jLabelPreguntaC))
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addGap(100, 100, 100)
-                        .addComponent(jLabelPreguntaD))
-                    .addComponent(jScrollPaneRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonCargarPre, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelNombreArchivoPre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jB_SiguientePre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jB_GuardarTarea)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel3.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 130, 460, 250));
+        jPanel3.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 460, 250));
 
         jB_CargarArchivoGeneral.setText("Examinar");
         jB_CargarArchivoGeneral.addActionListener(new java.awt.event.ActionListener() {
@@ -480,18 +425,17 @@ public class Docente extends javax.swing.JInternalFrame {
                 jB_CargarArchivoGeneralActionPerformed(evt);
             }
         });
-        jPanel3.add(jB_CargarArchivoGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 96, 100, 27));
+        jPanel3.add(jB_CargarArchivoGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 100, -1));
 
         jLabelNombreArchivoGeneral.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        jLabelNombreArchivoGeneral.setText("Nombre de archivo ");
-        jPanel3.add(jLabelNombreArchivoGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 100, 310, 20));
+        jPanel3.add(jLabelNombreArchivoGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 310, 20));
 
         jLabel4.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        jLabel4.setText("Seleccione un tipo de pregunta:");
-        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, 23));
+        jLabel4.setText("Tipo de pregunta:");
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, 20));
 
         jComboBox_TipoPreguntas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Icfes", "Abierta", "Completar" }));
-        jPanel3.add(jComboBox_TipoPreguntas, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, 110, 20));
+        jPanel3.add(jComboBox_TipoPreguntas, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 70, 20));
 
         jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         jLabel1.setText("Nombre de actividad:");
@@ -502,6 +446,37 @@ public class Docente extends javax.swing.JInternalFrame {
         jLabel5.setText("Grado:");
         jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
         jPanel3.add(jTextField_GradoActividad, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 62, -1));
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Crear actividad", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/CrearTarea.png"))); // NOI18N
+        jButton1.setBorderPainted(false);
+        jButton1.setContentAreaFilled(false);
+        jButton1.setFocusPainted(false);
+        jButton1.setOpaque(true);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(30, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 50, 130, 70));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -514,19 +489,19 @@ public class Docente extends javax.swing.JInternalFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(348, 348, 348)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(164, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 101, 900, 410));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 101, -1, -1));
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/archivo.png"))); // NOI18N
         jMenu1.setText("Archivo");
@@ -710,9 +685,7 @@ public class Docente extends javax.swing.JInternalFrame {
                 ps.setString(3, jTextFieldRespuesta2.getText());
                 ps.setString(4, jTextFieldRespuesta3.getText());
                 ps.setString(5, jTextFieldRespuesta4.getText());
-                ps.setString(6, jTextFieldRespuesta1.getText());
                 ps.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Estudiante registrado");
             } catch (SQLException ex) {
                 Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -723,6 +696,23 @@ public class Docente extends javax.swing.JInternalFrame {
 
 
     private void jB_GuardarTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_GuardarTareaActionPerformed
+
+    }//GEN-LAST:event_jB_GuardarTareaActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String SSQL1 = "SELECT d.idDocente FROM rafalee_bd.docente d WHERE nombre_completo='" + jLabel_NombreDocente.getText() + "'";
+        Connection conect = null;
+
+        try {
+            conect = cc.Conectar();
+            Statement st = conect.createStatement();
+            ResultSet rs1 = st.executeQuery(SSQL1);
+            if (rs1.next()) {
+                idDocente = rs1.getString(1);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
+        }
         try {
             PreparedStatement ps = cn.prepareStatement("INSERT INTO rafalee_bd.actividad (nombre,grado,id_Docente1) VALUES (?,?,?)");
             ps.setString(1, jTextField_NombreActivi.getText());
@@ -734,13 +724,14 @@ public class Docente extends javax.swing.JInternalFrame {
         } catch (SQLException ex) {
             Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jB_GuardarTareaActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_AñadirTipoPre;
     private javax.swing.JButton jB_CargarArchivoGeneral;
     private javax.swing.JButton jB_GuardarTarea;
     private javax.swing.JButton jB_SiguientePre;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonCargarPre;
     private javax.swing.JButton jButtonExitDocente;
     private javax.swing.JComboBox<String> jComboBox_TipoPreguntas;
@@ -774,6 +765,7 @@ public class Docente extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
