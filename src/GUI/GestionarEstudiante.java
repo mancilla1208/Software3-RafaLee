@@ -39,24 +39,7 @@ public class GestionarEstudiante extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
 
         jPanelAddEstu.setBackground(new Color(222, 243, 252, 30));
-
-        jButtonAñadirEstu.setBackground(new Color(222, 243, 252, 0));
-
-        jButtonEditar.setOpaque(false);
-        jButtonEditar.setContentAreaFilled(false);
-        jButtonEditar.setBorderPainted(false);
-
-        jButtonEliminar.setOpaque(false);
-        jButtonEliminar.setContentAreaFilled(false);
-        jButtonEliminar.setBorderPainted(false);
-
-        jButtonVolver.setOpaque(false);
-        jButtonVolver.setContentAreaFilled(false);
-        jButtonVolver.setBorderPainted(false);
-
-        jButtonActualizar.setOpaque(false);
-        jButtonActualizar.setContentAreaFilled(false);
-        jButtonActualizar.setBorderPainted(false);
+        jPanelEliModiEstu.setOpaque(false);
 
     }
 
@@ -206,6 +189,9 @@ public class GestionarEstudiante extends javax.swing.JFrame {
         getContentPane().add(jPanelEliModiEstu, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, 240));
 
         jButtonEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Eliminar.png"))); // NOI18N
+        jButtonEliminar.setBorderPainted(false);
+        jButtonEliminar.setContentAreaFilled(false);
+        jButtonEliminar.setFocusPainted(false);
         jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonEliminarActionPerformed(evt);
@@ -214,6 +200,9 @@ public class GestionarEstudiante extends javax.swing.JFrame {
         getContentPane().add(jButtonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 420, 60, 50));
 
         jButtonEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Editar.png"))); // NOI18N
+        jButtonEditar.setBorderPainted(false);
+        jButtonEditar.setContentAreaFilled(false);
+        jButtonEditar.setFocusPainted(false);
         jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonEditarActionPerformed(evt);
@@ -222,6 +211,9 @@ public class GestionarEstudiante extends javax.swing.JFrame {
         getContentPane().add(jButtonEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 420, 60, 50));
 
         jButtonVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Volver.png"))); // NOI18N
+        jButtonVolver.setBorderPainted(false);
+        jButtonVolver.setContentAreaFilled(false);
+        jButtonVolver.setFocusPainted(false);
         jButtonVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonVolverActionPerformed(evt);
@@ -230,6 +222,9 @@ public class GestionarEstudiante extends javax.swing.JFrame {
         getContentPane().add(jButtonVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 420, 60, 50));
 
         jButtonAñadirEstu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Agregar.png"))); // NOI18N
+        jButtonAñadirEstu.setBorderPainted(false);
+        jButtonAñadirEstu.setContentAreaFilled(false);
+        jButtonAñadirEstu.setFocusPainted(false);
         jButtonAñadirEstu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAñadirEstuActionPerformed(evt);
@@ -238,6 +233,8 @@ public class GestionarEstudiante extends javax.swing.JFrame {
         getContentPane().add(jButtonAñadirEstu, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 120, 52, 46));
 
         jButtonActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/actualizar.png"))); // NOI18N
+        jButtonActualizar.setBorderPainted(false);
+        jButtonActualizar.setContentAreaFilled(false);
         jButtonActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonActualizarActionPerformed(evt);
