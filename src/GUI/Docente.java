@@ -40,6 +40,7 @@ public class Docente extends javax.swing.JInternalFrame {
     MetodosBD metodobd = new MetodosBD();
     MetodosLogica logica = new MetodosLogica();
     String idDocente = "";
+    String id_Actividad = "";
     
     JFileChooser seleccionado = new JFileChooser();
     File archivo;
@@ -68,6 +69,7 @@ public class Docente extends javax.swing.JInternalFrame {
         jPanel_CrearActividad.setOpaque(false);
         jPanel_Actividades.setOpaque(false);
         jPanel_Pregunta.setOpaque(false);
+        jPanel_BotonActividad.setOpaque(false);
         
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         
@@ -137,7 +139,7 @@ public class Docente extends javax.swing.JInternalFrame {
         jTextField_NombreActivi = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jTextField_GradoActividad = new javax.swing.JTextField();
-        jPanel4 = new javax.swing.JPanel();
+        jPanel_BotonActividad = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -162,7 +164,7 @@ public class Docente extends javax.swing.JInternalFrame {
         jPanelBarraDocente.setPreferredSize(new java.awt.Dimension(883, 104));
         jPanelBarraDocente.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel_NombreDocente.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel_NombreDocente.setFont(new java.awt.Font("Comic Sans MS", 1, 20)); // NOI18N
         jPanelBarraDocente.add(jLabel_NombreDocente, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 4, 290, 30));
 
         jLabel2.setFont(new java.awt.Font("Monotype Corsiva", 0, 18)); // NOI18N
@@ -352,7 +354,7 @@ public class Docente extends javax.swing.JInternalFrame {
                 jB_AñadirTipoPreActionPerformed(evt);
             }
         });
-        jPanel_CrearActividad.add(jB_AñadirTipoPre, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 40, 40));
+        jPanel_CrearActividad.add(jB_AñadirTipoPre, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, 40, 40));
 
         jPanel_Pregunta.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Preguntas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 14))); // NOI18N
         jPanel_Pregunta.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -439,14 +441,14 @@ public class Docente extends javax.swing.JInternalFrame {
         jPanel_CrearActividad.add(jB_CargarArchivoGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 100, -1));
 
         jLabelNombreArchivoGeneral.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        jPanel_CrearActividad.add(jLabelNombreArchivoGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 310, 20));
+        jPanel_CrearActividad.add(jLabelNombreArchivoGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 220, 20));
 
         jLabel4.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         jLabel4.setText("Tipo de pregunta:");
         jPanel_CrearActividad.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, 20));
 
         jComboBox_TipoPreguntas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Icfes", "Abierta", "Completar" }));
-        jPanel_CrearActividad.add(jComboBox_TipoPreguntas, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 70, 20));
+        jPanel_CrearActividad.add(jComboBox_TipoPreguntas, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 100, 20));
 
         jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         jLabel1.setText("Nombre de actividad:");
@@ -458,22 +460,21 @@ public class Docente extends javax.swing.JInternalFrame {
         jPanel_CrearActividad.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
         jPanel_CrearActividad.add(jTextField_GradoActividad, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 62, -1));
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Crear actividad", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel_BotonActividad.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Crear actividad", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        jPanel_BotonActividad.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/CrearTarea.png"))); // NOI18N
         jButton1.setBorderPainted(false);
         jButton1.setContentAreaFilled(false);
         jButton1.setFocusPainted(false);
-        jButton1.setOpaque(true);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel4.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 56, 47));
+        jPanel_BotonActividad.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 56, 47));
 
-        jPanel_CrearActividad.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 50, 100, 80));
+        jPanel_CrearActividad.add(jPanel_BotonActividad, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 60, 100, 80));
 
         jPanel2.add(jPanel_CrearActividad, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, 497, 420));
 
@@ -580,6 +581,21 @@ public class Docente extends javax.swing.JInternalFrame {
         } catch (SQLException ex) {
             Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        String SqlID = "SELECT a.idActividad FROM rafalee_bd.actividad a WHERE nombre='" + jTextField_NombreActivi.getText() + "'";
+        try {
+            conect = cc.Conectar();
+            Statement st = conect.createStatement();
+            ResultSet rs1 = st.executeQuery(SSQL1);
+            if (rs1.next()) {
+                id_Actividad = rs1.getString(1);
+                System.out.println("Id de la actividad " + id_Actividad);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
+        }
+        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jB_CargarArchivoGeneralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_CargarArchivoGeneralActionPerformed
@@ -627,6 +643,7 @@ public class Docente extends javax.swing.JInternalFrame {
                 ps.setString(3, jTextFieldRespuesta2.getText());
                 ps.setString(4, jTextFieldRespuesta3.getText());
                 ps.setString(5, jTextFieldRespuesta4.getText());
+                ps.setString(6, id_Actividad);
                 ps.executeUpdate();
             } catch (SQLException ex) {
                 Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
@@ -745,7 +762,6 @@ public class Docente extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
@@ -753,6 +769,7 @@ public class Docente extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPanel jPanelBarraDocente;
     private javax.swing.JPanel jPanel_Actividades;
+    private javax.swing.JPanel jPanel_BotonActividad;
     private javax.swing.JPanel jPanel_CrearActividad;
     private javax.swing.JPanel jPanel_Pregunta;
     private javax.swing.JScrollPane jScrollPane1;
