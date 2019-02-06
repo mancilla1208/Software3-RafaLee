@@ -65,9 +65,9 @@ public class Estudiante extends javax.swing.JInternalFrame {
                 Lista.addElement(rs.getString(1));
                 jList_Actividades.setModel(Lista);
                 System.out.println("hjkl" + rs.getString(1));
-                rs.close();
-                st.close();
             }
+            rs.close();
+            st.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
         } finally {

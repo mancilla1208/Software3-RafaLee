@@ -587,7 +587,7 @@ public class Docente extends javax.swing.JInternalFrame {
             ps.executeUpdate();
 
             logica.limpiarCamposCrearActi();
-            cn.close();
+            ps.close();
 
         } catch (SQLException ex) {
             Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
@@ -606,10 +606,10 @@ public class Docente extends javax.swing.JInternalFrame {
             ResultSet rs1 = st.executeQuery(SSQL1);
             if (rs1.next()) {
                 id_Actividad = rs1.getString(1);
-                rs1.close();
-                st.close();
                 System.out.println("Id de la actividad " + id_Actividad);
             }
+            rs1.close();
+            st.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
         } finally {
@@ -654,9 +654,9 @@ public class Docente extends javax.swing.JInternalFrame {
             ResultSet rs1 = st.executeQuery(SSQL1);
             if (rs1.next()) {
                 idDocente = rs1.getString(1);
-                rs1.close();
-                st.close();
             }
+            rs1.close();
+            st.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
         } finally {
@@ -678,7 +678,7 @@ public class Docente extends javax.swing.JInternalFrame {
                 ps.setString(5, jTextFieldRespuesta4.getText());
                 ps.setString(6, id_Actividad);
                 ps.executeUpdate();
-                cn.close();
+                ps.close();
             } catch (SQLException ex) {
                 Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
             } finally {
