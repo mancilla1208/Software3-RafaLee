@@ -33,7 +33,7 @@ import javax.swing.table.DefaultTableModel;
  * tareas para el estudiante por parte del docente y demas funciones.
  */
 public class Docente extends javax.swing.JInternalFrame {
-    
+
     DefaultTableModel modelo = new DefaultTableModel();
     ConexionMySql cc = new ConexionMySql();
     Connection cn = cc.Conectar();
@@ -41,7 +41,7 @@ public class Docente extends javax.swing.JInternalFrame {
     MetodosLogica logica = new MetodosLogica();
     String idDocente = "";
     String id_Actividad = "";
-    
+
     JFileChooser seleccionado = new JFileChooser();
     File archivo;
     byte[] bytesImg;
@@ -53,7 +53,7 @@ public class Docente extends javax.swing.JInternalFrame {
     public Docente() {
         initComponents();
         metodobd.cargarActividades();
-        
+
         jLabelNombreArchivoPre.setVisible(false);
         jTextAreaRespuesta.setVisible(false);
         jScrollPaneRespuesta.setVisible(false);
@@ -65,14 +65,14 @@ public class Docente extends javax.swing.JInternalFrame {
         jTextFieldRespuesta2.setVisible(false);
         jTextFieldRespuesta3.setVisible(false);
         jTextFieldRespuesta4.setVisible(false);
-        
+
         jPanel_CrearActividad.setOpaque(false);
         jPanel_Actividades.setOpaque(false);
         jPanel_Pregunta.setOpaque(false);
         jPanel_BotonActividad.setOpaque(false);
-        
+
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
-        
+
     }
 
     /**
@@ -518,15 +518,15 @@ public class Docente extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        
+
         GestionarEstudiante gestion = new GestionarEstudiante();
         gestion.show();
-        
+
 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItemInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemInicioActionPerformed
-        
+
         int seleccion = JOptionPane.showOptionDialog(
                 null, // Componente padre
                 "Esta seguro que desea salir.?", //Mensaje
@@ -536,7 +536,7 @@ public class Docente extends javax.swing.JInternalFrame {
                 null, // null para icono por defecto.
                 new Object[]{"Si", "No"}, // null para YES, NO y CANCEL
                 "Si");
-        
+
         if (seleccion == JOptionPane.YES_OPTION) {
             this.dispose();
             Principal.jbDocente.setVisible(true);
@@ -545,7 +545,7 @@ public class Docente extends javax.swing.JInternalFrame {
             Principal.jLabelDocente.setVisible(true);
             Principal.jLabelEstudiante.setVisible(true);
         } else {
-            
+
         }
 
     }//GEN-LAST:event_jMenuItemInicioActionPerformed
@@ -559,13 +559,14 @@ public class Docente extends javax.swing.JInternalFrame {
         //Consulta SQL
         String SSQL1 = "SELECT d.idDocente FROM rafalee_bd.docente d WHERE nombre_completo='" + jLabel_NombreDocente.getText() + "'";
         Connection conect = null;
-        
+
         try {
             conect = cc.Conectar();
             Statement st = conect.createStatement();
             ResultSet rs1 = st.executeQuery(SSQL1);
             if (rs1.next()) {
                 idDocente = rs1.getString(1);
+                conect.close();
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
@@ -577,11 +578,12 @@ public class Docente extends javax.swing.JInternalFrame {
             ps.setString(3, idDocente);
             ps.executeUpdate();
             logica.limpiarCamposCrearActi();
-            
+            conect.close();
+
         } catch (SQLException ex) {
             Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         String SqlID = "SELECT a.idActividad FROM rafalee_bd.actividad a WHERE nombre='" + jTextField_NombreActivi.getText() + "'";
         try {
             conect = cc.Conectar();
@@ -589,12 +591,13 @@ public class Docente extends javax.swing.JInternalFrame {
             ResultSet rs1 = st.executeQuery(SSQL1);
             if (rs1.next()) {
                 id_Actividad = rs1.getString(1);
+                conect.close();
                 System.out.println("Id de la actividad " + id_Actividad);
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
         }
-        
+
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -609,7 +612,7 @@ public class Docente extends javax.swing.JInternalFrame {
                     if (archivo.getName().endsWith("jpg") || archivo.getName().endsWith("png") || archivo.getName().endsWith("gif") || archivo.getName().endsWith("jpeg")) {
                         bytesImg = gestion.AbrirAImagen(archivo);
                         jLabelNombreArchivoGeneral.setText(archivo.getName());
-                        
+
                     } else {
                         JOptionPane.showMessageDialog(null, "Por favor seleccione un archivo de texto o de imagen.");
                     }
@@ -619,23 +622,24 @@ public class Docente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jB_CargarArchivoGeneralActionPerformed
 
     private void jB_SiguientePreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_SiguientePreActionPerformed
-        
+
         String SSQL1 = "SELECT d.idDocente FROM rafalee_bd.docente d WHERE nombre_completo='" + jLabel_NombreDocente.getText() + "'";
         Connection conect = null;
-        
+
         try {
             conect = cc.Conectar();
             Statement st = conect.createStatement();
             ResultSet rs1 = st.executeQuery(SSQL1);
             if (rs1.next()) {
                 idDocente = rs1.getString(1);
+                conect.close();
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
         }
-        
+
         if (jComboBox_TipoPreguntas.getSelectedItem().toString().equals("Icfes")) {
-            
+
             try {
                 PreparedStatement ps = cn.prepareStatement("INSERT INTO rafalee_bd.tipo_icfes(enunciado,respuesta1,respuesta2,respuesta3,respuesta4,id_Actividad3) VALUES (?,?,?,?,?,?)");
                 ps.setString(1, jTextAreaPregunta.getText());
@@ -645,10 +649,11 @@ public class Docente extends javax.swing.JInternalFrame {
                 ps.setString(5, jTextFieldRespuesta4.getText());
                 ps.setString(6, id_Actividad);
                 ps.executeUpdate();
+                conect.close();
             } catch (SQLException ex) {
                 Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
         }
     }//GEN-LAST:event_jB_SiguientePreActionPerformed
 
@@ -680,44 +685,44 @@ public class Docente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextFieldRespuesta1ActionPerformed
 
     private void jB_AñadirTipoPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_AñadirTipoPreActionPerformed
-        
+
         if (jComboBox_TipoPreguntas.getSelectedItem() == "Icfes") {
             jTextAreaRespuesta.setVisible(false);
             jScrollPaneRespuesta.setVisible(false);
-            
+
             jLabelPreguntaA.setVisible(true);
             jLabelPreguntaB.setVisible(true);
             jLabelPreguntaC.setVisible(true);
             jLabelPreguntaD.setVisible(true);
-            
+
             jTextFieldRespuesta1.setVisible(true);
             jTextFieldRespuesta2.setVisible(true);
             jTextFieldRespuesta3.setVisible(true);
             jTextFieldRespuesta4.setVisible(true);
-            
+
             jButtonCargarPre.setVisible(true);
             jLabelNombreArchivoPre.setVisible(true);
-            
+
         } else if (jComboBox_TipoPreguntas.getSelectedItem() == "Abierta") {
-            
+
             jTextAreaRespuesta.setVisible(true);
             jScrollPaneRespuesta.setVisible(true);
-            
+
             jLabelPreguntaA.setVisible(false);
             jLabelPreguntaB.setVisible(false);
             jLabelPreguntaC.setVisible(false);
             jLabelPreguntaD.setVisible(false);
-            
+
             jTextFieldRespuesta1.setVisible(false);
             jTextFieldRespuesta2.setVisible(false);
             jTextFieldRespuesta3.setVisible(false);
             jTextFieldRespuesta4.setVisible(false);
-            
+
             jButtonCargarPre.setVisible(true);
             jLabelNombreArchivoPre.setVisible(true);
-            
+
         } else if (jComboBox_TipoPreguntas.getSelectedItem() == "Completar") {
-            
+
         }
     }//GEN-LAST:event_jB_AñadirTipoPreActionPerformed
 

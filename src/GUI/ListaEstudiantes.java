@@ -51,6 +51,7 @@ public class ListaEstudiantes extends javax.swing.JFrame {
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 this.jComboBoxListaEstu.addItem(rs.getString("nombre_completo"));
+                conect.close();
 
             }
 
@@ -146,6 +147,7 @@ public class ListaEstudiantes extends javax.swing.JFrame {
                 ResultSet rs1 = st.executeQuery(SSQL1);
                 if (rs1.next()) {
                     gradoEstudiante = rs1.getString(1);
+                    conect.close();
                 }
 
             } catch (SQLException ex) {
