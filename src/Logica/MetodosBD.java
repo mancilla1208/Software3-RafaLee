@@ -39,12 +39,13 @@ public class MetodosBD {
     public void Actualizar(String nombreCompleto, String grado, String idEstudiante) {
 
         Connection conexion = null;
+        PreparedStatement ps = null;
 
         try {
             conexion = con.Conectar();
             String sql = "UPDATE rafalee_bd.estudiante SET nombre_completo=?, grado=? WHERE idEstudiante=?";
 
-            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps = conexion.prepareStatement(sql);
             ps.setString(1, nombreCompleto);
             ps.setString(2, grado);
             ps.setString(3, idEstudiante);
@@ -55,16 +56,16 @@ public class MetodosBD {
             } else {
                 JOptionPane.showMessageDialog(null, "No se han podido actualizar los datos");
             }
-
+            ps.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "No se han podido actualizar los datos, error en la operación" + "Error:" + e);
         } finally {
-            if (conexion != null) {
+            if (conexion != null && ps != null) {
                 try {
                     conexion.close();
+                    ps.close();
                 } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "Error al cerrar la conexion" + "Error:" + e);
-
+                    JOptionPane.showMessageDialog(null, "Se produjo un error al cerrar la conexion");
                 }
             }
         }
@@ -76,15 +77,12 @@ public class MetodosBD {
      */
     public void Eliminar(String id) {
         Connection conexion = null;
-
+        PreparedStatement ps = null;
         try {
-
             String sql = "DELETE FROM rafalee_bd.estudiante WHERE idEstudiante=?";
             conexion = con.Conectar();
-            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps = conexion.prepareStatement(sql);
             ps.setString(1, id);
-            conexion.close();
-
             if (ps.executeUpdate() > 0) {
                 JOptionPane.showMessageDialog(null, "Se ha eliminado de forma exitosa");
             } else {
@@ -94,9 +92,10 @@ public class MetodosBD {
         } catch (HeadlessException | SQLException e) {
             JOptionPane.showMessageDialog(null, "No se ha podido eliminar el registro");
         } finally {
-            if (conexion != null) {
+            if (conexion != null && ps != null) {
                 try {
                     conexion.close();
+                    ps.close();
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Se produjo un error al cerrar la conexion");
                 }
@@ -115,23 +114,28 @@ public class MetodosBD {
         int resultado = 0;
         String SSQL = "SELECT * FROM rafalee_bd.docente WHERE nombre_usuario='" + usuario + "' AND clave='" + clave + "'";
         Connection conect = null;
+        Statement st = null;
+        ResultSet rs = null;
+
         try {
             conect = con.Conectar();
-            Statement st = conect.createStatement();
-            ResultSet rs = st.executeQuery(SSQL);
+            st = conect.createStatement();
+            rs = st.executeQuery(SSQL);
             if (rs.next()) {
                 resultado = 1;
-                conect.close();
             }
-
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
         } finally {
-            try {
-                conect.close();
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, ex, "Error de desconexión", JOptionPane.ERROR_MESSAGE);
+            if (st != null && rs != null) {
+                try {
+                    st.close();
+                    rs.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(MetodosBD.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
+
         }
         return resultado;
     }
@@ -146,19 +150,27 @@ public class MetodosBD {
         String variableNombreDocente = "";
         String SSQL1 = "SELECT * FROM rafalee_bd.docente WHERE nombre_usuario='" + usuario + "' AND clave='" + clave + "'";
         Connection conect = null;
+        Statement st = null;
+        ResultSet rs1 = null;
 
         try {
             conect = con.Conectar();
-            Statement st = conect.createStatement();
-            ResultSet rs1 = st.executeQuery(SSQL1);
+            st = conect.createStatement();
+            rs1 = st.executeQuery(SSQL1);
             if (rs1.next()) {
                 variableNombreDocente = rs1.getString(2);
-                conect.close();
-
             }
-
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            if (st != null && rs1 != null) {
+                try {
+                    st.close();
+                    rs1.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(MetodosBD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
         return variableNombreDocente;
     }
@@ -180,51 +192,98 @@ public class MetodosBD {
         String[] consultas = new String[6];
 
         for (int i = 0; i < grados.length; i++) {
+
             String sql = "SELECT a.nombre FROM rafalee_bd.actividad a WHERE grado=" + grados[i] + "";
             consultas[i] = sql;
-            Statement st;
-
+            Statement st = null;
+            ResultSet rs = null;
             try {
                 st = cn.createStatement();
-                ResultSet rs = st.executeQuery(consultas[i]);
+                rs = st.executeQuery(consultas[i]);
                 while (rs.next()) {
                     if (grados[i] == 0) {
                         ListaG0.addElement(rs.getString(1));
                         Docente.jList_ActividadesG0.setModel(ListaG0);
-                        cn.close();
                     }
                     if (grados[i] == 1) {
                         ListaG1.addElement(rs.getString(1));
                         Docente.jList_ActividadesG1.setModel(ListaG1);
-                        cn.close();
                     }
                     if (grados[i] == 2) {
                         ListaG2.addElement(rs.getString(1));
                         Docente.jList_ActividadesG2.setModel(ListaG2);
-                        cn.close();
                     }
                     if (grados[i] == 3) {
                         ListaG3.addElement(rs.getString(1));
                         Docente.jList_ActividadesG3.setModel(ListaG3);
-                        cn.close();
                     }
                     if (grados[i] == 4) {
                         ListaG4.addElement(rs.getString(1));
                         Docente.jList_ActividadesG4.setModel(ListaG4);
-                        cn.close();
                     }
                     if (grados[i] == 5) {
                         ListaG5.addElement(rs.getString(1));
                         Docente.jList_ActividadesG5.setModel(ListaG5);
-                        cn.close();
                     }
 
                 }
-
             } catch (SQLException ex) {
-                Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(MetodosBD.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                if (st != null && rs != null) {
+                    try {
+                        st.close();
+                        rs.close();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(MetodosBD.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
             }
+
         }
 
     }
+
+    public static void cerrarConexion(Connection... connections) {
+        if (connections != null) {
+            for (Connection conn : connections) {
+                if (conn != null) {
+                    try {
+                        conn.close();
+                    } catch (SQLException ignored) {
+                        //ignored
+                    }
+                }
+            }
+        }
+    }
+
+    public static void cerrarResultSets(ResultSet... resultSets) {
+        if (resultSets != null) {
+            for (ResultSet rs : resultSets) {
+                if (rs != null) {
+                    try {
+                        rs.close();
+                    } catch (SQLException ignored) {
+                        //ignored
+                    }
+                }
+            }
+        }
+    }
+
+    public static void cerrarStatements(Statement... statements) {
+        if (statements != null) {
+            for (Statement statement : statements) {
+                if (statement != null) {
+                    try {
+                        statement.close();
+                    } catch (SQLException ignored) {
+                        //ignored
+                    }
+                }
+            }
+        }
+    }
+
 }

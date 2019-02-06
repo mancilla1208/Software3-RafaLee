@@ -566,22 +566,37 @@ public class Docente extends javax.swing.JInternalFrame {
             ResultSet rs1 = st.executeQuery(SSQL1);
             if (rs1.next()) {
                 idDocente = rs1.getString(1);
-                conect.close();
+                rs1.close();
+                st.close();
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, ex, "Error de conexion", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            try {
+                conect.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Docente.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+
         try {
             PreparedStatement ps = cn.prepareStatement("INSERT INTO rafalee_bd.actividad (nombre,grado,id_Docente1) VALUES (?,?,?)");
             ps.setString(1, jTextField_NombreActivi.getText());
             ps.setString(2, jTextField_GradoActividad.getText());
             ps.setString(3, idDocente);
             ps.executeUpdate();
+
             logica.limpiarCamposCrearActi();
-            conect.close();
+            ps.close();
 
         } catch (SQLException ex) {
             Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                cn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Docente.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
         String SqlID = "SELECT a.idActividad FROM rafalee_bd.actividad a WHERE nombre='" + jTextField_NombreActivi.getText() + "'";
@@ -591,11 +606,18 @@ public class Docente extends javax.swing.JInternalFrame {
             ResultSet rs1 = st.executeQuery(SSQL1);
             if (rs1.next()) {
                 id_Actividad = rs1.getString(1);
-                conect.close();
                 System.out.println("Id de la actividad " + id_Actividad);
             }
+            rs1.close();
+            st.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            try {
+                conect.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Docente.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
 
@@ -632,10 +654,17 @@ public class Docente extends javax.swing.JInternalFrame {
             ResultSet rs1 = st.executeQuery(SSQL1);
             if (rs1.next()) {
                 idDocente = rs1.getString(1);
-                conect.close();
             }
+            rs1.close();
+            st.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            try {
+                conect.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Docente.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
         if (jComboBox_TipoPreguntas.getSelectedItem().toString().equals("Icfes")) {
@@ -649,9 +678,15 @@ public class Docente extends javax.swing.JInternalFrame {
                 ps.setString(5, jTextFieldRespuesta4.getText());
                 ps.setString(6, id_Actividad);
                 ps.executeUpdate();
-                conect.close();
+                ps.close();
             } catch (SQLException ex) {
                 Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                try {
+                    cn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(Docente.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
 
         }

@@ -65,13 +65,19 @@ public class GestionarEstudiante extends javax.swing.JFrame {
                 datos[1] = rs.getString(2);
                 datos[2] = rs.getString(3);
                 modelo.addRow(datos);
-
             }
             jTableListaEstu.setModel(modelo);
-            cn.close();
+            rs.close();
+            st.close();
 
         } catch (SQLException ex) {
             Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                cn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Docente.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
     }
@@ -270,9 +276,15 @@ public class GestionarEstudiante extends javax.swing.JFrame {
             metodos.limpiarCamposGEstudiantes();
             JOptionPane.showMessageDialog(null, "Estudiante registrado");
             mostrarTabla();
-            cn.close();
+            ps.close();
         } catch (SQLException ex) {
             Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                cn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Docente.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
 
@@ -310,11 +322,17 @@ public class GestionarEstudiante extends javax.swing.JFrame {
             try {
                 PreparedStatement ps = cn.prepareStatement("DELETE FROM rafalee_bd.estudiante WHERE idEstudiante='" + valor + "'");
                 ps.executeUpdate();
-                cn.close();
                 JOptionPane.showMessageDialog(null, "Estudiante eliminado");
                 mostrarTabla();
+                ps.close();
             } catch (SQLException ex) {
                 Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                try {
+                    cn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(Docente.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
 //        if (idEstudiante.isEmpty()) {

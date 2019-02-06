@@ -9,6 +9,9 @@ import static java.lang.Class.forName;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -35,17 +38,21 @@ public class ConexionMySql {
     * ya establecidos.
      */
     public Connection Conectar() {
-        Connection link = null;
+        Connection conect = null;
         try {
             Class.forName("org.gjt.mm.mysql.Driver");
-            link = DriverManager.getConnection(this.url, this.usuario, this.clave);
+            conect = DriverManager.getConnection(this.url, this.usuario, this.clave);
         } catch (Exception e) {
 
         }
-        return link;
+        return conect;
     }
 
-    PreparedStatement Conectar(String select_archivopdf_FROM_pdf_WHERE_codigopd) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void cerrarConexion() {
+        try {
+            Conectar().close();
+        } catch (SQLException ex) {
+
+        }
     }
 }
