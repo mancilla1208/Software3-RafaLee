@@ -57,6 +57,12 @@ public class ListaEstudiantes extends javax.swing.JFrame {
 
         } catch (SQLException ex) {
             Logger.getLogger(ListaEstudiantes.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                conect.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Docente.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
         this.setLocationRelativeTo(null);
@@ -147,11 +153,17 @@ public class ListaEstudiantes extends javax.swing.JFrame {
                 ResultSet rs1 = st.executeQuery(SSQL1);
                 if (rs1.next()) {
                     gradoEstudiante = rs1.getString(1);
-                    conect.close();
+
                 }
 
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
+            } finally {
+                try {
+                    conect.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(Docente.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
 
             jComboBoxListaEstu.setOpaque(false);

@@ -59,13 +59,10 @@ public class MetodosBD {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "No se han podido actualizar los datos, error en la operación" + "Error:" + e);
         } finally {
-            if (conexion != null) {
-                try {
-                    conexion.close();
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "Error al cerrar la conexion" + "Error:" + e);
-
-                }
+            try {
+                conexion.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Docente.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
@@ -159,6 +156,12 @@ public class MetodosBD {
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            try {
+                conect.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Docente.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return variableNombreDocente;
     }
@@ -223,6 +226,12 @@ public class MetodosBD {
 
             } catch (SQLException ex) {
                 Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                try {
+                    cn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(Docente.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
 

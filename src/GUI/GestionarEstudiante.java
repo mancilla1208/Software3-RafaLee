@@ -72,6 +72,12 @@ public class GestionarEstudiante extends javax.swing.JFrame {
 
         } catch (SQLException ex) {
             Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                cn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Docente.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
     }
@@ -273,6 +279,12 @@ public class GestionarEstudiante extends javax.swing.JFrame {
             cn.close();
         } catch (SQLException ex) {
             Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                cn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Docente.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
 
@@ -315,6 +327,12 @@ public class GestionarEstudiante extends javax.swing.JFrame {
                 mostrarTabla();
             } catch (SQLException ex) {
                 Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                try {
+                    cn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(Docente.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
 //        if (idEstudiante.isEmpty()) {

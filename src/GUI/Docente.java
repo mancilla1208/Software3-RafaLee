@@ -570,7 +570,14 @@ public class Docente extends javax.swing.JInternalFrame {
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            try {
+                conect.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Docente.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        
         try {
             PreparedStatement ps = cn.prepareStatement("INSERT INTO rafalee_bd.actividad (nombre,grado,id_Docente1) VALUES (?,?,?)");
             ps.setString(1, jTextField_NombreActivi.getText());
@@ -591,11 +598,16 @@ public class Docente extends javax.swing.JInternalFrame {
             ResultSet rs1 = st.executeQuery(SSQL1);
             if (rs1.next()) {
                 id_Actividad = rs1.getString(1);
-                conect.close();
                 System.out.println("Id de la actividad " + id_Actividad);
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            try {
+                conect.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Docente.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
 
@@ -636,6 +648,12 @@ public class Docente extends javax.swing.JInternalFrame {
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            try {
+                conect.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Docente.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
         if (jComboBox_TipoPreguntas.getSelectedItem().toString().equals("Icfes")) {
@@ -652,6 +670,12 @@ public class Docente extends javax.swing.JInternalFrame {
                 conect.close();
             } catch (SQLException ex) {
                 Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                try {
+                    conect.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(Docente.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
 
         }
