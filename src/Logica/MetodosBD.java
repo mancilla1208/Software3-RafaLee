@@ -55,7 +55,7 @@ public class MetodosBD {
             } else {
                 JOptionPane.showMessageDialog(null, "No se han podido actualizar los datos");
             }
-
+            ps.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "No se han podido actualizar los datos, error en la operación" + "Error:" + e);
         } finally {
@@ -80,13 +80,12 @@ public class MetodosBD {
             conexion = con.Conectar();
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setString(1, id);
-            conexion.close();
-
             if (ps.executeUpdate() > 0) {
                 JOptionPane.showMessageDialog(null, "Se ha eliminado de forma exitosa");
             } else {
                 JOptionPane.showMessageDialog(null, "No se ha podido eliminar el registro");
             }
+            ps.close();
 
         } catch (HeadlessException | SQLException e) {
             JOptionPane.showMessageDialog(null, "No se ha podido eliminar el registro");
@@ -118,8 +117,9 @@ public class MetodosBD {
             ResultSet rs = st.executeQuery(SSQL);
             if (rs.next()) {
                 resultado = 1;
-                conect.close();
             }
+            rs.close();
+            st.close();
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
@@ -150,7 +150,8 @@ public class MetodosBD {
             ResultSet rs1 = st.executeQuery(SSQL1);
             if (rs1.next()) {
                 variableNombreDocente = rs1.getString(2);
-                conect.close();
+                st.close();
+                rs1.close();
 
             }
 
@@ -223,6 +224,8 @@ public class MetodosBD {
                     }
 
                 }
+                rs.close();
+                st.close();
 
             } catch (SQLException ex) {
                 Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);

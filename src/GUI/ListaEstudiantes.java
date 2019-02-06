@@ -51,7 +51,8 @@ public class ListaEstudiantes extends javax.swing.JFrame {
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 this.jComboBoxListaEstu.addItem(rs.getString("nombre_completo"));
-                conect.close();
+                st.close();
+                rs.close();
 
             }
 
@@ -155,6 +156,8 @@ public class ListaEstudiantes extends javax.swing.JFrame {
                     gradoEstudiante = rs1.getString(1);
 
                 }
+                st.close();
+                rs1.close();
 
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
