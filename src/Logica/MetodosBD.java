@@ -51,6 +51,7 @@ public class MetodosBD {
 
             if (ps.executeUpdate() > 0) {
                 JOptionPane.showMessageDialog(null, "Datos guardados con exito");
+                conexion.close();
             } else {
                 JOptionPane.showMessageDialog(null, "No se han podido actualizar los datos");
             }
@@ -82,6 +83,7 @@ public class MetodosBD {
             conexion = con.Conectar();
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setString(1, id);
+            conexion.close();
 
             if (ps.executeUpdate() > 0) {
                 JOptionPane.showMessageDialog(null, "Se ha eliminado de forma exitosa");
@@ -119,6 +121,7 @@ public class MetodosBD {
             ResultSet rs = st.executeQuery(SSQL);
             if (rs.next()) {
                 resultado = 1;
+                conect.close();
             }
 
         } catch (SQLException ex) {
@@ -150,6 +153,7 @@ public class MetodosBD {
             ResultSet rs1 = st.executeQuery(SSQL1);
             if (rs1.next()) {
                 variableNombreDocente = rs1.getString(2);
+                conect.close();
 
             }
 
@@ -187,26 +191,32 @@ public class MetodosBD {
                     if (grados[i] == 0) {
                         ListaG0.addElement(rs.getString(1));
                         Docente.jList_ActividadesG0.setModel(ListaG0);
+                        cn.close();
                     }
                     if (grados[i] == 1) {
                         ListaG1.addElement(rs.getString(1));
                         Docente.jList_ActividadesG1.setModel(ListaG1);
+                        cn.close();
                     }
                     if (grados[i] == 2) {
                         ListaG2.addElement(rs.getString(1));
                         Docente.jList_ActividadesG2.setModel(ListaG2);
+                        cn.close();
                     }
                     if (grados[i] == 3) {
                         ListaG3.addElement(rs.getString(1));
                         Docente.jList_ActividadesG3.setModel(ListaG3);
+                        cn.close();
                     }
                     if (grados[i] == 4) {
                         ListaG4.addElement(rs.getString(1));
                         Docente.jList_ActividadesG4.setModel(ListaG4);
+                        cn.close();
                     }
                     if (grados[i] == 5) {
                         ListaG5.addElement(rs.getString(1));
                         Docente.jList_ActividadesG5.setModel(ListaG5);
+                        cn.close();
                     }
 
                 }
