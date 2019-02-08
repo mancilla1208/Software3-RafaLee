@@ -28,7 +28,7 @@ public class GestionarEstudiante extends javax.swing.JFrame {
     Connection cn = cc.Conectar();
     MetodosBD metodobd = new MetodosBD();
     String idEstudiante = "";
-    MetodosLogica metodos = new MetodosLogica();
+    MetodosLogica metodos = new MetodosLogica(this);
 
     /**
      * Creates new form AgregarEstudiante

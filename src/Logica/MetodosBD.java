@@ -198,6 +198,7 @@ public class MetodosBD {
             Statement st = null;
             ResultSet rs = null;
             try {
+
                 st = cn.createStatement();
                 rs = st.executeQuery(consultas[i]);
                 while (rs.next()) {
@@ -225,7 +226,6 @@ public class MetodosBD {
                         ListaG5.addElement(rs.getString(1));
                         Docente.jList_ActividadesG5.setModel(ListaG5);
                     }
-
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(MetodosBD.class.getName()).log(Level.SEVERE, null, ex);
@@ -286,4 +286,6 @@ public class MetodosBD {
         }
     }
 
+    
+    
 }
