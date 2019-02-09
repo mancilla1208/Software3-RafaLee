@@ -34,7 +34,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Docente extends javax.swing.JInternalFrame {
 
-    MetodosBD metodobd = new MetodosBD();
+    MetodosBD metodobd = new MetodosBD(this);
     MetodosLogica logica = new MetodosLogica(this);
 
     /**

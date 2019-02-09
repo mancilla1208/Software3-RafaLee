@@ -27,24 +27,24 @@ import javax.swing.border.EmptyBorder;
  * aplicación por parte del docente o estudiante.
  */
 public class Login extends javax.swing.JFrame {
-    
-    MetodosBD metodos = new MetodosBD();
+
+    MetodosBD metodos = new MetodosBD(this);
     Docente docente = new Docente();
 
     /**
      * Metodo que crea la vista de Login
      */
     public Login() {
-        
+
         initComponents();
         this.setLocationRelativeTo(null);
         jTextFieldUsuario.setBorder(new EmptyBorder(0, 5, 0, 2));
         jPasswordField1.setBorder(new EmptyBorder(0, 5, 0, 2));
-        
+
         jB_Registro.setOpaque(false);
         jB_Registro.setContentAreaFilled(false);
         jB_Registro.setBorderPainted(false);
-        
+
     }
 
     /**
@@ -142,24 +142,24 @@ public class Login extends javax.swing.JFrame {
      */
 
     private void jB_AceptarLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_AceptarLoginActionPerformed
-        
+
         if (metodos.validar_ingreso() == 1) {
             this.dispose();
-            
+
             try {
-                
+
                 Principal.VentaPrincipal.add(docente);
                 Principal.VentaPrincipal.moveToFront(docente);
                 docente.setSize(Principal.VentaPrincipal.getWidth(), Principal.VentaPrincipal.getHeight());
                 docente.setLocation(0, 0);
                 docente.show();
-                
+
                 docente.jLabel_NombreDocente.setText(metodos.nombreDocente());
-                
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            
+
         } else {
             System.out.println(metodos.validar_ingreso());
             JOptionPane.showMessageDialog(null, "Usuario y/o contraseña incorrectos\n"
@@ -230,21 +230,21 @@ public class Login extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private static class RoundedBorder implements Border {
-        
+
         private int radius;
-        
+
         RoundedBorder(int radius) {
             this.radius = radius;
         }
-        
+
         public Insets getBorderInsets(Component c) {
             return new Insets(this.radius + 1, this.radius + 1, this.radius + 2, this.radius);
         }
-        
+
         public boolean isBorderOpaque() {
             return true;
         }
-        
+
         public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
             g.drawRoundRect(x, y, width - 1, height - 1, radius, radius);
         }
