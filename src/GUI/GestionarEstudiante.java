@@ -282,7 +282,7 @@ public class GestionarEstudiante extends javax.swing.JFrame {
         try {
             filaseleccionada = jTableListaEstu.getSelectedRow();
             if (filaseleccionada == -1) {
-                JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila");
+                JOptionPane.showMessageDialog(null, "Debe seleccionar el estudiante a modificar");
             } else {
                 DefaultTableModel modelotabla = (DefaultTableModel) jTableListaEstu.getModel();
                 String codigo = (String) modelotabla.getValueAt(filaseleccionada, 0);
@@ -302,18 +302,20 @@ public class GestionarEstudiante extends javax.swing.JFrame {
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
 
         int fila = jTableListaEstu.getSelectedRow();
-        String valor = jTableListaEstu.getValueAt(fila, 0).toString();
-        System.out.println(valor + " Inicio");
-        if (fila >= 0) {
-            System.out.println(valor + " medio");
-            try {
+
+        try {
+            if (fila == -1) {
+                JOptionPane.showMessageDialog(null, "Debe seleccionar el estudiante a eliminar");
+            } else {
+                String valor = jTableListaEstu.getValueAt(fila, 0).toString();
                 PreparedStatement ps = cn.prepareStatement("DELETE FROM rafalee_bd.estudiante WHERE idEstudiante='" + valor + "'");
                 ps.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Estudiante eliminado");
                 mostrarTabla();
-            } catch (SQLException ex) {
-                Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
             }
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+
         }
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 
