@@ -11,6 +11,8 @@ import static GUI.Principal.jLabelEstudiante;
 import static GUI.Principal.jbDocente;
 import static GUI.Principal.jbEstudiante;
 import Logica.ConexionMySql;
+import Logica.MetodosBD;
+import Logica.MetodosLogica;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,16 +32,14 @@ public class Estudiante extends javax.swing.JInternalFrame {
 
     ConexionMySql cc = new ConexionMySql();
     Connection cn = cc.Conectar();
-    String grado;
 
     /**
      * Creates new form Estudiante
      */
     public Estudiante(String grado) {
 
-        this.grado = grado;
         initComponents();
-        listaActividades();
+
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
 
         jButtonSalirEstudiante.setOpaque(false);
@@ -49,34 +49,6 @@ public class Estudiante extends javax.swing.JInternalFrame {
         jButtonVolverEstu.setOpaque(false);
         jButtonVolverEstu.setContentAreaFilled(false);
         jButtonVolverEstu.setBorderPainted(false);
-    }
-
-    public void listaActividades() {
-
-        DefaultListModel Lista = new DefaultListModel();
-        String SSQL1 = "SELECT a.nombre FROM rafalee_bd.actividad a WHERE grado='" + grado + "'";
-        Connection conect = null;
-
-        try {
-            conect = cc.Conectar();
-            Statement st = conect.createStatement();
-            ResultSet rs = st.executeQuery(SSQL1);
-            while (rs.next()) {
-                Lista.addElement(rs.getString(1));
-                jList_Actividades.setModel(Lista);
-                System.out.println("hjkl" + rs.getString(1));
-            }
-            rs.close();
-            st.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            try {
-                conect.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(Docente.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
     }
 
     /**
@@ -321,7 +293,7 @@ public class Estudiante extends javax.swing.JInternalFrame {
     public static javax.swing.JLabel jLabelNombreEstudiante;
     public static javax.swing.JLabel jLabel_Grado;
     public static javax.swing.JLabel jLabel_texGra;
-    private javax.swing.JList<String> jList_Actividades;
+    public static javax.swing.JList<String> jList_Actividades;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

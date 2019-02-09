@@ -244,48 +244,4 @@ public class MetodosBD {
 
     }
 
-    public static void cerrarConexion(Connection... connections) {
-        if (connections != null) {
-            for (Connection conn : connections) {
-                if (conn != null) {
-                    try {
-                        conn.close();
-                    } catch (SQLException ignored) {
-                        //ignored
-                    }
-                }
-            }
-        }
-    }
-
-    public static void cerrarResultSets(ResultSet... resultSets) {
-        if (resultSets != null) {
-            for (ResultSet rs : resultSets) {
-                if (rs != null) {
-                    try {
-                        rs.close();
-                    } catch (SQLException ignored) {
-                        //ignored
-                    }
-                }
-            }
-        }
-    }
-
-    public static void cerrarStatements(Statement... statements) {
-        if (statements != null) {
-            for (Statement statement : statements) {
-                if (statement != null) {
-                    try {
-                        statement.close();
-                    } catch (SQLException ignored) {
-                        //ignored
-                    }
-                }
-            }
-        }
-    }
-
-    
-    
 }

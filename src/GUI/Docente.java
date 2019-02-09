@@ -523,9 +523,7 @@ public class Docente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItemInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemInicioActionPerformed
-
         MetodosLogica.irDeDocente_Inicio();
-
     }//GEN-LAST:event_jMenuItemInicioActionPerformed
 
     private void jButtonExitDocenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExitDocenteActionPerformed

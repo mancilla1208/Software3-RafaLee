@@ -5,12 +5,16 @@
  */
 package Logica;
 
-import GUI.Docente;
+import GUI.*;
 import static GUI.Docente.*;
-import GUI.GestionarEstudiante;
 import static GUI.GestionarEstudiante.*;
-import GUI.Login;
-import GUI.Principal;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,16 +23,32 @@ import javax.swing.JOptionPane;
  */
 public class MetodosLogica {
 
+
     private static Docente docente;
-    private static GestionarEstudiante gestion;
+    private static GestionarEstudiante gestionEstudiante;
+    private static Login login;
+    private static Estudiante estudiante;
+    private static RegistroDocente registroDoce;
 
     public MetodosLogica(Docente docente) {
         this.docente = docente;
     }
+
     public MetodosLogica(GestionarEstudiante gestion) {
-        this.gestion = gestion;
+        this.gestionEstudiante = gestion;
     }
-      
+
+    public MetodosLogica(Login login) {
+        this.login = login;
+    }
+
+    public MetodosLogica(Estudiante estudiante) {
+        this.estudiante = estudiante;
+    }
+
+    public MetodosLogica(RegistroDocente registroDocente) {
+        this.registroDoce = registroDocente;
+    }
 
     public void limpiarCamposCrearActi() {
         jTextField_NombreActivi.setText("");
