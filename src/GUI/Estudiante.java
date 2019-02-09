@@ -30,8 +30,7 @@ import javax.swing.JOptionPane;
  */
 public class Estudiante extends javax.swing.JInternalFrame {
 
-    ConexionMySql cc = new ConexionMySql();
-    Connection cn = cc.Conectar();
+    MetodosBD metodobd = new MetodosBD();
 
     /**
      * Creates new form Estudiante
@@ -39,7 +38,6 @@ public class Estudiante extends javax.swing.JInternalFrame {
     public Estudiante(String grado) {
 
         initComponents();
-
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
 
         jButtonSalirEstudiante.setOpaque(false);
@@ -49,6 +47,7 @@ public class Estudiante extends javax.swing.JInternalFrame {
         jButtonVolverEstu.setOpaque(false);
         jButtonVolverEstu.setContentAreaFilled(false);
         jButtonVolverEstu.setBorderPainted(false);
+
     }
 
     /**
