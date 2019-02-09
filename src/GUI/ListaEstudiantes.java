@@ -52,8 +52,6 @@ public class ListaEstudiantes extends javax.swing.JFrame {
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 this.jComboBoxListaEstu.addItem(rs.getString("nombre_completo"));
-                st.close();
-                rs.close();
 
             }
 
@@ -248,7 +246,7 @@ public class ListaEstudiantes extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAceptarEstu;
     private javax.swing.JButton jButtonCancelarEstu;
-    private javax.swing.JComboBox<String> jComboBoxListaEstu;
+    public static javax.swing.JComboBox<String> jComboBoxListaEstu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables

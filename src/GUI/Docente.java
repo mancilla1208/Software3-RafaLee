@@ -34,18 +34,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Docente extends javax.swing.JInternalFrame {
 
-    DefaultTableModel modelo = new DefaultTableModel();
-    ConexionMySql cc = new ConexionMySql();
-    Connection cn = cc.Conectar();
     MetodosBD metodobd = new MetodosBD();
     MetodosLogica logica = new MetodosLogica(this);
-    String idDocente = "";
-    String id_Actividad = "";
-
-    JFileChooser seleccionado = new JFileChooser();
-    File archivo;
-    byte[] bytesImg;
-    GestionArchivos gestion = new GestionArchivos();
 
     /**
      * Creates new form Docente
@@ -95,7 +85,7 @@ public class Docente extends javax.swing.JInternalFrame {
         jTabbedPane3 = new javax.swing.JTabbedPane();
         jPanel12 = new javax.swing.JPanel();
         jScrollPane8 = new javax.swing.JScrollPane();
-        jList_ActividadesG6 = new javax.swing.JList<>();
+        jList_ActividadesG0 = new javax.swing.JList<>();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jList_ActividadesG1 = new javax.swing.JList<>();
@@ -140,7 +130,7 @@ public class Docente extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jTextField_GradoActividad = new javax.swing.JTextField();
         jPanel_BotonActividad = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        jButton_CrearActividad = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -196,8 +186,8 @@ public class Docente extends javax.swing.JInternalFrame {
 
         jPanel_Actividades.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Actividades", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 12))); // NOI18N
 
-        jList_ActividadesG6.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        jScrollPane8.setViewportView(jList_ActividadesG6);
+        jList_ActividadesG0.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jScrollPane8.setViewportView(jList_ActividadesG0);
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -399,7 +389,6 @@ public class Docente extends javax.swing.JInternalFrame {
         jPanel_Pregunta.add(jButtonCargarPre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 101, 26));
 
         jLabelNombreArchivoPre.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        jLabelNombreArchivoPre.setText("Nombre de archivo");
         jPanel_Pregunta.add(jLabelNombreArchivoPre, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 186, 30));
 
         jScrollPaneRespuesta.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Respuesta", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 0, 12))); // NOI18N
@@ -441,7 +430,7 @@ public class Docente extends javax.swing.JInternalFrame {
         jPanel_CrearActividad.add(jB_CargarArchivoGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 100, -1));
 
         jLabelNombreArchivoGeneral.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        jPanel_CrearActividad.add(jLabelNombreArchivoGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 220, 20));
+        jPanel_CrearActividad.add(jLabelNombreArchivoGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 220, 30));
 
         jLabel4.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         jLabel4.setText("Tipo de pregunta:");
@@ -463,16 +452,16 @@ public class Docente extends javax.swing.JInternalFrame {
         jPanel_BotonActividad.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Crear actividad", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
         jPanel_BotonActividad.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/CrearTarea.png"))); // NOI18N
-        jButton1.setBorderPainted(false);
-        jButton1.setContentAreaFilled(false);
-        jButton1.setFocusPainted(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButton_CrearActividad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/CrearTarea.png"))); // NOI18N
+        jButton_CrearActividad.setBorderPainted(false);
+        jButton_CrearActividad.setContentAreaFilled(false);
+        jButton_CrearActividad.setFocusPainted(false);
+        jButton_CrearActividad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButton_CrearActividadActionPerformed(evt);
             }
         });
-        jPanel_BotonActividad.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 56, 47));
+        jPanel_BotonActividad.add(jButton_CrearActividad, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 56, 47));
 
         jPanel_CrearActividad.add(jPanel_BotonActividad, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 60, 100, 80));
 
@@ -530,142 +519,21 @@ public class Docente extends javax.swing.JInternalFrame {
         System.exit(0);
     }//GEN-LAST:event_jButtonExitDocenteActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton_CrearActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CrearActividadActionPerformed
+        metodobd.obtenerIdDocente();
+        metodobd.crearActividad();
+        metodobd.obtenerIdActividad();
 
-        //Consulta SQL
-        String SSQL1 = "SELECT d.idDocente FROM rafalee_bd.docente d WHERE nombre_completo='" + jLabel_NombreDocente.getText() + "'";
-        Connection conect = null;
-
-        try {
-            conect = cc.Conectar();
-            Statement st = conect.createStatement();
-            ResultSet rs1 = st.executeQuery(SSQL1);
-            if (rs1.next()) {
-                idDocente = rs1.getString(1);
-                rs1.close();
-                st.close();
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex, "Error de conexion", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            try {
-                conect.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(Docente.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
-        try {
-            PreparedStatement ps = cn.prepareStatement("INSERT INTO rafalee_bd.actividad (nombre,grado,id_Docente1) VALUES (?,?,?)");
-            ps.setString(1, jTextField_NombreActivi.getText());
-            ps.setString(2, jTextField_GradoActividad.getText());
-            ps.setString(3, idDocente);
-            ps.executeUpdate();
-
-            logica.limpiarCamposCrearActi();
-            ps.close();
-
-        } catch (SQLException ex) {
-            Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                cn.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(Docente.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
-        String SqlID = "SELECT a.idActividad FROM rafalee_bd.actividad a WHERE nombre='" + jTextField_NombreActivi.getText() + "'";
-        try {
-            conect = cc.Conectar();
-            Statement st = conect.createStatement();
-            ResultSet rs1 = st.executeQuery(SSQL1);
-            if (rs1.next()) {
-                id_Actividad = rs1.getString(1);
-                System.out.println("Id de la actividad " + id_Actividad);
-            }
-            rs1.close();
-            st.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            try {
-                conect.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(Docente.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
-
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButton_CrearActividadActionPerformed
 
     private void jB_CargarArchivoGeneralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_CargarArchivoGeneralActionPerformed
-        if (seleccionado.showDialog(null, "ABRIR ARCHIVO") == JFileChooser.APPROVE_OPTION) {
-            archivo = seleccionado.getSelectedFile();
-            if (archivo.canRead()) {
-                if (archivo.getName().endsWith("txt") || archivo.getName().endsWith("doc") || archivo.getName().endsWith("pdf")) {
-                    String contenido = gestion.AbrirATexto(archivo);
-                    jLabelNombreArchivoGeneral.setText(archivo.getName());
-                } else {
-                    if (archivo.getName().endsWith("jpg") || archivo.getName().endsWith("png") || archivo.getName().endsWith("gif") || archivo.getName().endsWith("jpeg")) {
-                        bytesImg = gestion.AbrirAImagen(archivo);
-                        jLabelNombreArchivoGeneral.setText(archivo.getName());
-
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Por favor seleccione un archivo de texto o de imagen.");
-                    }
-                }
-            }
-        }
+        logica.cargarArchivoGeneral();
     }//GEN-LAST:event_jB_CargarArchivoGeneralActionPerformed
 
     private void jB_SiguientePreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_SiguientePreActionPerformed
-
-        String SSQL1 = "SELECT d.idDocente FROM rafalee_bd.docente d WHERE nombre_completo='" + jLabel_NombreDocente.getText() + "'";
-        Connection conect = null;
-
-        try {
-            conect = cc.Conectar();
-            Statement st = conect.createStatement();
-            ResultSet rs1 = st.executeQuery(SSQL1);
-            if (rs1.next()) {
-                idDocente = rs1.getString(1);
-            }
-            rs1.close();
-            st.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            try {
-                conect.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(Docente.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
-        if (jComboBox_TipoPreguntas.getSelectedItem().toString().equals("Icfes")) {
-
-            try {
-                PreparedStatement ps = cn.prepareStatement("INSERT INTO rafalee_bd.tipo_icfes(enunciado,respuesta1,respuesta2,respuesta3,respuesta4,id_Actividad3) VALUES (?,?,?,?,?,?)");
-                ps.setString(1, jTextAreaPregunta.getText());
-                ps.setString(2, jTextFieldRespuesta1.getText());
-                ps.setString(3, jTextFieldRespuesta2.getText());
-                ps.setString(4, jTextFieldRespuesta3.getText());
-                ps.setString(5, jTextFieldRespuesta4.getText());
-                ps.setString(6, id_Actividad);
-                ps.executeUpdate();
-                ps.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
-            } finally {
-                try {
-                    cn.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(Docente.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-
-        }
+        metodobd.obtenerIdDocente();
+        metodobd.guardarPregunta();
+        logica.limpiarCamposPregunta();
     }//GEN-LAST:event_jB_SiguientePreActionPerformed
 
     private void jB_GuardarTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_GuardarTareaActionPerformed
@@ -673,22 +541,7 @@ public class Docente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jB_GuardarTareaActionPerformed
 
     private void jButtonCargarPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCargarPreActionPerformed
-        if (seleccionado.showDialog(null, "ABRIR ARCHIVO") == JFileChooser.APPROVE_OPTION) {
-            archivo = seleccionado.getSelectedFile();
-            if (archivo.canRead()) {
-                if (archivo.getName().endsWith("txt") || archivo.getName().endsWith("doc") || archivo.getName().endsWith("pdf")) {
-                    String contenido = gestion.AbrirATexto(archivo);
-                    jLabelNombreArchivoPre.setText(archivo.getName());
-                } else {
-                    if (archivo.getName().endsWith("jpg") || archivo.getName().endsWith("png") || archivo.getName().endsWith("gif") || archivo.getName().endsWith("jpeg")) {
-                        bytesImg = gestion.AbrirAImagen(archivo);
-                        jLabelNombreArchivoPre.setText(archivo.getName());
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Por favor seleccione un archivo de texto o de imagen.");
-                    }
-                }
-            }
-        }
+        logica.cargarArchivoPregunta();
     }//GEN-LAST:event_jButtonCargarPreActionPerformed
 
     private void jTextFieldRespuesta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldRespuesta1ActionPerformed
@@ -696,57 +549,19 @@ public class Docente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextFieldRespuesta1ActionPerformed
 
     private void jB_AñadirTipoPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_AñadirTipoPreActionPerformed
-
-        if (jComboBox_TipoPreguntas.getSelectedItem() == "Icfes") {
-            jTextAreaRespuesta.setVisible(false);
-            jScrollPaneRespuesta.setVisible(false);
-
-            jLabelPreguntaA.setVisible(true);
-            jLabelPreguntaB.setVisible(true);
-            jLabelPreguntaC.setVisible(true);
-            jLabelPreguntaD.setVisible(true);
-
-            jTextFieldRespuesta1.setVisible(true);
-            jTextFieldRespuesta2.setVisible(true);
-            jTextFieldRespuesta3.setVisible(true);
-            jTextFieldRespuesta4.setVisible(true);
-
-            jButtonCargarPre.setVisible(true);
-            jLabelNombreArchivoPre.setVisible(true);
-
-        } else if (jComboBox_TipoPreguntas.getSelectedItem() == "Abierta") {
-
-            jTextAreaRespuesta.setVisible(true);
-            jScrollPaneRespuesta.setVisible(true);
-
-            jLabelPreguntaA.setVisible(false);
-            jLabelPreguntaB.setVisible(false);
-            jLabelPreguntaC.setVisible(false);
-            jLabelPreguntaD.setVisible(false);
-
-            jTextFieldRespuesta1.setVisible(false);
-            jTextFieldRespuesta2.setVisible(false);
-            jTextFieldRespuesta3.setVisible(false);
-            jTextFieldRespuesta4.setVisible(false);
-
-            jButtonCargarPre.setVisible(true);
-            jLabelNombreArchivoPre.setVisible(true);
-
-        } else if (jComboBox_TipoPreguntas.getSelectedItem() == "Completar") {
-
-        }
+        logica.añadirTipoPregunta();
     }//GEN-LAST:event_jB_AñadirTipoPreActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_AñadirTipoPre;
-    private javax.swing.JButton jB_CargarArchivoGeneral;
+    public static javax.swing.JButton jB_CargarArchivoGeneral;
     private javax.swing.JButton jB_GuardarTarea;
     private javax.swing.JButton jB_SiguientePre;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButtonCargarPre;
+    public static javax.swing.JButton jButtonCargarPre;
     private javax.swing.JButton jButtonExitDocente;
-    private javax.swing.JComboBox<String> jComboBox_TipoPreguntas;
+    private javax.swing.JButton jButton_CrearActividad;
+    public static javax.swing.JComboBox<String> jComboBox_TipoPreguntas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -754,31 +569,28 @@ public class Docente extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabelNombreArchivoGeneral;
-    private javax.swing.JLabel jLabelNombreArchivoPre;
+    public static javax.swing.JLabel jLabelNombreArchivoGeneral;
+    public static javax.swing.JLabel jLabelNombreArchivoPre;
     private javax.swing.JLabel jLabelNumPregunta;
-    private javax.swing.JLabel jLabelPreguntaA;
-    private javax.swing.JLabel jLabelPreguntaB;
-    private javax.swing.JLabel jLabelPreguntaC;
-    private javax.swing.JLabel jLabelPreguntaD;
-    public javax.swing.JLabel jLabel_NombreDocente;
+    public static javax.swing.JLabel jLabelPreguntaA;
+    public static javax.swing.JLabel jLabelPreguntaB;
+    public static javax.swing.JLabel jLabelPreguntaC;
+    public static javax.swing.JLabel jLabelPreguntaD;
+    public static javax.swing.JLabel jLabel_NombreDocente;
     public static javax.swing.JList<String> jList_ActividadesG0;
     public static javax.swing.JList<String> jList_ActividadesG1;
     public static javax.swing.JList<String> jList_ActividadesG2;
     public static javax.swing.JList<String> jList_ActividadesG3;
     public static javax.swing.JList<String> jList_ActividadesG4;
     public static javax.swing.JList<String> jList_ActividadesG5;
-    public static javax.swing.JList<String> jList_ActividadesG6;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItemInicio;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
@@ -788,23 +600,21 @@ public class Docente extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel_BotonActividad;
     private javax.swing.JPanel jPanel_CrearActividad;
     private javax.swing.JPanel jPanel_Pregunta;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
+    public static javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JScrollPane jScrollPaneRespuesta;
-    private javax.swing.JTabbedPane jTabbedPane2;
+    public static javax.swing.JScrollPane jScrollPaneRespuesta;
     private javax.swing.JTabbedPane jTabbedPane3;
-    private javax.swing.JTextArea jTextAreaPregunta;
-    private javax.swing.JTextArea jTextAreaRespuesta;
-    private javax.swing.JTextField jTextFieldRespuesta1;
-    private javax.swing.JTextField jTextFieldRespuesta2;
-    private javax.swing.JTextField jTextFieldRespuesta3;
-    private javax.swing.JTextField jTextFieldRespuesta4;
+    public static javax.swing.JTextArea jTextAreaPregunta;
+    public static javax.swing.JTextArea jTextAreaRespuesta;
+    public static javax.swing.JTextField jTextFieldRespuesta1;
+    public static javax.swing.JTextField jTextFieldRespuesta2;
+    public static javax.swing.JTextField jTextFieldRespuesta3;
+    public static javax.swing.JTextField jTextFieldRespuesta4;
     public static javax.swing.JTextField jTextField_GradoActividad;
     public static javax.swing.JTextField jTextField_NombreActivi;
     // End of variables declaration//GEN-END:variables

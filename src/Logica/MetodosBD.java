@@ -6,6 +6,10 @@
 package Logica;
 
 import GUI.Docente;
+import static GUI.Docente.jLabel_NombreDocente;
+import static GUI.Docente.jTextField_GradoActividad;
+import static GUI.Docente.jTextField_NombreActivi;
+import GUI.Estudiante;
 import GUI.GestionarEstudiante;
 import GUI.Login;
 import java.awt.HeadlessException;
@@ -29,8 +33,11 @@ import javax.swing.JOptionPane;
  */
 public class MetodosBD {
 
+    MetodosLogica logica = new MetodosLogica(this);
     ConexionMySql con = new ConexionMySql();
     Connection cn = con.Conectar();
+    String idDocente = "";
+    String idActividad = "";
 
     /*
     * Metodo encargado de actualizar los datos del estudiante seleccionado 
@@ -229,19 +236,94 @@ public class MetodosBD {
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(MetodosBD.class.getName()).log(Level.SEVERE, null, ex);
-            } finally {
-                if (st != null && rs != null) {
-                    try {
-                        st.close();
-                        rs.close();
-                    } catch (SQLException ex) {
-                        Logger.getLogger(MetodosBD.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
             }
 
         }
 
+    }
+
+    /**
+     * Metodo encargado de obtener el id del docente que se encuentra logueado
+     * en la aplicación en ese intante.
+     */
+    public void obtenerIdDocente() {
+        //Consulta SQL que se encarga de obtener el id del docente que se encuentra logueado en ese momento
+        String SSQL1 = "SELECT d.idDocente FROM rafalee_bd.docente d WHERE nombre_completo='" + Docente.jLabel_NombreDocente.getText() + "'";
+        Connection cn = null;
+        try {
+            cn = con.Conectar();
+            Statement st = cn.createStatement();
+            ResultSet rs1 = st.executeQuery(SSQL1);
+            if (rs1.next()) {
+                idDocente = rs1.getString(1);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex, "Error de conexion", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    /**
+     * Metodo encargado de crear la actividad en la base de datos y asignarla al
+     * docente que esta en sesión en ese momento
+     */
+    public void crearActividad() {
+        //Consulta SQL que se encarga de crear la actividad
+        try {
+            PreparedStatement ps = cn.prepareStatement("INSERT INTO rafalee_bd.actividad (nombre,grado,id_Docente1) VALUES (?,?,?)");
+            ps.setString(1, Docente.jTextField_NombreActivi.getText());
+            ps.setString(2, Docente.jTextField_GradoActividad.getText());
+            ps.setString(3, idDocente);
+            ps.executeUpdate();
+
+            logica.limpiarCamposCrearActi();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void obtenerIdActividad() {
+        //Consulta SQL que se encarga de obtener el id de la actividad creada en ese intante
+        String SqlID = "SELECT a.idActividad FROM rafalee_bd.actividad a WHERE nombre='" + Docente.jTextField_NombreActivi.getText() + "'";
+        String SSQL1 = "SELECT d.idDocente FROM rafalee_bd.docente d WHERE nombre_completo='" + Docente.jLabel_NombreDocente.getText() + "'";
+
+        try {
+            cn = con.Conectar();
+            Statement st = cn.createStatement();
+            ResultSet rs1 = st.executeQuery(SSQL1);
+            if (rs1.next()) {
+                idActividad = rs1.getString(1);
+                System.out.println("Id de la actividad " + idActividad);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void guardarPregunta() {
+
+        if (Docente.jComboBox_TipoPreguntas.getSelectedItem().toString().equals("Icfes")) {
+
+            try {
+                PreparedStatement ps = cn.prepareStatement("INSERT INTO rafalee_bd.tipo_icfes(enunciado,respuesta1,respuesta2,respuesta3,respuesta4,id_Actividad3) VALUES (?,?,?,?,?,?)");
+                ps.setString(1, Docente.jTextAreaPregunta.getText());
+                ps.setString(2, Docente.jTextFieldRespuesta1.getText());
+                ps.setString(3, Docente.jTextFieldRespuesta2.getText());
+                ps.setString(4, Docente.jTextFieldRespuesta3.getText());
+                ps.setString(5, Docente.jTextFieldRespuesta4.getText());
+                ps.setString(6, idActividad);
+                ps.executeUpdate();
+            } catch (SQLException ex) {
+                Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                try {
+                    cn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(Docente.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+        }
     }
 
 }
