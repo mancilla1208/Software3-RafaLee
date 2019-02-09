@@ -198,6 +198,7 @@ public class MetodosBD {
             Statement st = null;
             ResultSet rs = null;
             try {
+
                 st = cn.createStatement();
                 rs = st.executeQuery(consultas[i]);
                 while (rs.next()) {
@@ -225,7 +226,6 @@ public class MetodosBD {
                         ListaG5.addElement(rs.getString(1));
                         Docente.jList_ActividadesG5.setModel(ListaG5);
                     }
-
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(MetodosBD.class.getName()).log(Level.SEVERE, null, ex);
@@ -242,48 +242,6 @@ public class MetodosBD {
 
         }
 
-    }
-
-    public static void cerrarConexion(Connection... connections) {
-        if (connections != null) {
-            for (Connection conn : connections) {
-                if (conn != null) {
-                    try {
-                        conn.close();
-                    } catch (SQLException ignored) {
-                        //ignored
-                    }
-                }
-            }
-        }
-    }
-
-    public static void cerrarResultSets(ResultSet... resultSets) {
-        if (resultSets != null) {
-            for (ResultSet rs : resultSets) {
-                if (rs != null) {
-                    try {
-                        rs.close();
-                    } catch (SQLException ignored) {
-                        //ignored
-                    }
-                }
-            }
-        }
-    }
-
-    public static void cerrarStatements(Statement... statements) {
-        if (statements != null) {
-            for (Statement statement : statements) {
-                if (statement != null) {
-                    try {
-                        statement.close();
-                    } catch (SQLException ignored) {
-                        //ignored
-                    }
-                }
-            }
-        }
     }
 
 }

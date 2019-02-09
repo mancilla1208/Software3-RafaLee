@@ -28,7 +28,7 @@ public class GestionarEstudiante extends javax.swing.JFrame {
     Connection cn = cc.Conectar();
     MetodosBD metodobd = new MetodosBD();
     String idEstudiante = "";
-    MetodosLogica metodos = new MetodosLogica();
+    MetodosLogica metodos = new MetodosLogica(this);
 
     /**
      * Creates new form AgregarEstudiante
@@ -67,17 +67,9 @@ public class GestionarEstudiante extends javax.swing.JFrame {
                 modelo.addRow(datos);
             }
             jTableListaEstu.setModel(modelo);
-            rs.close();
-            st.close();
 
         } catch (SQLException ex) {
             Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                cn.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(Docente.class.getName()).log(Level.SEVERE, null, ex);
-            }
         }
 
     }
@@ -276,15 +268,8 @@ public class GestionarEstudiante extends javax.swing.JFrame {
             metodos.limpiarCamposGEstudiantes();
             JOptionPane.showMessageDialog(null, "Estudiante registrado");
             mostrarTabla();
-            ps.close();
         } catch (SQLException ex) {
             Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                cn.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(Docente.class.getName()).log(Level.SEVERE, null, ex);
-            }
         }
 
 
@@ -318,29 +303,18 @@ public class GestionarEstudiante extends javax.swing.JFrame {
 
         int fila = jTableListaEstu.getSelectedRow();
         String valor = jTableListaEstu.getValueAt(fila, 0).toString();
+        System.out.println(valor + " Inicio");
         if (fila >= 0) {
+            System.out.println(valor + " medio");
             try {
                 PreparedStatement ps = cn.prepareStatement("DELETE FROM rafalee_bd.estudiante WHERE idEstudiante='" + valor + "'");
                 ps.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Estudiante eliminado");
                 mostrarTabla();
-                ps.close();
             } catch (SQLException ex) {
                 Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
-            } finally {
-                try {
-                    cn.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(Docente.class.getName()).log(Level.SEVERE, null, ex);
-                }
             }
         }
-//        if (idEstudiante.isEmpty()) {
-//            JOptionPane.showMessageDialog(null, "No se ha seleccionado ningun estudiante para eliminar");
-//        }else{
-//            metodobd.Eliminar(idEstudiante);
-//        }
-
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 
     private void txtNombreCompletoEstuKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreCompletoEstuKeyTyped

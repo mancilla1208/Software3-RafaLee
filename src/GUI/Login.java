@@ -29,6 +29,7 @@ import javax.swing.border.EmptyBorder;
 public class Login extends javax.swing.JFrame {
 
     MetodosBD metodos = new MetodosBD();
+    Docente docente = new Docente();
 
     /**
      * Metodo que crea la vista de Login
@@ -147,7 +148,6 @@ public class Login extends javax.swing.JFrame {
 
             try {
 
-                Docente docente = new Docente();
                 Principal.VentaPrincipal.add(docente);
                 Principal.VentaPrincipal.moveToFront(docente);
                 docente.setSize(Principal.VentaPrincipal.getWidth(), Principal.VentaPrincipal.getHeight());

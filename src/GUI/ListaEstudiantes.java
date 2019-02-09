@@ -11,6 +11,7 @@ import static GUI.Principal.jLabelEstudiante;
 import static GUI.Principal.jbDocente;
 import static GUI.Principal.jbEstudiante;
 import Logica.ConexionMySql;
+import Logica.MetodosLogica;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

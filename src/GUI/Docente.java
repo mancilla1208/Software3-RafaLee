@@ -38,7 +38,7 @@ public class Docente extends javax.swing.JInternalFrame {
     ConexionMySql cc = new ConexionMySql();
     Connection cn = cc.Conectar();
     MetodosBD metodobd = new MetodosBD();
-    MetodosLogica logica = new MetodosLogica();
+    MetodosLogica logica = new MetodosLogica(this);
     String idDocente = "";
     String id_Actividad = "";
 
@@ -518,36 +518,12 @@ public class Docente extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-
         GestionarEstudiante gestion = new GestionarEstudiante();
         gestion.show();
-
-
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItemInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemInicioActionPerformed
-
-        int seleccion = JOptionPane.showOptionDialog(
-                null, // Componente padre
-                "Esta seguro que desea salir.?", //Mensaje
-                "Seleccione una opción", // Título
-                JOptionPane.YES_NO_CANCEL_OPTION,
-                JOptionPane.QUESTION_MESSAGE,
-                null, // null para icono por defecto.
-                new Object[]{"Si", "No"}, // null para YES, NO y CANCEL
-                "Si");
-
-        if (seleccion == JOptionPane.YES_OPTION) {
-            this.dispose();
-            Principal.jbDocente.setVisible(true);
-            Principal.jbEstudiante.setVisible(true);
-            Principal.jLabelBienvenidos.setVisible(true);
-            Principal.jLabelDocente.setVisible(true);
-            Principal.jLabelEstudiante.setVisible(true);
-        } else {
-
-        }
-
+        MetodosLogica.irDeDocente_Inicio();
     }//GEN-LAST:event_jMenuItemInicioActionPerformed
 
     private void jButtonExitDocenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExitDocenteActionPerformed
