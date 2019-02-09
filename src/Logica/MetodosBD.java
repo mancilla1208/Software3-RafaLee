@@ -402,4 +402,19 @@ public class MetodosBD {
         }
     }
 
+    public void cargarListaEstudiantes() {
+        String sql = "SELECT * FROM rafalee_bd.estudiante";
+        try {
+            cn = con.Conectar();
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                listaEstudiantes.jComboBoxListaEstu.addItem(rs.getString("nombre_completo"));
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ListaEstudiantes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
