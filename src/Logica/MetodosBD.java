@@ -11,7 +11,10 @@ import static GUI.Docente.jTextField_GradoActividad;
 import static GUI.Docente.jTextField_NombreActivi;
 import GUI.Estudiante;
 import GUI.GestionarEstudiante;
+import GUI.ListaEstudiantes;
+import static GUI.ListaEstudiantes.jComboBoxListaEstu;
 import GUI.Login;
+import GUI.Principal;
 import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -36,8 +39,35 @@ public class MetodosBD {
     MetodosLogica logica = new MetodosLogica(this);
     ConexionMySql con = new ConexionMySql();
     Connection cn = con.Conectar();
+    String SQL_GradoEstu = "";
+    String gradoEstudiante = "";
     String idDocente = "";
     String idActividad = "";
+
+    private static ListaEstudiantes listaEstudiantes;
+    private static Docente docente;
+    private static Estudiante estudiante;
+    private static Login login;
+    private static GestionarEstudiante gestion;
+
+    public MetodosBD(GestionarEstudiante gestion) {
+        this.gestion = gestion;
+    }
+
+    public MetodosBD(Login login) {
+        this.login = login;
+    }
+
+    public MetodosBD() {
+    }
+
+    public MetodosBD(Estudiante estudiante) {
+        this.estudiante = estudiante;
+    }
+
+    public MetodosBD(Docente docente) {
+        this.docente = docente;
+    }
 
     /*
     * Metodo encargado de actualizar los datos del estudiante seleccionado 
@@ -323,6 +353,52 @@ public class MetodosBD {
                 }
             }
 
+        }
+    }
+
+    public String obtenerGradoEstudiante() {
+        // Codigo para obtener el grado del estudiante y redireccionarlo a su perfil o grado correspondiente
+        SQL_GradoEstu = "SELECT e.grado FROM rafalee_bd.estudiante e WHERE nombre_completo='" + ListaEstudiantes.jComboBoxListaEstu.getSelectedItem().toString() + "'";
+        Connection conect = null;
+
+        try {
+            System.out.println("Aqui " + ListaEstudiantes.jComboBoxListaEstu.getSelectedItem().toString());
+            cn = con.Conectar();
+            Statement st = cn.createStatement();
+            ResultSet rs1 = st.executeQuery(SQL_GradoEstu);
+            if (rs1.next()) {
+                gradoEstudiante = rs1.getString(1);
+                System.out.println("Grado de " + ListaEstudiantes.jComboBoxListaEstu.getSelectedItem().toString() + " es " + gradoEstudiante);
+
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
+        }
+        return gradoEstudiante;
+
+    }
+
+    public void cargarActividadesEstudiante() {
+
+        obtenerGradoEstudiante();
+        System.out.println("Grado que llego a cargarArti " + gradoEstudiante);
+        DefaultListModel listaActividades = new DefaultListModel();
+        String SQL = "SELECT a.nombre FROM rafalee_bd.actividad a WHERE grado='" + gradoEstudiante + "'";
+
+        try {
+            cn = con.Conectar();
+            Statement st = cn.createStatement();
+            ResultSet rs1 = st.executeQuery(SQL);
+            System.out.println("Mire " + rs1 + "******* " + gradoEstudiante);
+            while (rs1.next()) {
+                listaActividades.addElement(rs1.getString(1));
+                Estudiante.jList_Actividades.setModel(listaActividades);
+                System.out.println("Esto encontro " + rs1.getString(1));
+
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
         }
     }
 

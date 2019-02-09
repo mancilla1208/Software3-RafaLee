@@ -26,7 +26,7 @@ public class GestionarEstudiante extends javax.swing.JFrame {
 
     ConexionMySql cc = new ConexionMySql();
     Connection cn = cc.Conectar();
-    MetodosBD metodobd = new MetodosBD();
+    MetodosBD metodobd = new MetodosBD(this);
     String idEstudiante = "";
     MetodosLogica metodos = new MetodosLogica(this);
 

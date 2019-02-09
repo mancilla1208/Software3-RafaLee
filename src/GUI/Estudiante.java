@@ -30,14 +30,24 @@ import javax.swing.JOptionPane;
  */
 public class Estudiante extends javax.swing.JInternalFrame {
 
-    MetodosBD metodobd = new MetodosBD();
+    MetodosBD metodobd = new MetodosBD(this);
 
+    private static ListaEstudiantes listaEstudiantes;
+
+    public Estudiante(ListaEstudiantes listaEstudiantes) {
+        this.listaEstudiantes = listaEstudiantes;
+    }
+
+    
+    
     /**
      * Creates new form Estudiante
      */
     public Estudiante(String grado) {
 
         initComponents();
+       metodobd.cargarActividadesEstudiante();
+
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
 
         jButtonSalirEstudiante.setOpaque(false);
