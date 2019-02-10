@@ -38,15 +38,13 @@ public class Estudiante extends javax.swing.JInternalFrame {
         this.listaEstudiantes = listaEstudiantes;
     }
 
-    
-    
     /**
      * Creates new form Estudiante
      */
     public Estudiante(String grado) {
 
         initComponents();
-       metodobd.cargarActividadesEstudiante();
+        metodobd.cargarActividadesEstudiante();
 
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
 

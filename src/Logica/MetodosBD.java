@@ -11,6 +11,9 @@ import static GUI.Docente.jTextField_GradoActividad;
 import static GUI.Docente.jTextField_NombreActivi;
 import GUI.Estudiante;
 import GUI.GestionarEstudiante;
+import static GUI.GestionarEstudiante.jTableListaEstu;
+import static GUI.GestionarEstudiante.txtGradoEstu;
+import static GUI.GestionarEstudiante.txtNombreCompletoEstu;
 import GUI.ListaEstudiantes;
 import static GUI.ListaEstudiantes.jComboBoxListaEstu;
 import GUI.Login;
@@ -25,6 +28,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -42,6 +46,7 @@ public class MetodosBD {
     String SQL_GradoEstu = "";
     String gradoEstudiante = "";
     String idDocente = "";
+    String idEstudiante = "";
     String idActividad = "";
 
     private static ListaEstudiantes listaEstudiantes;
@@ -76,33 +81,29 @@ public class MetodosBD {
     public void Actualizar(String nombreCompleto, String grado, String idEstudiante) {
 
         Connection conexion = null;
-        PreparedStatement ps = null;
-
         try {
             conexion = con.Conectar();
-            String sql = "UPDATE rafalee_bd.estudiante SET nombre_completo=?, grado=? WHERE idEstudiante=?";
+            String SQL_actualizar = "UPDATE rafalee_bd.estudiante SET nombre_completo=?, grado=? WHERE idEstudiante=?";
 
-            ps = conexion.prepareStatement(sql);
+            PreparedStatement ps = conexion.prepareStatement(SQL_actualizar);
             ps.setString(1, nombreCompleto);
             ps.setString(2, grado);
             ps.setString(3, idEstudiante);
 
             if (ps.executeUpdate() > 0) {
-                JOptionPane.showMessageDialog(null, "Datos guardados con exito");
-                conexion.close();
+                JOptionPane.showMessageDialog(null, "Estudiante modificado", "", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(null, "No se han podido actualizar los datos");
+                JOptionPane.showMessageDialog(null, "Error al modificar estudiante", "", JOptionPane.ERROR_MESSAGE);
             }
-            ps.close();
+
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "No se han podido actualizar los datos, error en la operación" + "Error:" + e);
+
         } finally {
-            if (conexion != null && ps != null) {
+            if (conexion != null) {
                 try {
                     conexion.close();
-                    ps.close();
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "Se produjo un error al cerrar la conexion");
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(null, "Error al cerrar conexion", "", JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
@@ -139,6 +140,56 @@ public class MetodosBD {
             }
         }
 
+    }
+
+    /**
+     * Metodo que se encarga de realizar la inserción de un estudiante a la
+     * lista por parte del docente
+     */
+    public void agregarEstudiante() {
+
+        try {
+            PreparedStatement ps = cn.prepareStatement("INSERT INTO rafalee_bd.estudiante(nombre_completo,grado) VALUES (?,?)");
+            ps.setString(1, txtNombreCompletoEstu.getText());
+            ps.setString(2, txtGradoEstu.getText());
+            int res = ps.executeUpdate();
+
+            if (res > 0) {
+                JOptionPane.showMessageDialog(null, "Estudiante registrado");
+                listaEstudiantesGestionDoce();
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al guardar estudiante");
+                listaEstudiantesGestionDoce();
+            }
+            cn.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    /**
+     * Metodo que se encarga de editar un estudiante seleccionado por el docente
+     * para modificar alguno de sus datos
+     */
+    public void eliminarEstudiante() {
+        int fila = gestion.jTableListaEstu.getSelectedRow();
+
+        try {
+            if (fila == -1) {
+                JOptionPane.showMessageDialog(null, "Debe seleccionar el estudiante a eliminar");
+            } else {
+                String valor = gestion.jTableListaEstu.getValueAt(fila, 0).toString();
+                PreparedStatement ps = cn.prepareStatement("DELETE FROM rafalee_bd.estudiante WHERE idEstudiante='" + valor + "'");
+                ps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Estudiante eliminado");
+                listaEstudiantesGestionDoce();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
     }
 
     /*
@@ -382,7 +433,6 @@ public class MetodosBD {
     public void cargarActividadesEstudiante() {
 
         obtenerGradoEstudiante();
-        System.out.println("Grado que llego a cargarArti " + gradoEstudiante);
         DefaultListModel listaActividades = new DefaultListModel();
         String SQL = "SELECT a.nombre FROM rafalee_bd.actividad a WHERE grado='" + gradoEstudiante + "'";
 
@@ -390,11 +440,9 @@ public class MetodosBD {
             cn = con.Conectar();
             Statement st = cn.createStatement();
             ResultSet rs1 = st.executeQuery(SQL);
-            System.out.println("Mire " + rs1 + "******* " + gradoEstudiante);
             while (rs1.next()) {
                 listaActividades.addElement(rs1.getString(1));
                 Estudiante.jList_Actividades.setModel(listaActividades);
-                System.out.println("Esto encontro " + rs1.getString(1));
 
             }
         } catch (SQLException ex) {
@@ -415,6 +463,37 @@ public class MetodosBD {
 
         } catch (SQLException ex) {
             Logger.getLogger(ListaEstudiantes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    /*
+    * Metodo encargado de crear la tabla con sus respectivas columnas y la consulta
+    * para que muestre los estudiantes que se encuentran registrados en la base de datos.
+     */
+    public void listaEstudiantesGestionDoce() {
+
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Id");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Grado");
+        gestion.jTableListaEstu.setModel(modelo);
+
+        String sql = "SELECT * FROM rafalee_bd.estudiante";
+        String[] datos = new String[3];
+        Statement st;
+        try {
+            st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                datos[0] = rs.getString(1);
+                datos[1] = rs.getString(2);
+                datos[2] = rs.getString(3);
+                modelo.addRow(datos);
+            }
+            gestion.jTableListaEstu.setModel(modelo);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
