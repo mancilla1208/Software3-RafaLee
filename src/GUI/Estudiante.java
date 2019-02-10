@@ -48,15 +48,13 @@ public class Estudiante extends javax.swing.JInternalFrame {
 
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
 
-        jButtonSalirEstudiante.setOpaque(false);
-        jButtonSalirEstudiante.setContentAreaFilled(false);
-        jButtonSalirEstudiante.setBorderPainted(false);
+      
 
-        jButtonVolverEstu.setOpaque(false);
-        jButtonVolverEstu.setContentAreaFilled(false);
-        jButtonVolverEstu.setBorderPainted(false);
+        
 
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -67,6 +65,7 @@ public class Estudiante extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        rbtnGrupo = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -80,15 +79,16 @@ public class Estudiante extends javax.swing.JInternalFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel_Grado = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jScrollBar1 = new javax.swing.JScrollBar();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jLabel8 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
+        lblActividad = new javax.swing.JLabel();
+        rbtnRespuesta1 = new javax.swing.JRadioButton();
+        rbtnRespuesta2 = new javax.swing.JRadioButton();
+        rbtnRespuesta3 = new javax.swing.JRadioButton();
+        rbtnRespuesta4 = new javax.swing.JRadioButton();
+        lblNumeroPregunta = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtAreaPregunta = new javax.swing.JTextArea();
+        txtRespuesta = new javax.swing.JTextField();
+        btnSiguiente = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximizable(true);
@@ -104,6 +104,11 @@ public class Estudiante extends javax.swing.JInternalFrame {
         jLabel3.setText("Lista de actividades");
 
         jList_Actividades.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jList_Actividades.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jList_ActividadesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jList_Actividades);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -147,6 +152,7 @@ public class Estudiante extends javax.swing.JInternalFrame {
         jPanel2.add(jLabel_texGra, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 70, 30));
 
         jButtonSalirEstudiante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Salir.png"))); // NOI18N
+        jButtonSalirEstudiante.setContentAreaFilled(false);
         jButtonSalirEstudiante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSalirEstudianteActionPerformed(evt);
@@ -155,6 +161,7 @@ public class Estudiante extends javax.swing.JInternalFrame {
         jPanel2.add(jButtonSalirEstudiante, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 20, 62, 45));
 
         jButtonVolverEstu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/volver2.png"))); // NOI18N
+        jButtonVolverEstu.setContentAreaFilled(false);
         jButtonVolverEstu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonVolverEstuActionPerformed(evt);
@@ -170,77 +177,51 @@ public class Estudiante extends javax.swing.JInternalFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel3.setLayout(null);
 
-        jLabel6.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
-        jLabel6.setText("Lectura sobre animales");
+        lblActividad.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
+        lblActividad.setText("Lectura sobre animales");
+        jPanel3.add(lblActividad);
+        lblActividad.setBounds(122, 24, 279, 34);
 
-        jLabel7.setText("1. Cual de los siguientes animales tiene 4 patas?");
-
-        jRadioButton1.setText("Delfin");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        rbtnGrupo.add(rbtnRespuesta1);
+        rbtnRespuesta1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                rbtnRespuesta1ActionPerformed(evt);
             }
         });
+        jPanel3.add(rbtnRespuesta1);
+        rbtnRespuesta1.setBounds(102, 208, 21, 21);
 
-        jRadioButton2.setText("Perro");
+        rbtnGrupo.add(rbtnRespuesta2);
+        jPanel3.add(rbtnRespuesta2);
+        rbtnRespuesta2.setBounds(100, 240, 21, 21);
 
-        jRadioButton3.setText("Ballena");
+        rbtnGrupo.add(rbtnRespuesta3);
+        jPanel3.add(rbtnRespuesta3);
+        rbtnRespuesta3.setBounds(100, 280, 21, 21);
 
-        jLabel8.setText("2. Leer y dar opinion sobre el siguiente texto:");
+        rbtnGrupo.add(rbtnRespuesta4);
+        jPanel3.add(rbtnRespuesta4);
+        rbtnRespuesta4.setBounds(100, 310, 21, 21);
 
-        jTextField1.setBorder(javax.swing.BorderFactory.createTitledBorder("RESPUESTA"));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
+        lblNumeroPregunta.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblNumeroPregunta.setText("N°");
+        jPanel3.add(lblNumeroPregunta);
+        lblNumeroPregunta.setBounds(56, 76, 18, 17);
 
-        jLabel9.setText("Esto es una prueba, conteste en el siguiente recuadro.");
-        jLabel9.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtAreaPregunta.setColumns(20);
+        txtAreaPregunta.setRows(5);
+        jScrollPane2.setViewportView(txtAreaPregunta);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(91, 91, 91)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel7)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton3)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jLabel6)
-                .addGap(26, 26, 26)
-                .addComponent(jLabel7)
-                .addGap(7, 7, 7)
-                .addComponent(jRadioButton1)
-                .addGap(0, 0, 0)
-                .addComponent(jRadioButton2)
-                .addGap(3, 3, 3)
-                .addComponent(jRadioButton3)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel8)
-                .addGap(11, 11, 11)
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        jPanel3.add(jScrollPane2);
+        jScrollPane2.setBounds(102, 76, 456, 96);
+        jPanel3.add(txtRespuesta);
+        txtRespuesta.setBounds(100, 210, 460, 90);
+
+        btnSiguiente.setText("Siguiente");
+        jPanel3.add(btnSiguiente);
+        btnSiguiente.setBounds(240, 380, 80, 23);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -248,9 +229,10 @@ public class Estudiante extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -265,13 +247,9 @@ public class Estudiante extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void rbtnRespuesta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnRespuesta1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_rbtnRespuesta1ActionPerformed
 
     private void jButtonSalirEstudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirEstudianteActionPerformed
         System.exit(0);
@@ -287,16 +265,17 @@ public class Estudiante extends javax.swing.JInternalFrame {
         jLabelBienvenidos.setVisible(true);
     }//GEN-LAST:event_jButtonVolverEstuActionPerformed
 
+    private void jList_ActividadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList_ActividadesMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jList_ActividadesMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSiguiente;
     private javax.swing.JButton jButtonSalirEstudiante;
     private javax.swing.JButton jButtonVolverEstu;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     public static javax.swing.JLabel jLabelNombreEstudiante;
     public static javax.swing.JLabel jLabel_Grado;
     public static javax.swing.JLabel jLabel_texGra;
@@ -304,12 +283,17 @@ public class Estudiante extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lblActividad;
+    private javax.swing.JLabel lblNumeroPregunta;
+    private javax.swing.ButtonGroup rbtnGrupo;
+    private javax.swing.JRadioButton rbtnRespuesta1;
+    private javax.swing.JRadioButton rbtnRespuesta2;
+    private javax.swing.JRadioButton rbtnRespuesta3;
+    private javax.swing.JRadioButton rbtnRespuesta4;
+    private javax.swing.JTextArea txtAreaPregunta;
+    private javax.swing.JTextField txtRespuesta;
     // End of variables declaration//GEN-END:variables
 }
