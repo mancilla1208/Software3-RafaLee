@@ -329,14 +329,18 @@ public class MetodosBD {
      */
     public void obtenerIdDocente() {
         //Consulta SQL que se encarga de obtener el id del docente que se encuentra logueado en ese momento
-        String SSQL1 = "SELECT d.idDocente FROM rafalee_bd.docente d WHERE nombre_completo='" + Docente.jLabel_NombreDocente.getText() + "'";
+        String SSQL1 = "SELECT d.idDocente FROM rafalee_bd.docente d WHERE nombre_completo='" + docente.jLabel_NombreDocente.getText() + "'";
         Connection cn = null;
+
+        System.out.println("nombre doce " + docente.jLabel_NombreDocente.getText());
         try {
             cn = con.Conectar();
             Statement st = cn.createStatement();
             ResultSet rs1 = st.executeQuery(SSQL1);
             if (rs1.next()) {
                 idDocente = rs1.getString(1);
+                System.out.println("id docente " + idDocente);
+
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex, "Error de conexion", JOptionPane.ERROR_MESSAGE);
@@ -349,14 +353,13 @@ public class MetodosBD {
      */
     public void crearActividad() {
         //Consulta SQL que se encarga de crear la actividad
+        System.out.println("id docente " + idDocente);
         try {
             PreparedStatement ps = cn.prepareStatement("INSERT INTO rafalee_bd.actividad (nombre,grado,id_Docente1) VALUES (?,?,?)");
             ps.setString(1, Docente.jTextField_NombreActivi.getText());
             ps.setString(2, Docente.jTextField_GradoActividad.getText());
             ps.setString(3, idDocente);
             ps.executeUpdate();
-
-            logica.limpiarCamposCrearActi();
 
         } catch (SQLException ex) {
             Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
@@ -365,9 +368,10 @@ public class MetodosBD {
 
     public void obtenerIdActividad() {
         //Consulta SQL que se encarga de obtener el id de la actividad creada en ese intante
-        String SqlID = "SELECT a.idActividad FROM rafalee_bd.actividad a WHERE nombre='" + Docente.jTextField_NombreActivi.getText() + "'";
+        String SqlID = "SELECT a.idActividad FROM rafalee_bd.actividad a WHERE nombre='" + docente.jTextField_NombreActivi.getText() + "'";
         //String SSQL1 = "SELECT d.idDocente FROM rafalee_bd.docente d WHERE nombre_completo='" + Docente.jLabel_NombreDocente.getText() + "'";
 
+        System.out.println("Nombre actividad " + docente.jTextField_NombreActivi.getText());
         try {
             cn = con.Conectar();
             Statement st = cn.createStatement();
@@ -379,6 +383,7 @@ public class MetodosBD {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
         }
+
     }
 
     public void guardarPregunta() {
@@ -407,7 +412,7 @@ public class MetodosBD {
         }
         if (Docente.jComboBox_TipoPreguntas.getSelectedItem().toString().equals("Abierta")) {
             try {
-                PreparedStatement ps = cn.prepareStatement("INSERT INTO rafalee_bd.tipo_abierta(enunciado) VALUES (?)");
+                PreparedStatement ps = cn.prepareStatement("INSERT INTO rafalee_bd.tipo_abierta(enunciado,id_Actividad) VALUES (?,?)");
                 ps.setString(1, Docente.jTextAreaPregunta.getText());
                 ps.setString(2, idActividad);
                 ps.executeUpdate();

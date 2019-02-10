@@ -33,7 +33,7 @@ import javax.swing.table.DefaultTableModel;
  * tareas para el estudiante por parte del docente y demas funciones.
  */
 public class Docente extends javax.swing.JInternalFrame {
-
+    
     MetodosBD metodobd = new MetodosBD(this);
     MetodosLogica logica = new MetodosLogica(this);
 
@@ -43,7 +43,7 @@ public class Docente extends javax.swing.JInternalFrame {
     public Docente() {
         initComponents();
         metodobd.cargarActividades();
-
+        
         jLabelNombreArchivoPre.setVisible(false);
         jTextAreaRespuesta.setVisible(false);
         jScrollPaneRespuesta.setVisible(false);
@@ -55,14 +55,14 @@ public class Docente extends javax.swing.JInternalFrame {
         jTextFieldRespuesta2.setVisible(false);
         jTextFieldRespuesta3.setVisible(false);
         jTextFieldRespuesta4.setVisible(false);
-
+        
         jPanel_CrearActividad.setOpaque(false);
         jPanel_Actividades.setOpaque(false);
         jPanel_Pregunta.setOpaque(false);
         jPanel_BotonActividad.setOpaque(false);
-
+        
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
-
+        
     }
 
     /**
@@ -527,11 +527,9 @@ public class Docente extends javax.swing.JInternalFrame {
 
     private void jButton_CrearActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CrearActividadActionPerformed
         metodobd.obtenerIdDocente();
-        metodobd.crearActividad();
         metodobd.obtenerIdActividad();
-
-        jTextField_NombreActivi.enable(false);
-        jTextField_GradoActividad.enable(false);
+        metodobd.crearActividad();
+        
 
     }//GEN-LAST:event_jButton_CrearActividadActionPerformed
 
@@ -541,15 +539,14 @@ public class Docente extends javax.swing.JInternalFrame {
 
     private void jB_SiguientePreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_SiguientePreActionPerformed
         metodobd.obtenerIdDocente();
+        metodobd.obtenerIdActividad();
         metodobd.guardarPregunta();
         logica.limpiarCamposPregunta();
     }//GEN-LAST:event_jB_SiguientePreActionPerformed
 
     private void jB_GuardarTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_GuardarTareaActionPerformed
-        
-        
-        
-        
+        logica.limpiarCamposCrearActi();
+        JOptionPane.showMessageDialog(null, "Actividad creada con exito");
     }//GEN-LAST:event_jB_GuardarTareaActionPerformed
 
     private void jButtonCargarPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCargarPreActionPerformed
