@@ -32,12 +32,12 @@ import javax.swing.JOptionPane;
  * interfaz.
  */
 public class ListaEstudiantes extends javax.swing.JFrame {
-    
+
     MetodosBD metodosBD = new MetodosBD();
     ConexionMySql cc = new ConexionMySql();
     Connection cn = cc.Conectar();
     String gradoEstudiante = "";
-    
+
     public ListaEstudiantes(String grado) {
         this.gradoEstudiante = grado;
     }
@@ -48,32 +48,16 @@ public class ListaEstudiantes extends javax.swing.JFrame {
     public ListaEstudiantes() {
         initComponents();
         this.jComboBoxListaEstu.removeAllItems();
-        
-        
-        Connection conect = null;
-        
-        String sql = "SELECT * FROM rafalee_bd.estudiante";
-        try {
-            conect = cc.Conectar();
-            Statement st = conect.createStatement();
-            ResultSet rs = st.executeQuery(sql);
-            while (rs.next()) {
-                this.jComboBoxListaEstu.addItem(rs.getString("nombre_completo"));
-                
-            }
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(ListaEstudiantes.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+
+        metodosBD.cargarListaEstudiantes();
         this.setLocationRelativeTo(null);
-        
+
         jComboBoxListaEstu.setBackground(new Color(222, 243, 252, 40));
-        
+
         jButtonAceptarEstu.setOpaque(false);
         jButtonAceptarEstu.setContentAreaFilled(false);
         jButtonAceptarEstu.setBorderPainted(false);
-        
+
         jButtonCancelarEstu.setOpaque(false);
         jButtonCancelarEstu.setContentAreaFilled(false);
         jButtonCancelarEstu.setBorderPainted(false);
@@ -137,13 +121,13 @@ public class ListaEstudiantes extends javax.swing.JFrame {
     //Validar selección de nombre al momento de un estudiante escoger
 
     private void jButtonAceptarEstuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarEstuActionPerformed
-        
+
         if (jComboBoxListaEstu.getSelectedItem() == "Seleccione") {
             jComboBoxListaEstu.setOpaque(true);
             JOptionPane.showMessageDialog(null, "Seleccione un nombre válido");
         } else {
-            metodosBD.obtenerGradoEstudiante();            
-            
+            metodosBD.obtenerGradoEstudiante();
+
             jComboBoxListaEstu.setOpaque(false);
             dispose();
             Estudiante estudiante = new Estudiante(gradoEstudiante);
@@ -158,9 +142,9 @@ public class ListaEstudiantes extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAceptarEstuActionPerformed
 
     private void jButtonCancelarEstuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarEstuActionPerformed
-        
+
         dispose();
-        
+
         jbDocente.setVisible(true);
         jbEstudiante.setVisible(true);
         jLabelDocente.setVisible(true);
@@ -187,21 +171,21 @@ public class ListaEstudiantes extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                    
+
                 }
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(ListaEstudiantes.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            
+
         } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(ListaEstudiantes.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            
+
         } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(ListaEstudiantes.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ListaEstudiantes.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);

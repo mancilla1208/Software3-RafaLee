@@ -26,7 +26,7 @@ public class GestionarEstudiante extends javax.swing.JFrame {
 
     ConexionMySql cc = new ConexionMySql();
     Connection cn = cc.Conectar();
-    MetodosBD metodobd = new MetodosBD(this);
+    MetodosBD metodobd = new MetodosBD();
     String idEstudiante = "";
     MetodosLogica metodos = new MetodosLogica(this);
 
@@ -35,42 +35,11 @@ public class GestionarEstudiante extends javax.swing.JFrame {
      */
     public GestionarEstudiante() {
         initComponents();
-        mostrarTabla();
+        metodobd.listaEstudiantesGestionDoce();
         this.setLocationRelativeTo(null);
 
         jPanelAddEstu.setBackground(new Color(222, 243, 252, 30));
         jPanelEliModiEstu.setOpaque(false);
-
-    }
-
-    /*
-    * Metodo encargado de crear la tabla con sus respectivas columnas y la consulta
-    * para que muestre los estudiantes que se encuentran registrados en la base de datos.
-     */
-    void mostrarTabla() {
-        DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("Id");
-        modelo.addColumn("Nombre");
-        modelo.addColumn("Grado");
-        jTableListaEstu.setModel(modelo);
-
-        String sql = "SELECT * FROM rafalee_bd.estudiante";
-        String[] datos = new String[3];
-        Statement st;
-        try {
-            st = cn.createStatement();
-            ResultSet rs = st.executeQuery(sql);
-            while (rs.next()) {
-                datos[0] = rs.getString(1);
-                datos[1] = rs.getString(2);
-                datos[2] = rs.getString(3);
-                modelo.addRow(datos);
-            }
-            jTableListaEstu.setModel(modelo);
-
-        } catch (SQLException ex) {
-            Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
     }
 
@@ -254,69 +223,41 @@ public class GestionarEstudiante extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNombreCompletoEstuActionPerformed
 
     private void jButtonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolverActionPerformed
-
         dispose();
     }//GEN-LAST:event_jButtonVolverActionPerformed
 
     private void jButtonAñadirEstuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAñadirEstuActionPerformed
-
-        try {
-            PreparedStatement ps = cn.prepareStatement("INSERT INTO rafalee_bd.estudiante(nombre_completo,grado) VALUES (?,?)");
-            ps.setString(1, txtNombreCompletoEstu.getText());
-            ps.setString(2, txtGradoEstu.getText());
-            ps.executeUpdate();
-            metodos.limpiarCamposGEstudiantes();
-            JOptionPane.showMessageDialog(null, "Estudiante registrado");
-            mostrarTabla();
-        } catch (SQLException ex) {
-            Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-
+        metodobd.agregarEstudiante();
+        metodos.limpiarCamposGEstudiantes();
     }//GEN-LAST:event_jButtonAñadirEstuActionPerformed
 
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
+        //metodobd.editarEstudiante();
 
         int filaseleccionada;
-
         try {
             filaseleccionada = jTableListaEstu.getSelectedRow();
             if (filaseleccionada == -1) {
                 JOptionPane.showMessageDialog(null, "Debe seleccionar el estudiante a modificar");
             } else {
                 DefaultTableModel modelotabla = (DefaultTableModel) jTableListaEstu.getModel();
-                String codigo = (String) modelotabla.getValueAt(filaseleccionada, 0);
-                String nombre = (String) modelotabla.getValueAt(filaseleccionada, 1);
-                String apellido = (String) modelotabla.getValueAt(filaseleccionada, 2);
-                idEstudiante = codigo;
-                txtNombreCompletoEstu.setText(nombre);
-                txtGradoEstu.setText(apellido);
 
+                String id = (String) modelotabla.getValueAt(filaseleccionada, 0);
+                String nombre = (String) modelotabla.getValueAt(filaseleccionada, 1);
+                String grado = (String) modelotabla.getValueAt(filaseleccionada, 2);
+
+                idEstudiante = id;
+                System.out.println("Id " + idEstudiante);
+                txtNombreCompletoEstu.setText(nombre);
+                txtGradoEstu.setText(grado);
             }
         } catch (HeadlessException ex) {
             JOptionPane.showMessageDialog(null, "Error: " + ex + "\nInténtelo nuevamente", " .::Error En la Operacion::.", JOptionPane.ERROR_MESSAGE);
         }
-
     }//GEN-LAST:event_jButtonEditarActionPerformed
 
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
-
-        int fila = jTableListaEstu.getSelectedRow();
-
-        try {
-            if (fila == -1) {
-                JOptionPane.showMessageDialog(null, "Debe seleccionar el estudiante a eliminar");
-            } else {
-                String valor = jTableListaEstu.getValueAt(fila, 0).toString();
-                PreparedStatement ps = cn.prepareStatement("DELETE FROM rafalee_bd.estudiante WHERE idEstudiante='" + valor + "'");
-                ps.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Estudiante eliminado");
-                mostrarTabla();
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
-
-        }
+        metodobd.eliminarEstudiante();
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 
     private void txtNombreCompletoEstuKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreCompletoEstuKeyTyped
@@ -332,12 +273,15 @@ public class GestionarEstudiante extends javax.swing.JFrame {
 
     private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
 
+        System.out.println("Aca despues " + idEstudiante);
         if (idEstudiante.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Dede seleccionar un estudiante de la tabla para modificar");
         } else {
+
             metodobd.Actualizar(txtNombreCompletoEstu.getText(), txtGradoEstu.getText(), idEstudiante);
-            mostrarTabla();
             metodos.limpiarCamposGEstudiantes();
+            metodobd.listaEstudiantesGestionDoce();
+
         }
     }//GEN-LAST:event_jButtonActualizarActionPerformed
 
