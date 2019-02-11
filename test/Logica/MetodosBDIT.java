@@ -173,7 +173,7 @@ public class MetodosBDIT {
                 resultado = 1;
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, ex, "Error de conexiÃ³n", JOptionPane.ERROR_MESSAGE);
         } finally {
             if (st != null && rs != null) {
                 try {
@@ -210,7 +210,7 @@ public class MetodosBDIT {
                 JOptionPane.showMessageDialog(null, "Docente  " + variableNombreDocente + " encontrado");
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, ex, "Error de conexiÃ³n", JOptionPane.ERROR_MESSAGE);
             fail("The test case is a prototype.");
         } finally {
             if (st != null && rs1 != null) {
@@ -300,42 +300,33 @@ public class MetodosBDIT {
     /**
      * Test of obtenerIdActividad method, of class MetodosBD.
      */
-//    @Test
-//    public void testObtenerIdActividad() {
-//        System.out.println("obtenerIdActividad");
-//        String nombreActividad="Animales";
-//        String idActividad="3";
-//        String SqlID = "SELECT a.idActividad FROM rafalee_bd.actividad a WHERE nombre='" + nombreActividad + "'";
-//
-//        try {
-//            cn = con.Conectar();
-//            Statement st = cn.createStatement();
-//            ResultSet rs1 = st.executeQuery(SqlID);
-//            if (rs1.next()) {
-//                idActividad = rs1.getString(1);
-//                System.out.println("Id de la actividad " + idActividad);
-//            }
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
-//        }
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of guardarPregunta method, of class MetodosBD.
-//     */
-//    @Test
-//    public void testGuardarPregunta() {
-//        System.out.println("guardarPregunta");
-//        MetodosBD instance = new MetodosBD();
-//        instance.guardarPregunta();
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of obtenerGradoEstudiante method, of class MetodosBD.
-//     */
+    @Test
+    public void testObtenerIdActividad() {
+        System.out.println("obtenerIdActividad");
+        String nombreActividad="nueva tarea 1";
+        String idActividad="22";
+        String SqlID = "SELECT a.idActividad FROM rafalee_bd.actividad a WHERE nombre='" + nombreActividad + "'";
+
+        try {
+            cn = con.Conectar();
+            Statement st = cn.createStatement();
+            ResultSet rs1 = st.executeQuery(SqlID);
+            if (rs1.next()) {
+                idActividad = rs1.getString(1);
+                System.out.println("Id de la actividad " + idActividad);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex, "Error de conexiÃ³n", JOptionPane.ERROR_MESSAGE);
+            fail("The test case is a prototype.");
+        }
+        
+    }
+
+ 
+
+    /**
+     * Test of obtenerGradoEstudiante method, of class MetodosBD.
+     */
 //    @Test
 //    public void testObtenerGradoEstudiante() {
 //        System.out.println("obtenerGradoEstudiante");
