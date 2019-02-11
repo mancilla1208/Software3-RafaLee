@@ -50,6 +50,16 @@ public class MetodosBD {
     String idDocente = "";
     String idEstudiante = "";
     String idActividad = "";
+    int cont = 0;
+    //Arreglos para cargar las preguntas
+    ArrayList<String> arregloEnunciadoA = new ArrayList<>();
+    ArrayList<String> arregloEnunciadoI = new ArrayList<>();
+    ArrayList<String> arregloResp1 = new ArrayList<>();
+    ArrayList<String> arregloResp2 = new ArrayList<>();
+    ArrayList<String> arregloResp3 = new ArrayList<>();
+    ArrayList<String> arregloResp4 = new ArrayList<>();
+   public ArrayList<String> IdsAbiertas = new ArrayList<>();
+   public ArrayList<String> IdsIcfes = new ArrayList<>();
 
     private static ListaEstudiantes listaEstudiantes;
     private static Docente docente;
@@ -170,6 +180,7 @@ public class MetodosBD {
         }
 
     }
+    
 
     /**
      * Metodo que se encarga de editar un estudiante seleccionado por el docente
@@ -522,6 +533,7 @@ public class MetodosBD {
     }
 
     public void metodo3() {
+
         String idActividad1 = "";
         String nombreActividad = estudiante.jList_Actividades.getSelectedValue();
         estudiante.lblActividad.setText(nombreActividad);
@@ -548,33 +560,67 @@ public class MetodosBD {
             try {
                 st1 = cn.createStatement();
                 ResultSet rs1 = st1.executeQuery(sql1);
-                ArrayList<String> arregloEnunciadoA = new ArrayList<>();
-                ArrayList<String> arregloEnunciadoI = new ArrayList<>();
-                ArrayList<String> arregloResp1 = new ArrayList<>();
-                ArrayList<String> arregloResp2 = new ArrayList<>();
-                ArrayList<String> arregloResp3 = new ArrayList<>();
-                ArrayList<String> arregloResp4 = new ArrayList<>();
+
                 while (rs1.next()) {
-                    //   estudiante.txtAreaPregunta.setText(rs1.getString(1)); 
 
                     if (rs1.getString(1) != null) {
                         arregloEnunciadoA.add(rs1.getString(1));
+
+                        if (cont == 0) {
+                            estudiante.txtRespuesta.setVisible(true);
+                            estudiante.txtAreaPregunta.setText(rs1.getString(1));
+                            estudiante.rbtnRespuesta1.setVisible(false);
+                            estudiante.rbtnRespuesta2.setVisible(false);
+                            estudiante.rbtnRespuesta3.setVisible(false);
+                            estudiante.rbtnRespuesta4.setVisible(false);
+                        }
+
                     }
                     if (rs1.getString(2) != null) {
                         arregloEnunciadoI.add(rs1.getString(2));
+                        if (cont == 0) {
+                            estudiante.txtAreaPregunta.setText(rs1.getString(2));
+                            estudiante.rbtnRespuesta1.setVisible(true);
+                            estudiante.rbtnRespuesta2.setVisible(true);
+                            estudiante.rbtnRespuesta3.setVisible(true);
+                            estudiante.rbtnRespuesta4.setVisible(true);
+
+                            estudiante.txtRespuesta.setVisible(false);
+                        }
+
                     }
                     if (rs1.getString(3) != null) {
                         arregloResp1.add(rs1.getString(3));
+                        if (cont == 0) {
+                            estudiante.rbtnRespuesta1.setText(rs1.getString(3));
+                        }
                     }
                     if (rs1.getString(4) != null) {
                         arregloResp2.add(rs1.getString(4));
+                        if (cont == 0) {
+                            estudiante.rbtnRespuesta2.setText(rs1.getString(4));
+                        }
                     }
                     if (rs1.getString(5) != null) {
                         arregloResp3.add(rs1.getString(5));
+                        if (cont == 0) {
+                            estudiante.rbtnRespuesta3.setText(rs1.getString(5));
+                        }
                     }
                     if (rs1.getString(6) != null) {
                         arregloResp4.add(rs1.getString(6));
+                        if (cont == 0) {
+                            estudiante.rbtnRespuesta4.setText(rs1.getString(6));
+                        }
                     }
+//                    if (rs1.getString(7) != null) {
+//                        IdsAbiertas.add(rs1.getString(7));
+//                    }
+//                    if (rs1.getString(8) != null) {
+//                        IdsAbiertas.add(rs1.getString(8));
+//                    }
+                    
+                    cont++;
 
                 }
                 System.out.println("tamano: " + arregloEnunciadoI.size());
@@ -583,7 +629,40 @@ public class MetodosBD {
                 Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        cont = 0;
 
     }
+    public void agregarRespuesta(String tipoPregunta,String respuesta,String id) {
+          String tip="";
+        try {
+            if(tipoPregunta.equals("Icfes")){
+                tip="idTipo_Icfes1";
+            }
+            else{
+                tip="idTipo_Saber1";
+            }
+            PreparedStatement ps = cn.prepareStatement("INSERT INTO rafalee_bd.respuesta(tipoPregunta,respuesta,"+tip+") VALUES (?,?,?)");
+            ps.setString(1, tipoPregunta);
+            ps.setString(2, respuesta);
+             ps.setString(3, id);
+            int res = ps.executeUpdate();
 
+            if (res > 0) {
+                JOptionPane.showMessageDialog(null, "Respuesta guardada");
+                listaEstudiantesGestionDoce();
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al guardar respuesta");
+                listaEstudiantesGestionDoce();
+            }
+            cn.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    public void siguientePregunta(){
+       
+        
+    }
 }
