@@ -371,7 +371,6 @@ public class MetodosBD {
     public void obtenerIdActividad() {
         //Consulta SQL que se encarga de obtener el id de la actividad creada en ese intante
         String SqlID = "SELECT a.idActividad FROM rafalee_bd.actividad a WHERE nombre='" + docente.jTextField_NombreActivi.getText() + "'";
-        //String SSQL1 = "SELECT d.idDocente FROM rafalee_bd.docente d WHERE nombre_completo='" + Docente.jLabel_NombreDocente.getText() + "'";
 
         System.out.println("Nombre actividad " + docente.jTextField_NombreActivi.getText());
         try {
