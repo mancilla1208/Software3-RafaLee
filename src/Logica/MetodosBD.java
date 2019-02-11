@@ -106,6 +106,7 @@ public class MetodosBD {
                     JOptionPane.showMessageDialog(null, "Error al cerrar conexion", "", JOptionPane.ERROR_MESSAGE);
                 }
             }
+
         }
 
     }
@@ -146,12 +147,13 @@ public class MetodosBD {
      * Metodo que se encarga de realizar la inserción de un estudiante a la
      * lista por parte del docente
      */
-    public void agregarEstudiante() {
+    public void agregarEstudiante(String nombre, String grado) {
 
         try {
             PreparedStatement ps = cn.prepareStatement("INSERT INTO rafalee_bd.estudiante(nombre_completo,grado) VALUES (?,?)");
-            ps.setString(1, txtNombreCompletoEstu.getText());
-            ps.setString(2, txtGradoEstu.getText());
+
+            ps.setString(1, nombre);
+            ps.setString(2, grado);
             int res = ps.executeUpdate();
 
             if (res > 0) {

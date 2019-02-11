@@ -227,7 +227,7 @@ public class GestionarEstudiante extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonVolverActionPerformed
 
     private void jButtonAñadirEstuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAñadirEstuActionPerformed
-        metodobd.agregarEstudiante();
+        metodobd.agregarEstudiante(txtNombreCompletoEstu.getText(),txtGradoEstu.getText());
         metodos.limpiarCamposGEstudiantes();
     }//GEN-LAST:event_jButtonAñadirEstuActionPerformed
 
