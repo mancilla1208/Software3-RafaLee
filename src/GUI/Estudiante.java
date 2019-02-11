@@ -31,6 +31,8 @@ import javax.swing.JOptionPane;
 public class Estudiante extends javax.swing.JInternalFrame {
 
     MetodosBD metodobd = new MetodosBD(this);
+    int contador1=1;
+     int contador2=1;
 
     private static ListaEstudiantes listaEstudiantes;
 
@@ -180,31 +182,36 @@ public class Estudiante extends javax.swing.JInternalFrame {
         lblActividad.setBounds(122, 24, 279, 34);
 
         rbtnGrupo.add(rbtnRespuesta1);
+        rbtnRespuesta1.setText("\"\"");
         rbtnRespuesta1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbtnRespuesta1ActionPerformed(evt);
             }
         });
         jPanel3.add(rbtnRespuesta1);
-        rbtnRespuesta1.setBounds(102, 208, 21, 21);
+        rbtnRespuesta1.setBounds(102, 208, 33, 23);
 
         rbtnGrupo.add(rbtnRespuesta2);
+        rbtnRespuesta2.setText("\"\"");
         jPanel3.add(rbtnRespuesta2);
-        rbtnRespuesta2.setBounds(100, 240, 21, 21);
+        rbtnRespuesta2.setBounds(100, 240, 33, 23);
 
         rbtnGrupo.add(rbtnRespuesta3);
+        rbtnRespuesta3.setText("\"\"");
         jPanel3.add(rbtnRespuesta3);
-        rbtnRespuesta3.setBounds(100, 280, 21, 21);
+        rbtnRespuesta3.setBounds(100, 280, 33, 23);
 
         rbtnGrupo.add(rbtnRespuesta4);
+        rbtnRespuesta4.setText("\"\"");
         jPanel3.add(rbtnRespuesta4);
-        rbtnRespuesta4.setBounds(100, 310, 21, 21);
+        rbtnRespuesta4.setBounds(100, 310, 33, 23);
 
         lblNumeroPregunta.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblNumeroPregunta.setText("N°");
         jPanel3.add(lblNumeroPregunta);
         lblNumeroPregunta.setBounds(56, 76, 18, 17);
 
+        txtAreaPregunta.setEditable(false);
         txtAreaPregunta.setColumns(20);
         txtAreaPregunta.setRows(5);
         jScrollPane2.setViewportView(txtAreaPregunta);
@@ -215,6 +222,11 @@ public class Estudiante extends javax.swing.JInternalFrame {
         txtRespuesta.setBounds(100, 210, 460, 90);
 
         btnSiguiente.setText("Siguiente");
+        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSiguienteActionPerformed(evt);
+            }
+        });
         jPanel3.add(btnSiguiente);
         btnSiguiente.setBounds(240, 380, 80, 23);
 
@@ -265,6 +277,21 @@ public class Estudiante extends javax.swing.JInternalFrame {
         
         
     }//GEN-LAST:event_jList_ActividadesMouseClicked
+
+    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
+        // TODO add your handling code here:
+        
+//        if(txtRespuesta.isVisible()){
+//        metodobd.agregarRespuesta("Icfes", rbtnGrupo.getSelection().toString(), metodobd.IdsIcfes.get(contador1));
+//        contador1++;
+//        }
+//        else{
+//         metodobd.agregarRespuesta("Abierta", txtRespuesta.getText(), metodobd.IdsAbiertas.get(contador2));
+//        contador2++;   
+//        }
+        
+        
+    }//GEN-LAST:event_btnSiguienteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
