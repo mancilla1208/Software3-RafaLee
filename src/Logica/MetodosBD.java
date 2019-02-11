@@ -19,11 +19,13 @@ import static GUI.ListaEstudiantes.jComboBoxListaEstu;
 import GUI.Login;
 import GUI.Principal;
 import java.awt.HeadlessException;
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -518,4 +520,70 @@ public class MetodosBD {
             Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public void metodo3() {
+        String idActividad1 = "";
+        String nombreActividad = estudiante.jList_Actividades.getSelectedValue();
+        estudiante.lblActividad.setText(nombreActividad);
+        String sql = "SELECT a.idActividad FROM rafalee_bd.actividad a where a.nombre='" + nombreActividad + "' ";
+
+        Statement st;
+        try {
+            st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            if (rs.next()) {
+                idActividad1 = rs.getString(1);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (idActividad1 != null) {
+            String sql1 = "SELECT a.enunciado,i.enunciado,i.respuesta1,i.respuesta2,i.respuesta3,i.respuesta4 FROM "
+                    + "rafalee_bd.tipo_abierta a join rafalee_bd.tipo_icfes i on a.id_Actividad "
+                    + "= i.id_Actividad3 where a.id_Actividad =" + idActividad1;
+
+            Statement st1;
+            try {
+                st1 = cn.createStatement();
+                ResultSet rs1 = st1.executeQuery(sql1);
+                ArrayList<String> arregloEnunciadoA = new ArrayList<>();
+                ArrayList<String> arregloEnunciadoI = new ArrayList<>();
+                ArrayList<String> arregloResp1 = new ArrayList<>();
+                ArrayList<String> arregloResp2 = new ArrayList<>();
+                ArrayList<String> arregloResp3 = new ArrayList<>();
+                ArrayList<String> arregloResp4 = new ArrayList<>();
+                while (rs1.next()) {
+                    //   estudiante.txtAreaPregunta.setText(rs1.getString(1)); 
+
+                    if (rs1.getString(1) != null) {
+                        arregloEnunciadoA.add(rs1.getString(1));
+                    }
+                    if (rs1.getString(2) != null) {
+                        arregloEnunciadoI.add(rs1.getString(2));
+                    }
+                    if (rs1.getString(3) != null) {
+                        arregloResp1.add(rs1.getString(3));
+                    }
+                    if (rs1.getString(4) != null) {
+                        arregloResp2.add(rs1.getString(4));
+                    }
+                    if (rs1.getString(5) != null) {
+                        arregloResp3.add(rs1.getString(5));
+                    }
+                    if (rs1.getString(6) != null) {
+                        arregloResp4.add(rs1.getString(6));
+                    }
+
+                }
+                System.out.println("tamano: " + arregloEnunciadoI.size());
+
+            } catch (SQLException ex) {
+                Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }
+
 }

@@ -48,13 +48,8 @@ public class Estudiante extends javax.swing.JInternalFrame {
 
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
 
-      
-
-        
-
     }
-    
-    
+      
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -266,7 +261,9 @@ public class Estudiante extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonVolverEstuActionPerformed
 
     private void jList_ActividadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList_ActividadesMouseClicked
-        // TODO add your handling code here:
+        metodobd.metodo3();
+        
+        
     }//GEN-LAST:event_jList_ActividadesMouseClicked
 
 
@@ -286,14 +283,14 @@ public class Estudiante extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel lblActividad;
+    public javax.swing.JLabel lblActividad;
     private javax.swing.JLabel lblNumeroPregunta;
     private javax.swing.ButtonGroup rbtnGrupo;
-    private javax.swing.JRadioButton rbtnRespuesta1;
-    private javax.swing.JRadioButton rbtnRespuesta2;
-    private javax.swing.JRadioButton rbtnRespuesta3;
-    private javax.swing.JRadioButton rbtnRespuesta4;
-    private javax.swing.JTextArea txtAreaPregunta;
-    private javax.swing.JTextField txtRespuesta;
+    public javax.swing.JRadioButton rbtnRespuesta1;
+    public javax.swing.JRadioButton rbtnRespuesta2;
+    public javax.swing.JRadioButton rbtnRespuesta3;
+    public javax.swing.JRadioButton rbtnRespuesta4;
+    public javax.swing.JTextArea txtAreaPregunta;
+    public javax.swing.JTextField txtRespuesta;
     // End of variables declaration//GEN-END:variables
 }
