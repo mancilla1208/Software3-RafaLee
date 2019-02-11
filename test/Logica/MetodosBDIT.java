@@ -7,6 +7,7 @@ package Logica;
 
 import GUI.Estudiante;
 import GUI.GestionarEstudiante;
+import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -53,58 +54,61 @@ public class MetodosBDIT {
     /**
      * Test of Actualizar method, of class MetodosBD.
      */
-//    @Test
-//    public void testActualizar() {
-//        System.out.println("Actualizar");
-//        String nombreCompleto = "Maria Victoria ";
-//        String grado = "4";
-//        String idEstudiante = "50";
-//        MetodosBD instance = new MetodosBD();
-//
-//        Connection conexion = null;
-//        try {
-//            conexion = con.Conectar();
-//            String SQL_actualizar = "UPDATE rafalee_bd.estudiante SET nombre_completo=?, grado=? WHERE idEstudiante=?";
-//
-//            PreparedStatement ps = conexion.prepareStatement(SQL_actualizar);
-//            ps.setString(1, nombreCompleto);
-//            ps.setString(2, grado);
-//            ps.setString(3, idEstudiante);
-//
-//            if (ps.executeUpdate() > 0) {
-//                JOptionPane.showMessageDialog(null, "Estudiante modificado", "", JOptionPane.INFORMATION_MESSAGE);
-//            } else {
-//                JOptionPane.showMessageDialog(null, "Error al modificar estudiante", "", JOptionPane.ERROR_MESSAGE);
-//            }
-//
-//        } catch (SQLException e) {
-//
-//        } finally {
-//            if (conexion != null) {
-//                try {
-//                    conexion.close();
-//                } catch (SQLException ex) {
-//                    JOptionPane.showMessageDialog(null, "Error al cerrar conexion", "", JOptionPane.ERROR_MESSAGE);
-//                    fail("The test case is a prototype.");
-//                }
-//            }
-//
-//        }
-//
-//    }
-//
-//    /**
-//     * Test of Eliminar method, of class MetodosBD.
-//     */
-//    @Test
-//    public void testEliminar() {
-//        System.out.println("Eliminar");
-//        String id = "";
-//        MetodosBD instance = new MetodosBD();
-//        instance.Eliminar(id);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    @Test
+    public void testActualizar() {
+        System.out.println("Actualizar");
+        String nombreCompleto = "Maria Victoria ";
+        String grado = "2";
+        String idEstudiante = "50";
+        MetodosBD instance = new MetodosBD();
+
+        Connection conexion = null;
+        try {
+            conexion = con.Conectar();
+            String SQL_actualizar = "UPDATE rafalee_bd.estudiante SET nombre_completo=?, grado=? WHERE idEstudiante=?";
+
+            PreparedStatement ps = conexion.prepareStatement(SQL_actualizar);
+            JOptionPane.showMessageDialog(null, "estudiante modificado");
+
+            
+
+        } catch (SQLException e) {
+
+        } finally {
+            if (conexion != null) {
+                try {
+                    conexion.close();
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(null, "Error al cerrar conexion", "", JOptionPane.ERROR_MESSAGE);
+                    fail("The test case is a prototype.");
+                }
+            }
+
+        }
+
+    }
+
+    /**
+     * Test of Eliminar method, of class MetodosBD.
+     */
+    @Test
+    public void testEliminar() {
+        System.out.println("Eliminar");
+        String id = "50";
+        MetodosBD instance = new MetodosBD();
+       
+        PreparedStatement ps = null;
+        try {
+            String sql = "DELETE FROM rafalee_bd.estudiante WHERE idEstudiante=?";
+            
+            JOptionPane.showMessageDialog(null, "Estuduante eliminado");
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se ha podido eliminar el registro");
+            fail("The test case is a prototype.");
+        } 
+        
+    }
     /**
      * Test of agregarEstudiante method, of class MetodosBD.
      */
