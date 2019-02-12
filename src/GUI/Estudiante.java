@@ -186,9 +186,10 @@ public class Estudiante extends javax.swing.JInternalFrame {
 
         lblActividad.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
         jPanel3.add(lblActividad);
-        lblActividad.setBounds(122, 24, 279, 0);
+        lblActividad.setBounds(120, 20, 410, 40);
 
         rbtnGrupo.add(rbtnRespuesta1);
+        rbtnRespuesta1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         rbtnRespuesta1.setText("\"\"");
         rbtnRespuesta1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -196,38 +197,45 @@ public class Estudiante extends javax.swing.JInternalFrame {
             }
         });
         jPanel3.add(rbtnRespuesta1);
-        rbtnRespuesta1.setBounds(102, 208, 290, 23);
+        rbtnRespuesta1.setBounds(102, 208, 290, 37);
 
         rbtnGrupo.add(rbtnRespuesta2);
+        rbtnRespuesta2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         rbtnRespuesta2.setText("\"\"");
         jPanel3.add(rbtnRespuesta2);
-        rbtnRespuesta2.setBounds(100, 240, 290, 23);
+        rbtnRespuesta2.setBounds(100, 240, 290, 37);
 
         rbtnGrupo.add(rbtnRespuesta3);
+        rbtnRespuesta3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         rbtnRespuesta3.setText("\"\"");
         jPanel3.add(rbtnRespuesta3);
-        rbtnRespuesta3.setBounds(100, 280, 290, 23);
+        rbtnRespuesta3.setBounds(100, 280, 290, 37);
 
         rbtnGrupo.add(rbtnRespuesta4);
+        rbtnRespuesta4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         rbtnRespuesta4.setText("\"\"");
         jPanel3.add(rbtnRespuesta4);
-        rbtnRespuesta4.setBounds(100, 310, 290, 23);
+        rbtnRespuesta4.setBounds(100, 310, 290, 37);
 
-        lblNumeroPregunta.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblNumeroPregunta.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         lblNumeroPregunta.setText("1");
         jPanel3.add(lblNumeroPregunta);
-        lblNumeroPregunta.setBounds(56, 76, 9, 17);
+        lblNumeroPregunta.setBounds(39, 87, 40, 40);
 
         jScrollPane2.setBorder(null);
+        jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
         txtAreaPregunta.setEditable(false);
         txtAreaPregunta.setColumns(20);
+        txtAreaPregunta.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
         txtAreaPregunta.setRows(5);
         txtAreaPregunta.setBorder(null);
         jScrollPane2.setViewportView(txtAreaPregunta);
 
         jPanel3.add(jScrollPane2);
-        jScrollPane2.setBounds(102, 76, 456, 90);
+        jScrollPane2.setBounds(100, 90, 456, 90);
+
+        txtRespuesta.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jPanel3.add(txtRespuesta);
         txtRespuesta.setBounds(100, 210, 460, 90);
 
@@ -283,7 +291,7 @@ public class Estudiante extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonVolverEstuActionPerformed
 
     private void jList_ActividadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList_ActividadesMouseClicked
-        metodobd.metodo3();
+        metodobd.consultaActividad();
         jList_Actividades.enable(false);
 
 

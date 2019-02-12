@@ -9,13 +9,7 @@ import Logica.ConexionMySql;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Graphics;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -33,17 +27,7 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
 
-        jButtonExit.setOpaque(false);
-        jButtonExit.setContentAreaFilled(false);
-        jButtonExit.setBorderPainted(false);
-
-        jbEstudiante.setOpaque(false);
-        jbEstudiante.setContentAreaFilled(false);
-        jbEstudiante.setBorderPainted(false);
-
-        jbDocente.setOpaque(false);
-        jbDocente.setContentAreaFilled(false);
-        jbDocente.setBorderPainted(false);
+        
 
         setIconImage(new ImageIcon(getClass().getResource("/Imagenes/imgLogo.png")).getImage());
 
@@ -90,6 +74,7 @@ public class Principal extends javax.swing.JFrame {
         VentaPrincipal.setForeground(new java.awt.Color(255, 255, 255));
 
         jbEstudiante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Estudiantes.png"))); // NOI18N
+        jbEstudiante.setContentAreaFilled(false);
         jbEstudiante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbEstudianteActionPerformed(evt);
@@ -97,6 +82,7 @@ public class Principal extends javax.swing.JFrame {
         });
 
         jbDocente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/docente.png"))); // NOI18N
+        jbDocente.setContentAreaFilled(false);
         jbDocente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbDocenteActionPerformed(evt);
@@ -114,6 +100,7 @@ public class Principal extends javax.swing.JFrame {
         jLabelDocente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Docente_1.png"))); // NOI18N
 
         jButtonExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Exit.png"))); // NOI18N
+        jButtonExit.setContentAreaFilled(false);
         jButtonExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonExitActionPerformed(evt);
