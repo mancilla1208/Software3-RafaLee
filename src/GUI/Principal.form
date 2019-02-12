@@ -54,26 +54,34 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="308" pref="308" max="-2" attributes="0"/>
+                          <Component id="jLabelBienvenidos" min="-2" pref="424" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="219" pref="219" max="-2" attributes="0"/>
+                          <Component id="jbEstudiante" min="-2" pref="257" max="-2" attributes="0"/>
+                          <EmptySpace min="75" pref="75" max="-2" attributes="0"/>
+                          <Component id="jbDocente" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="219" pref="219" max="-2" attributes="0"/>
+                          <Component id="jLabelEstudiante" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="116" pref="116" max="-2" attributes="0"/>
+                          <Component id="jLabelDocente" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace min="71" max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="180" pref="180" max="-2" attributes="0"/>
                   <Component id="jLabel_Conexion" min="-2" pref="120" max="-2" attributes="0"/>
-                  <EmptySpace min="533" pref="533" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="470" max="-2" attributes="0"/>
+                  <Component id="jButton1" min="-2" pref="57" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Component id="jButtonExit" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" attributes="0">
-                  <EmptySpace min="308" pref="308" max="-2" attributes="0"/>
-                  <Component id="jLabelBienvenidos" min="-2" pref="424" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" attributes="0">
-                  <EmptySpace min="219" pref="219" max="-2" attributes="0"/>
-                  <Component id="jbEstudiante" min="-2" pref="257" max="-2" attributes="0"/>
-                  <EmptySpace min="75" pref="75" max="-2" attributes="0"/>
-                  <Component id="jbDocente" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" attributes="0">
-                  <EmptySpace min="219" pref="219" max="-2" attributes="0"/>
-                  <Component id="jLabelEstudiante" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="116" pref="116" max="-2" attributes="0"/>
-                  <Component id="jLabelDocente" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -83,9 +91,12 @@
                   <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel_Conexion" min="-2" pref="20" max="-2" attributes="0"/>
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                          <Component id="jButtonExit" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jButton1" max="32767" attributes="0"/>
+                              <Component id="jButtonExit" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
                   <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
@@ -106,7 +117,7 @@
                       </Group>
                       <Component id="jLabelDocente" min="-2" pref="34" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="125" max="32767" attributes="0"/>
+                  <EmptySpace pref="118" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -197,6 +208,19 @@
               <Font name="Tahoma" size="12" style="1"/>
             </Property>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButton1">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Imagenes/Button-Help-icon.png"/>
+            </Property>
+            <Property name="borderPainted" type="boolean" value="false"/>
+            <Property name="contentAreaFilled" type="boolean" value="false"/>
+            <Property name="focusPainted" type="boolean" value="false"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

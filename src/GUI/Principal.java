@@ -7,8 +7,11 @@ package GUI;
 
 import Logica.ConexionMySql;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Image;
 import java.awt.Graphics;
+import java.io.File;
+import java.io.IOException;
 import javax.swing.ImageIcon;
 
 /**
@@ -26,8 +29,6 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         this.setLocationRelativeTo(null);
-
-        
 
         setIconImage(new ImageIcon(getClass().getResource("/Imagenes/imgLogo.png")).getImage());
 
@@ -65,6 +66,7 @@ public class Principal extends javax.swing.JFrame {
         jLabelDocente = new javax.swing.JLabel();
         jButtonExit = new javax.swing.JButton();
         jLabel_Conexion = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("RafaLee");
@@ -109,6 +111,16 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel_Conexion.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Button-Help-icon.png"))); // NOI18N
+        jButton1.setBorderPainted(false);
+        jButton1.setContentAreaFilled(false);
+        jButton1.setFocusPainted(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         VentaPrincipal.setLayer(jbEstudiante, javax.swing.JLayeredPane.DEFAULT_LAYER);
         VentaPrincipal.setLayer(jbDocente, javax.swing.JLayeredPane.DEFAULT_LAYER);
         VentaPrincipal.setLayer(jLabelBienvenidos, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -116,29 +128,36 @@ public class Principal extends javax.swing.JFrame {
         VentaPrincipal.setLayer(jLabelDocente, javax.swing.JLayeredPane.DEFAULT_LAYER);
         VentaPrincipal.setLayer(jButtonExit, javax.swing.JLayeredPane.DEFAULT_LAYER);
         VentaPrincipal.setLayer(jLabel_Conexion, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        VentaPrincipal.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout VentaPrincipalLayout = new javax.swing.GroupLayout(VentaPrincipal);
         VentaPrincipal.setLayout(VentaPrincipalLayout);
         VentaPrincipalLayout.setHorizontalGroup(
             VentaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(VentaPrincipalLayout.createSequentialGroup()
+                .addGroup(VentaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(VentaPrincipalLayout.createSequentialGroup()
+                        .addGap(308, 308, 308)
+                        .addComponent(jLabelBienvenidos, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(VentaPrincipalLayout.createSequentialGroup()
+                        .addGap(219, 219, 219)
+                        .addComponent(jbEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(75, 75, 75)
+                        .addComponent(jbDocente))
+                    .addGroup(VentaPrincipalLayout.createSequentialGroup()
+                        .addGap(219, 219, 219)
+                        .addComponent(jLabelEstudiante)
+                        .addGap(116, 116, 116)
+                        .addComponent(jLabelDocente)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(VentaPrincipalLayout.createSequentialGroup()
                 .addGap(180, 180, 180)
                 .addComponent(jLabel_Conexion, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(533, 533, 533)
-                .addComponent(jButtonExit))
-            .addGroup(VentaPrincipalLayout.createSequentialGroup()
-                .addGap(308, 308, 308)
-                .addComponent(jLabelBienvenidos, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(VentaPrincipalLayout.createSequentialGroup()
-                .addGap(219, 219, 219)
-                .addComponent(jbEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(75, 75, 75)
-                .addComponent(jbDocente))
-            .addGroup(VentaPrincipalLayout.createSequentialGroup()
-                .addGap(219, 219, 219)
-                .addComponent(jLabelEstudiante)
-                .addGap(116, 116, 116)
-                .addComponent(jLabelDocente))
+                .addGap(470, 470, 470)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonExit)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         VentaPrincipalLayout.setVerticalGroup(
             VentaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,7 +167,9 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jLabel_Conexion, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(VentaPrincipalLayout.createSequentialGroup()
                         .addGap(1, 1, 1)
-                        .addComponent(jButtonExit)))
+                        .addGroup(VentaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonExit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(18, 18, 18)
                 .addComponent(jLabelBienvenidos, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
@@ -163,7 +184,7 @@ public class Principal extends javax.swing.JFrame {
                         .addGap(10, 10, 10)
                         .addComponent(jLabelEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabelDocente, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(125, Short.MAX_VALUE))
+                .addContainerGap(118, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -211,6 +232,19 @@ public class Principal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jButtonExitActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        try {
+
+            File path = new File("D:\\Universidad\\Software 3\\ProyectoFinal-RafaLee\\Software3-RafaLee\\src\\manualAyuda\\ManualEstudiante.pdf");
+            Desktop.getDesktop().open(path);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -255,6 +289,7 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JDesktopPane VentaPrincipal;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonExit;
     public static javax.swing.JLabel jLabelBienvenidos;
     public static javax.swing.JLabel jLabelDocente;
