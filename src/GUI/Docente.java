@@ -33,7 +33,7 @@ import javax.swing.table.DefaultTableModel;
  * tareas para el estudiante por parte del docente y demas funciones.
  */
 public class Docente extends javax.swing.JInternalFrame {
-    
+
     MetodosBD metodobd = new MetodosBD(this);
     MetodosLogica logica = new MetodosLogica(this);
 
@@ -43,7 +43,7 @@ public class Docente extends javax.swing.JInternalFrame {
     public Docente() {
         initComponents();
         metodobd.cargarActividades();
-        
+
         jLabelNombreArchivoPre.setVisible(false);
         jTextAreaRespuesta.setVisible(false);
         jScrollPaneRespuesta.setVisible(false);
@@ -55,14 +55,14 @@ public class Docente extends javax.swing.JInternalFrame {
         jTextFieldRespuesta2.setVisible(false);
         jTextFieldRespuesta3.setVisible(false);
         jTextFieldRespuesta4.setVisible(false);
-        
+
         jPanel_CrearActividad.setOpaque(false);
         jPanel_Actividades.setOpaque(false);
         jPanel_Pregunta.setOpaque(false);
         jPanel_BotonActividad.setOpaque(false);
-        
+
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
-        
+
     }
 
     /**
@@ -517,7 +517,7 @@ public class Docente extends javax.swing.JInternalFrame {
         metodobd.obtenerIdDocente();
         metodobd.obtenerIdActividad();
         metodobd.crearActividad();
-        
+
 
     }//GEN-LAST:event_jButton_CrearActividadActionPerformed
 
@@ -551,8 +551,8 @@ public class Docente extends javax.swing.JInternalFrame {
 
     private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
         // TODO add your handling code here:
-       ActividadesResueltas a= new ActividadesResueltas();
-       a.show();
+        ActividadesResueltas a = new ActividadesResueltas();
+        a.show();
     }//GEN-LAST:event_jMenu3MouseClicked
 
     private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked

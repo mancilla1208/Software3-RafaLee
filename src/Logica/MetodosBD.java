@@ -17,8 +17,13 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.HeadlessException;
+import java.awt.Image;
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -29,6 +34,8 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -768,7 +775,9 @@ public class MetodosBD {
     public void convertirPdF() {
         JFileChooser archivos = new JFileChooser();
         try {
-            File pdf = new File("D:\\Universidad\\Software 3\\ProyectoFinal-RafaLee\\Software3-RafaLee\\src\\archivosPDF\\" + estudiante.lblActividad.getText() + " - " + estudiante.jLabelNombreEstudiante.getText() + ".pdf");
+            String nombrePDF = estudiante.lblActividad.getText() + " - " + estudiante.jLabelNombreEstudiante.getText();
+            String ruta = "D:\\Universidad\\Software 3\\ProyectoFinal-RafaLee\\Software3-RafaLee\\src\\archivosPDF\\" + nombrePDF + ".pdf";
+            File pdf = new File(ruta);
             OutputStream texto = new FileOutputStream(pdf);
             Document doc = new Document();
             PdfWriter.getInstance(doc, texto);
@@ -777,9 +786,120 @@ public class MetodosBD {
             doc.close();
             texto.close();
 
+//            //***********************
+//            sql s = new sql();
+//            int codigo = s.auto_increment("SELECT MAX(codigopdf) FROM pdf;");
+//            File ruta = new File(ruta_archivo);
+//            if (nombre.trim().length() != 0 && ruta_archivo.trim().length() != 0) {
+//                guardar_pdf(codigo, nombre, ruta);
+//                tpdf.visualizar_PdfVO(tabla);
+//                ruta_archivo = "";
+//                activa_boton(false, false, false);
+//                txtname.setEnabled(false);
+//            } else {
+//                JOptionPane.showMessageDialog(null, "Rellenar todo los campos");
+//            }
+//            //**************************
+
+            byte[] pdf1 = new byte[(int) ruta.length()];
+            InputStream input = new FileInputStream(ruta);
+            input.read(pdf1);
+
+            String sql = "INSERT INTO rafalee_bd.pdf (nombrepdf, archivopdf) VALUES( ?, ?);";
+            PreparedStatement ps = null;
+
+            ps = cn.prepareStatement(sql);
+            ps.setString(1, nombrePDF);
+            ps.setBytes(2, pdf1);
+            ps.executeUpdate();
+
         } catch (Exception e) {
 
         }
 
+    }
+
+    public void listarActividadesRealizadas() {
+        actividades.jTable_ActividadesResueltas.setDefaultRenderer(Object.class, new imgTabla());
+        DefaultTableModel modelo = new DefaultTableModel();
+
+        modelo.addColumn("Id");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Archivo");
+
+        String sql = "SELECT * FROM rafalee_bd.pdf";
+        Object[] datos = new Object[3];
+        Statement st;
+
+        try {
+            st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                datos[0] = rs.getString(1);
+                datos[1] = rs.getString(2);
+
+                ImageIcon icono = null;
+                if (get_Image("/Imagenes/imgPDF.png") != null) {
+                    icono = new ImageIcon(get_Image("/Imagenes/imgPDF.png"));
+                }
+
+                if (rs.getString(3) != null) {
+                    datos[2] = new JButton(icono);
+                } else {
+                    datos[2] = new JButton("Vacio");
+                }
+                modelo.addRow(datos);
+            }
+            actividades.jTable_ActividadesResueltas.setModel(modelo);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+//Permite mostrar PDF contenido en la base de datos
+    public void ejecutar_archivoPDF(int id) {
+
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        byte[] b = null;
+
+        try {
+            ps = cn.prepareStatement("SELECT p.archivopdf FROM rafalee_bd.pdf p WHERE codigopdf = ?;");
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                b = rs.getBytes(1);
+                System.out.println("Aca " + b);
+            }
+            InputStream bos = new ByteArrayInputStream(b);
+
+            int tamanoInput = bos.available();
+            byte[] datosPDF = new byte[tamanoInput];
+            bos.read(datosPDF, 0, tamanoInput);
+
+            OutputStream out = new FileOutputStream("new.pdf");
+            out.write(datosPDF);
+
+            //abrir archivo
+            out.close();
+            bos.close();
+            ps.close();
+            rs.close();
+            cn.close();
+
+        } catch (IOException | NumberFormatException | SQLException ex) {
+            System.out.println("Error al abrir archivo PDF " + ex.getMessage());
+        }
+    }
+
+    public Image get_Image(String ruta) {
+        try {
+            ImageIcon imageIcon = new ImageIcon(getClass().getResource(ruta));
+            Image mainIcon = imageIcon.getImage();
+            return mainIcon;
+        } catch (Exception e) {
+        }
+        return null;
     }
 }
