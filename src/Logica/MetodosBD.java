@@ -13,7 +13,13 @@ import static GUI.GestionarEstudiante.txtGradoEstu;
 import static GUI.GestionarEstudiante.txtNombreCompletoEstu;
 import GUI.ListaEstudiantes;
 import GUI.Login;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.HeadlessException;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,6 +29,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -56,7 +63,6 @@ public class MetodosBD {
     public ArrayList<String> IdsAbiertas = new ArrayList<>();
     public ArrayList<String> IdsIcfes = new ArrayList<>();
 
-    
     private static ListaEstudiantes listaEstudiantes;
     private static Docente docente;
     private static Estudiante estudiante;
@@ -85,9 +91,9 @@ public class MetodosBD {
     public MetodosBD(Docente docente) {
         this.docente = docente;
     }
-    
+
     public MetodosBD(ActividadesResueltas actividad) {
-        this.actividades=actividad;
+        this.actividades = actividad;
     }
 
     /*
@@ -387,14 +393,13 @@ public class MetodosBD {
         String SqlID = "SELECT a.idActividad FROM rafalee_bd.actividad a WHERE nombre='" + docente.jTextField_NombreActivi.getText() + "'";
         //String SSQL1 = "SELECT d.idDocente FROM rafalee_bd.docente d WHERE nombre_completo='" + Docente.jLabel_NombreDocente.getText() + "'";
 
-        
         try {
             cn = con.Conectar();
             Statement st = cn.createStatement();
             ResultSet rs1 = st.executeQuery(SqlID);
             if (rs1.next()) {
                 idActividad = rs1.getString(1);
-                
+
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
@@ -456,7 +461,7 @@ public class MetodosBD {
             ResultSet rs1 = st.executeQuery(SQL_GradoEstu);
             if (rs1.next()) {
                 gradoEstudiante = rs1.getString(1);
-                idEstudiante=rs1.getString(2);
+                idEstudiante = rs1.getString(2);
 
             }
 
@@ -581,6 +586,7 @@ public class MetodosBD {
                             estudiante.rbtnRespuesta2.setVisible(false);
                             estudiante.rbtnRespuesta3.setVisible(false);
                             estudiante.rbtnRespuesta4.setVisible(false);
+
                         }
 
                     } else {
@@ -636,7 +642,6 @@ public class MetodosBD {
                     cont++;
 
                 }
-                
 
             } catch (SQLException ex) {
                 Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
@@ -646,7 +651,7 @@ public class MetodosBD {
 
     }
 
-    public   void agregarRespuesta(String enunciado, String respuesta,String tipo) {
+    public void agregarRespuesta(String enunciado, String respuesta, String tipo) {
         String tip = "";
         String id = "";
         try {
@@ -654,17 +659,12 @@ public class MetodosBD {
                 id = IdsIcfes.get(contador1);
                 contador1++;
 
-                
-
                 PreparedStatement ps = cn.prepareStatement("INSERT INTO rafalee_bd.respuestaicfes(Enunciado,respuestaIcfes,idTipo_Icfes1) VALUES (?,?,?)");
                 ps.setString(1, enunciado);
                 ps.setString(2, respuesta);
                 ps.setString(3, id);
-                
-                
-                ps.executeUpdate();
 
-                
+                ps.executeUpdate();
 
             } else {
                 id = IdsAbiertas.get(contador2);
@@ -674,11 +674,8 @@ public class MetodosBD {
                 ps.setString(1, enunciado);
                 ps.setString(2, respuesta);
                 ps.setString(3, id);
-              
-              
-                ps.executeUpdate();
 
-                
+                ps.executeUpdate();
 
             }
 
@@ -690,7 +687,7 @@ public class MetodosBD {
     }
 
     public void siguientePregunta() {
-
+        int i = 2;
         if (contador2 <= arregloEnunciadoA.size() - 1) {
             estudiante.txtAreaPregunta.setText(arregloEnunciadoA.get(contador2));
             estudiante.txtRespuesta.setVisible(true);
@@ -699,6 +696,8 @@ public class MetodosBD {
             estudiante.rbtnRespuesta2.setVisible(false);
             estudiante.rbtnRespuesta3.setVisible(false);
             estudiante.rbtnRespuesta4.setVisible(false);
+            estudiante.lblNumeroPregunta.setText("" + i);
+            i++;
 
         } else if (contador1 <= arregloEnunciadoI.size() - 1) {
 
@@ -713,6 +712,8 @@ public class MetodosBD {
             estudiante.rbtnRespuesta2.setText(arregloResp2.get(contador1));
             estudiante.rbtnRespuesta3.setText(arregloResp3.get(contador1));
             estudiante.rbtnRespuesta4.setText(arregloResp4.get(contador1));
+            estudiante.lblNumeroPregunta.setText("" + i);
+            i++;
 
         } else {
             estudiante.btnSiguiente.setVisible(false);
@@ -729,70 +730,56 @@ public class MetodosBD {
             estudiante.txtRespuesta.setText("");
             JOptionPane.showMessageDialog(null, "Actividad terminada");
             estudiante.jList_Actividades.enable(true);
+            convertirPdF();
 
         }
 
     }
-    
-    public void agregarActividadesRealizadas(){
-       
-        String SqlID = "SELECT a.nombre, r.nombreEstudiante from actividad a join tipo_icfes i on a.idActividad=i.id_Actividad3 join respuestaicfes r on "
-                + "i.idTipo_Icfes= r.idTipo_Icfes1 where a.grado=2";
-        String Sql = "SELECT a.nombre, r.nombreEstudiante from actividad a join tipo_abierta i on a.idActividad=i.id_Actividad join respuestaabierta r on "
-                + "i.idTipo_abierta= r.idTipo_Abierta1 where a.grado=2";
-        String sql= "select a.idRespuesta_Abierta, e.idRespuesta_Icfes from respuestaicfes e join respuestaabierta a on ";
-        
 
-        DefaultListModel listaActividadesResueltas = new DefaultListModel();
+    public void agregarActividadesRealizadas() {
+
+    }
+
+    public void llenarIntermedia() {
+        String SqlID = "SELECT a.idActividad FROM rafalee_bd.actividad a WHERE nombre='" + estudiante.lblActividad.getText() + "'";
         try {
-            cn = con.Conectar();
-            Statement st = cn.createStatement();
-            ResultSet rs1 = st.executeQuery(SqlID);
-            while (rs1.next()) {
-                
-                String cosa= rs1.getString(1)+" - "+rs1.getString(2);
-                listaActividadesResueltas.addElement(cosa);
-                
-                
-            }
-            ResultSet rs2 = st.executeQuery(Sql);
-            while(rs2.next()){
-                String cosa= rs2.getString(1)+" - "+rs2.getString(2);
-                listaActividadesResueltas.addElement(cosa);
-               
-                
-            }
-             actividades.jList2.setModel(listaActividadesResueltas);
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
-        }
-        
-    }
-    
-    public void llenarIntermedia(){
-         String SqlID = "SELECT a.idActividad FROM rafalee_bd.actividad a WHERE nombre='" + estudiante.lblActividad.getText() + "'";
-         try {
             cn = con.Conectar();
             Statement st = cn.createStatement();
             ResultSet rs1 = st.executeQuery(SqlID);
             if (rs1.next()) {
                 idActividad = rs1.getString(1);
-                
+
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
         }
         try {
-            
+
             PreparedStatement ps = cn.prepareStatement("INSERT INTO rafalee_bd.estudianteactividad(id_Estudiante,id_Actividad) VALUES (?,?)");
-            ps.setString(1,  idEstudiante);
+            ps.setString(1, idEstudiante);
             ps.setString(2, idActividad);
             ps.executeUpdate();
-
-            
 
         } catch (SQLException ex) {
             Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public void convertirPdF() {
+        JFileChooser archivos = new JFileChooser();
+        try {
+            File pdf = new File("D:\\Universidad\\Software 3\\ProyectoFinal-RafaLee\\Software3-RafaLee\\src\\archivosPDF\\" + estudiante.lblActividad.getText() + " - " + estudiante.jLabelNombreEstudiante.getText() + ".pdf");
+            OutputStream texto = new FileOutputStream(pdf);
+            Document doc = new Document();
+            PdfWriter.getInstance(doc, texto);
+            doc.open();
+            doc.add(new Paragraph(estudiante.txtAreaPdf.getText()));
+            doc.close();
+            texto.close();
+
+        } catch (Exception e) {
+
+        }
+
     }
 }
