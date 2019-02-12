@@ -5,6 +5,7 @@
  */
 package Logica;
 
+import GUI.ActividadesResueltas;
 import GUI.Docente;
 import GUI.Estudiante;
 import GUI.GestionarEstudiante;
@@ -55,13 +56,11 @@ public class MetodosBD {
     public ArrayList<String> IdsAbiertas = new ArrayList<>();
     public ArrayList<String> IdsIcfes = new ArrayList<>();
 
-    int t = 0;
-    int t2 = 0;
-    int s = t;
-    int s1 = t2;
+    
     private static ListaEstudiantes listaEstudiantes;
     private static Docente docente;
     private static Estudiante estudiante;
+    private static ActividadesResueltas actividades;
     private static Login login;
     private static GestionarEstudiante gestion;
 
@@ -85,6 +84,10 @@ public class MetodosBD {
 
     public MetodosBD(Docente docente) {
         this.docente = docente;
+    }
+    
+    public MetodosBD(ActividadesResueltas actividad) {
+        this.actividades=actividad;
     }
 
     /*
@@ -384,14 +387,14 @@ public class MetodosBD {
         String SqlID = "SELECT a.idActividad FROM rafalee_bd.actividad a WHERE nombre='" + docente.jTextField_NombreActivi.getText() + "'";
         //String SSQL1 = "SELECT d.idDocente FROM rafalee_bd.docente d WHERE nombre_completo='" + Docente.jLabel_NombreDocente.getText() + "'";
 
-        System.out.println("Nombre actividad " + docente.jTextField_NombreActivi.getText());
+        
         try {
             cn = con.Conectar();
             Statement st = cn.createStatement();
             ResultSet rs1 = st.executeQuery(SqlID);
             if (rs1.next()) {
                 idActividad = rs1.getString(1);
-                System.out.println("Id de la actividad " + idActividad);
+                
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
@@ -444,17 +447,16 @@ public class MetodosBD {
 
     public String obtenerGradoEstudiante() {
         // Codigo para obtener el grado del estudiante y redireccionarlo a su perfil o grado correspondiente
-        SQL_GradoEstu = "SELECT e.grado FROM rafalee_bd.estudiante e WHERE nombre_completo='" + ListaEstudiantes.jComboBoxListaEstu.getSelectedItem().toString() + "'";
+        SQL_GradoEstu = "SELECT e.grado, e.idEstudiante FROM rafalee_bd.estudiante e WHERE nombre_completo='" + ListaEstudiantes.jComboBoxListaEstu.getSelectedItem().toString() + "'";
         Connection conect = null;
 
         try {
-            System.out.println("Aqui " + ListaEstudiantes.jComboBoxListaEstu.getSelectedItem().toString());
             cn = con.Conectar();
             Statement st = cn.createStatement();
             ResultSet rs1 = st.executeQuery(SQL_GradoEstu);
             if (rs1.next()) {
                 gradoEstudiante = rs1.getString(1);
-                System.out.println("Grado de " + ListaEstudiantes.jComboBoxListaEstu.getSelectedItem().toString() + " es " + gradoEstudiante);
+                idEstudiante=rs1.getString(2);
 
             }
 
@@ -634,11 +636,7 @@ public class MetodosBD {
                     cont++;
 
                 }
-                System.out.println("Prr: " + arregloEnunciadoA.get(0));
-                t = arregloEnunciadoA.size();
-                t2 = arregloEnunciadoI.size();
-                System.out.println("A: " + arregloEnunciadoA.size());
-                System.out.println("I: " + arregloEnunciadoI.size());
+                
 
             } catch (SQLException ex) {
                 Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
@@ -648,20 +646,22 @@ public class MetodosBD {
 
     }
 
-    public void agregarRespuesta(String tipoPregunta, String respuesta) {
+    public   void agregarRespuesta(String enunciado, String respuesta,String tipo) {
         String tip = "";
         String id = "";
         try {
-            if (tipoPregunta.equals("Icfes")) {
+            if (tipo.equals("Icfes")) {
                 id = IdsIcfes.get(contador1);
                 contador1++;
 
-                System.out.println("Aca 1: " + id + " " + contador1);
+                
 
-                PreparedStatement ps = cn.prepareStatement("INSERT INTO rafalee_bd.respuestaicfes(tipoPreguntaIcfes,respuestaIcfes,idTipo_Icfes1) VALUES (?,?,?)");
-                ps.setString(1, tipoPregunta);
+                PreparedStatement ps = cn.prepareStatement("INSERT INTO rafalee_bd.respuestaicfes(Enunciado,respuestaIcfes,idTipo_Icfes1) VALUES (?,?,?)");
+                ps.setString(1, enunciado);
                 ps.setString(2, respuesta);
                 ps.setString(3, id);
+                
+                
                 ps.executeUpdate();
 
                 
@@ -670,10 +670,12 @@ public class MetodosBD {
                 id = IdsAbiertas.get(contador2);
                 contador2++;
 
-                PreparedStatement ps = cn.prepareStatement("INSERT INTO rafalee_bd.respuestaabierta(tipoPreguntaAbierta,respuestaAbierta,idTipo_Abierta1) VALUES (?,?,?)");
-                ps.setString(1, tipoPregunta);
+                PreparedStatement ps = cn.prepareStatement("INSERT INTO rafalee_bd.respuestaabierta(Enunciado,respuestaAbierta,idTipo_Abierta1) VALUES (?,?,?)");
+                ps.setString(1, enunciado);
                 ps.setString(2, respuesta);
                 ps.setString(3, id);
+              
+              
                 ps.executeUpdate();
 
                 
@@ -730,5 +732,67 @@ public class MetodosBD {
 
         }
 
+    }
+    
+    public void agregarActividadesRealizadas(){
+       
+        String SqlID = "SELECT a.nombre, r.nombreEstudiante from actividad a join tipo_icfes i on a.idActividad=i.id_Actividad3 join respuestaicfes r on "
+                + "i.idTipo_Icfes= r.idTipo_Icfes1 where a.grado=2";
+        String Sql = "SELECT a.nombre, r.nombreEstudiante from actividad a join tipo_abierta i on a.idActividad=i.id_Actividad join respuestaabierta r on "
+                + "i.idTipo_abierta= r.idTipo_Abierta1 where a.grado=2";
+        String sql= "select a.idRespuesta_Abierta, e.idRespuesta_Icfes from respuestaicfes e join respuestaabierta a on ";
+        
+
+        DefaultListModel listaActividadesResueltas = new DefaultListModel();
+        try {
+            cn = con.Conectar();
+            Statement st = cn.createStatement();
+            ResultSet rs1 = st.executeQuery(SqlID);
+            while (rs1.next()) {
+                
+                String cosa= rs1.getString(1)+" - "+rs1.getString(2);
+                listaActividadesResueltas.addElement(cosa);
+                
+                
+            }
+            ResultSet rs2 = st.executeQuery(Sql);
+            while(rs2.next()){
+                String cosa= rs2.getString(1)+" - "+rs2.getString(2);
+                listaActividadesResueltas.addElement(cosa);
+               
+                
+            }
+             actividades.jList2.setModel(listaActividadesResueltas);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }
+    
+    public void llenarIntermedia(){
+         String SqlID = "SELECT a.idActividad FROM rafalee_bd.actividad a WHERE nombre='" + estudiante.lblActividad.getText() + "'";
+         try {
+            cn = con.Conectar();
+            Statement st = cn.createStatement();
+            ResultSet rs1 = st.executeQuery(SqlID);
+            if (rs1.next()) {
+                idActividad = rs1.getString(1);
+                
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
+        }
+        try {
+            
+            PreparedStatement ps = cn.prepareStatement("INSERT INTO rafalee_bd.estudianteactividad(id_Estudiante,id_Actividad) VALUES (?,?)");
+            ps.setString(1,  idEstudiante);
+            ps.setString(2, idActividad);
+            ps.executeUpdate();
+
+            
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

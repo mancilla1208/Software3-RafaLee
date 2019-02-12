@@ -56,6 +56,7 @@ public class Estudiante extends javax.swing.JInternalFrame {
         txtAreaPregunta.setVisible(false);
         jScrollPane2.setVisible(false);
         btnSiguiente.setVisible(false);
+        
 
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
 
@@ -292,6 +293,8 @@ public class Estudiante extends javax.swing.JInternalFrame {
 
     private void jList_ActividadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList_ActividadesMouseClicked
         metodobd.consultaActividad();
+       
+        metodobd.llenarIntermedia();
         jList_Actividades.enable(false);
 
 
@@ -303,20 +306,20 @@ public class Estudiante extends javax.swing.JInternalFrame {
         if (!txtRespuesta.isVisible()) {
 
             if (rbtnRespuesta1.isSelected()) {
-                metodobd.agregarRespuesta("Icfes", rbtnRespuesta1.getText().toString());
+                metodobd.agregarRespuesta(txtAreaPregunta.getText(), rbtnRespuesta1.getText().toString(),"Icfes");
             }
             if (rbtnRespuesta2.isSelected()) {
-                metodobd.agregarRespuesta("Icfes", rbtnRespuesta2.getText().toString());
+                metodobd.agregarRespuesta(txtAreaPregunta.getText(), rbtnRespuesta2.getText().toString(),"Icfes");
             }
             if (rbtnRespuesta3.isSelected()) {
-                metodobd.agregarRespuesta("Icfes", rbtnRespuesta3.getText().toString());
+                metodobd.agregarRespuesta(txtAreaPregunta.getText(), rbtnRespuesta3.getText().toString(),"Icfes");
             }
             if (rbtnRespuesta4.isSelected()) {
-                metodobd.agregarRespuesta("Icfes", rbtnRespuesta4.getText().toString());
+                metodobd.agregarRespuesta(txtAreaPregunta.getText(), rbtnRespuesta4.getText().toString(),"Icfes");
             }
 
         } else {
-            metodobd.agregarRespuesta("Abierta", txtRespuesta.getText());
+            metodobd.agregarRespuesta(txtAreaPregunta.getText(), txtRespuesta.getText(),"");
 
         }
         lblNumeroPregunta.setText("" + con3);
