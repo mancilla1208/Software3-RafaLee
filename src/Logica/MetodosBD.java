@@ -6,20 +6,13 @@
 package Logica;
 
 import GUI.Docente;
-import static GUI.Docente.jLabel_NombreDocente;
-import static GUI.Docente.jTextField_GradoActividad;
-import static GUI.Docente.jTextField_NombreActivi;
 import GUI.Estudiante;
 import GUI.GestionarEstudiante;
-import static GUI.GestionarEstudiante.jTableListaEstu;
 import static GUI.GestionarEstudiante.txtGradoEstu;
 import static GUI.GestionarEstudiante.txtNombreCompletoEstu;
 import GUI.ListaEstudiantes;
-import static GUI.ListaEstudiantes.jComboBoxListaEstu;
 import GUI.Login;
-import GUI.Principal;
 import java.awt.HeadlessException;
-import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -51,6 +44,7 @@ public class MetodosBD {
     String idEstudiante = "";
     String idActividad = "";
     int cont = 0;
+
     //Arreglos para cargar las preguntas
     ArrayList<String> arregloEnunciadoA = new ArrayList<>();
     ArrayList<String> arregloEnunciadoI = new ArrayList<>();
@@ -58,14 +52,21 @@ public class MetodosBD {
     ArrayList<String> arregloResp2 = new ArrayList<>();
     ArrayList<String> arregloResp3 = new ArrayList<>();
     ArrayList<String> arregloResp4 = new ArrayList<>();
-   public ArrayList<String> IdsAbiertas = new ArrayList<>();
-   public ArrayList<String> IdsIcfes = new ArrayList<>();
+    public ArrayList<String> IdsAbiertas = new ArrayList<>();
+    public ArrayList<String> IdsIcfes = new ArrayList<>();
 
+    int t = 0;
+    int t2 = 0;
+   int s=t;
+   int s1=t2;
     private static ListaEstudiantes listaEstudiantes;
     private static Docente docente;
     private static Estudiante estudiante;
     private static Login login;
     private static GestionarEstudiante gestion;
+
+    int contador1 = 0;
+    int contador2 = 0;
 
     public MetodosBD(GestionarEstudiante gestion) {
         this.gestion = gestion;
@@ -180,7 +181,6 @@ public class MetodosBD {
         }
 
     }
-    
 
     /**
      * Metodo que se encarga de editar un estudiante seleccionado por el docente
@@ -552,7 +552,7 @@ public class MetodosBD {
         }
 
         if (idActividad1 != null) {
-            String sql1 = "SELECT a.enunciado,i.enunciado,i.respuesta1,i.respuesta2,i.respuesta3,i.respuesta4 FROM "
+            String sql1 = "SELECT a.enunciado,i.enunciado,i.respuesta1,i.respuesta2,i.respuesta3,i.respuesta4, a.idTipo_Abierta, i.idTipo_Icfes FROM "
                     + "rafalee_bd.tipo_abierta a join rafalee_bd.tipo_icfes i on a.id_Actividad "
                     + "= i.id_Actividad3 where a.id_Actividad =" + idActividad1;
 
@@ -562,6 +562,12 @@ public class MetodosBD {
                 ResultSet rs1 = st1.executeQuery(sql1);
 
                 while (rs1.next()) {
+
+                    estudiante.lblActividad.setVisible(true);
+                    estudiante.lblNumeroPregunta.setVisible(true);
+                    estudiante.txtAreaPregunta.setVisible(true);
+                    estudiante.jScrollPane2.setVisible(true);
+                    estudiante.btnSiguiente.setVisible(true);
 
                     if (rs1.getString(1) != null) {
                         arregloEnunciadoA.add(rs1.getString(1));
@@ -576,9 +582,9 @@ public class MetodosBD {
                         }
 
                     }
-                    if (rs1.getString(2) != null) {
-                        arregloEnunciadoI.add(rs1.getString(2));
-                        if (cont == 0) {
+                    else{
+                        if(rs1.getString(2) != null){
+                            if (cont == 0) {
                             estudiante.txtAreaPregunta.setText(rs1.getString(2));
                             estudiante.rbtnRespuesta1.setVisible(true);
                             estudiante.rbtnRespuesta2.setVisible(true);
@@ -587,6 +593,10 @@ public class MetodosBD {
 
                             estudiante.txtRespuesta.setVisible(false);
                         }
+                        }
+                    }
+                    if (rs1.getString(2) != null) {
+                        arregloEnunciadoI.add(rs1.getString(2));                    
 
                     }
                     if (rs1.getString(3) != null) {
@@ -613,17 +623,23 @@ public class MetodosBD {
                             estudiante.rbtnRespuesta4.setText(rs1.getString(6));
                         }
                     }
-//                    if (rs1.getString(7) != null) {
-//                        IdsAbiertas.add(rs1.getString(7));
-//                    }
-//                    if (rs1.getString(8) != null) {
-//                        IdsAbiertas.add(rs1.getString(8));
-//                    }
-                    
+                    if (rs1.getString(7) != null) {
+                        IdsAbiertas.add(rs1.getString(7));
+
+                    }
+                    if (rs1.getString(8) != null) {
+                        IdsIcfes.add(rs1.getString(8));
+
+                    }
+//
                     cont++;
 
                 }
-                System.out.println("tamano: " + arregloEnunciadoI.size());
+                System.out.println("Prr: "+arregloEnunciadoA.get(0));
+                t=arregloEnunciadoA.size();
+                t2=arregloEnunciadoI.size();
+                System.out.println("A: " + arregloEnunciadoA.size());
+                System.out.println("I: " + arregloEnunciadoI.size());
 
             } catch (SQLException ex) {
                 Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
@@ -632,37 +648,78 @@ public class MetodosBD {
         cont = 0;
 
     }
-    public void agregarRespuesta(String tipoPregunta,String respuesta,String id) {
-          String tip="";
-        try {
-            if(tipoPregunta.equals("Icfes")){
-                tip="idTipo_Icfes1";
-            }
-            else{
-                tip="idTipo_Saber1";
-            }
-            PreparedStatement ps = cn.prepareStatement("INSERT INTO rafalee_bd.respuesta(tipoPregunta,respuesta,"+tip+") VALUES (?,?,?)");
-            ps.setString(1, tipoPregunta);
-            ps.setString(2, respuesta);
-             ps.setString(3, id);
-            int res = ps.executeUpdate();
 
-            if (res > 0) {
+    public void agregarRespuesta(String tipoPregunta, String respuesta) {
+        String tip = "";
+        String id = "";
+        try {
+            if (tipoPregunta.equals("Icfes")) {
+                id = IdsIcfes.get(contador1);
+                contador1++;
+
+                System.out.println("Aca 1: " + id + " " + contador1);
+
+                PreparedStatement ps = cn.prepareStatement("INSERT INTO rafalee_bd.respuestaicfes(tipoPreguntaIcfes,respuestaIcfes,idTipo_Icfes1) VALUES (?,?,?)");
+                ps.setString(1, tipoPregunta);
+                ps.setString(2, respuesta);
+                ps.setString(3, id);
+                ps.executeUpdate();
+
                 JOptionPane.showMessageDialog(null, "Respuesta guardada");
-                listaEstudiantesGestionDoce();
+
             } else {
-                JOptionPane.showMessageDialog(null, "Error al guardar respuesta");
-                listaEstudiantesGestionDoce();
+                id = IdsAbiertas.get(contador2);
+                contador2++;
+
+                PreparedStatement ps = cn.prepareStatement("INSERT INTO rafalee_bd.respuestaabierta(tipoPreguntaAbierta,respuestaAbierta,idTipo_Abierta1) VALUES (?,?,?)");
+                ps.setString(1, tipoPregunta);
+                ps.setString(2, respuesta);
+                ps.setString(3, id);
+                ps.executeUpdate();
+
+                JOptionPane.showMessageDialog(null, "Respuesta guardada");
+
             }
-            cn.close();
 
         } catch (SQLException ex) {
             Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error al guardar respuesta");
         }
 
     }
-    public void siguientePregunta(){
-       
+
+    public void siguientePregunta() {
+
         
+      
+        if (arregloEnunciadoA.get(contador2).indexOf(contador2)>1) {
+            estudiante.txtAreaPregunta.setText(arregloEnunciadoA.get(contador2));
+            estudiante.txtRespuesta.setVisible(true);
+
+            estudiante.rbtnRespuesta1.setVisible(false);
+            estudiante.rbtnRespuesta2.setVisible(false);
+            estudiante.rbtnRespuesta3.setVisible(false);
+            estudiante.rbtnRespuesta4.setVisible(false);
+            
+            
+            System.out.println("reee: "+arregloEnunciadoI.indexOf(contador1));
+         
+        } else  if (arregloEnunciadoI.indexOf(contador1)!= -1 ) {
+           
+            estudiante.txtAreaPregunta.setText(arregloEnunciadoI.get(contador1));
+
+            estudiante.txtRespuesta.setVisible(false);
+            estudiante.rbtnRespuesta1.setText(arregloResp1.get(contador1));
+            estudiante.rbtnRespuesta2.setText(arregloResp2.get(contador1));
+            estudiante.rbtnRespuesta3.setText(arregloResp3.get(contador1));
+            estudiante.rbtnRespuesta4.setText(arregloResp4.get(contador1));
+            
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Actividad terminada");
+            estudiante.jList_Actividades.enable(true);
+
+        }
+
     }
 }
