@@ -31,8 +31,7 @@ import javax.swing.JOptionPane;
 public class Estudiante extends javax.swing.JInternalFrame {
 
     MetodosBD metodobd = new MetodosBD(this);
-    int contador1=1;
-     int contador2=1;
+    int con3 = 2;
 
     private static ListaEstudiantes listaEstudiantes;
 
@@ -47,11 +46,20 @@ public class Estudiante extends javax.swing.JInternalFrame {
 
         initComponents();
         metodobd.cargarActividadesEstudiante();
+        txtRespuesta.setVisible(false);
+        rbtnRespuesta1.setVisible(false);
+        rbtnRespuesta2.setVisible(false);
+        rbtnRespuesta3.setVisible(false);
+        rbtnRespuesta4.setVisible(false);
+        lblActividad.setVisible(false);
+        lblNumeroPregunta.setVisible(false);
+        txtAreaPregunta.setVisible(false);
+        jScrollPane2.setVisible(false);
+        btnSiguiente.setVisible(false);
 
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
 
     }
-      
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -177,9 +185,8 @@ public class Estudiante extends javax.swing.JInternalFrame {
         jPanel3.setLayout(null);
 
         lblActividad.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
-        lblActividad.setText("Lectura sobre animales");
         jPanel3.add(lblActividad);
-        lblActividad.setBounds(122, 24, 279, 34);
+        lblActividad.setBounds(122, 24, 279, 0);
 
         rbtnGrupo.add(rbtnRespuesta1);
         rbtnRespuesta1.setText("\"\"");
@@ -189,35 +196,38 @@ public class Estudiante extends javax.swing.JInternalFrame {
             }
         });
         jPanel3.add(rbtnRespuesta1);
-        rbtnRespuesta1.setBounds(102, 208, 33, 23);
+        rbtnRespuesta1.setBounds(102, 208, 290, 23);
 
         rbtnGrupo.add(rbtnRespuesta2);
         rbtnRespuesta2.setText("\"\"");
         jPanel3.add(rbtnRespuesta2);
-        rbtnRespuesta2.setBounds(100, 240, 33, 23);
+        rbtnRespuesta2.setBounds(100, 240, 290, 23);
 
         rbtnGrupo.add(rbtnRespuesta3);
         rbtnRespuesta3.setText("\"\"");
         jPanel3.add(rbtnRespuesta3);
-        rbtnRespuesta3.setBounds(100, 280, 33, 23);
+        rbtnRespuesta3.setBounds(100, 280, 290, 23);
 
         rbtnGrupo.add(rbtnRespuesta4);
         rbtnRespuesta4.setText("\"\"");
         jPanel3.add(rbtnRespuesta4);
-        rbtnRespuesta4.setBounds(100, 310, 33, 23);
+        rbtnRespuesta4.setBounds(100, 310, 290, 23);
 
         lblNumeroPregunta.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblNumeroPregunta.setText("N°");
+        lblNumeroPregunta.setText("1");
         jPanel3.add(lblNumeroPregunta);
-        lblNumeroPregunta.setBounds(56, 76, 18, 17);
+        lblNumeroPregunta.setBounds(56, 76, 9, 17);
+
+        jScrollPane2.setBorder(null);
 
         txtAreaPregunta.setEditable(false);
         txtAreaPregunta.setColumns(20);
         txtAreaPregunta.setRows(5);
+        txtAreaPregunta.setBorder(null);
         jScrollPane2.setViewportView(txtAreaPregunta);
 
         jPanel3.add(jScrollPane2);
-        jScrollPane2.setBounds(102, 76, 456, 96);
+        jScrollPane2.setBounds(102, 76, 456, 90);
         jPanel3.add(txtRespuesta);
         txtRespuesta.setBounds(100, 210, 460, 90);
 
@@ -274,28 +284,41 @@ public class Estudiante extends javax.swing.JInternalFrame {
 
     private void jList_ActividadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList_ActividadesMouseClicked
         metodobd.metodo3();
-        
-        
+        jList_Actividades.enable(false);
+
+
     }//GEN-LAST:event_jList_ActividadesMouseClicked
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
         // TODO add your handling code here:
-        
-//        if(txtRespuesta.isVisible()){
-//        metodobd.agregarRespuesta("Icfes", rbtnGrupo.getSelection().toString(), metodobd.IdsIcfes.get(contador1));
-//        contador1++;
-//        }
-//        else{
-//         metodobd.agregarRespuesta("Abierta", txtRespuesta.getText(), metodobd.IdsAbiertas.get(contador2));
-//        contador2++;   
-//        }
-        
-        
+
+        if (!txtRespuesta.isVisible()) {
+
+            if (rbtnRespuesta1.isSelected()) {
+                metodobd.agregarRespuesta("Icfes", rbtnRespuesta1.getText().toString());
+            }
+            if (rbtnRespuesta2.isSelected()) {
+                metodobd.agregarRespuesta("Icfes", rbtnRespuesta2.getText().toString());
+            }
+            if (rbtnRespuesta3.isSelected()) {
+                metodobd.agregarRespuesta("Icfes", rbtnRespuesta3.getText().toString());
+            }
+            if (rbtnRespuesta4.isSelected()) {
+                metodobd.agregarRespuesta("Icfes", rbtnRespuesta4.getText().toString());
+            }
+
+        } else {
+            metodobd.agregarRespuesta("Abierta", txtRespuesta.getText());
+
+        }
+        lblNumeroPregunta.setText("" + con3);
+        con3++;
+        metodobd.siguientePregunta();
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnSiguiente;
+    public javax.swing.JButton btnSiguiente;
     private javax.swing.JButton jButtonSalirEstudiante;
     private javax.swing.JButton jButtonVolverEstu;
     private javax.swing.JLabel jLabel10;
@@ -308,10 +331,10 @@ public class Estudiante extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    public javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     public javax.swing.JLabel lblActividad;
-    private javax.swing.JLabel lblNumeroPregunta;
+    public javax.swing.JLabel lblNumeroPregunta;
     private javax.swing.ButtonGroup rbtnGrupo;
     public javax.swing.JRadioButton rbtnRespuesta1;
     public javax.swing.JRadioButton rbtnRespuesta2;
