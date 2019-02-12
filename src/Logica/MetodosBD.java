@@ -57,8 +57,8 @@ public class MetodosBD {
 
     int t = 0;
     int t2 = 0;
-   int s=t;
-   int s1=t2;
+    int s = t;
+    int s1 = t2;
     private static ListaEstudiantes listaEstudiantes;
     private static Docente docente;
     private static Estudiante estudiante;
@@ -532,7 +532,7 @@ public class MetodosBD {
         }
     }
 
-    public void metodo3() {
+    public void consultaActividad() {
 
         String idActividad1 = "";
         String nombreActividad = estudiante.jList_Actividades.getSelectedValue();
@@ -581,22 +581,21 @@ public class MetodosBD {
                             estudiante.rbtnRespuesta4.setVisible(false);
                         }
 
-                    }
-                    else{
-                        if(rs1.getString(2) != null){
+                    } else {
+                        if (rs1.getString(2) != null) {
                             if (cont == 0) {
-                            estudiante.txtAreaPregunta.setText(rs1.getString(2));
-                            estudiante.rbtnRespuesta1.setVisible(true);
-                            estudiante.rbtnRespuesta2.setVisible(true);
-                            estudiante.rbtnRespuesta3.setVisible(true);
-                            estudiante.rbtnRespuesta4.setVisible(true);
+                                estudiante.txtAreaPregunta.setText(rs1.getString(2));
+                                estudiante.rbtnRespuesta1.setVisible(true);
+                                estudiante.rbtnRespuesta2.setVisible(true);
+                                estudiante.rbtnRespuesta3.setVisible(true);
+                                estudiante.rbtnRespuesta4.setVisible(true);
 
-                            estudiante.txtRespuesta.setVisible(false);
-                        }
+                                estudiante.txtRespuesta.setVisible(false);
+                            }
                         }
                     }
                     if (rs1.getString(2) != null) {
-                        arregloEnunciadoI.add(rs1.getString(2));                    
+                        arregloEnunciadoI.add(rs1.getString(2));
 
                     }
                     if (rs1.getString(3) != null) {
@@ -635,9 +634,9 @@ public class MetodosBD {
                     cont++;
 
                 }
-                System.out.println("Prr: "+arregloEnunciadoA.get(0));
-                t=arregloEnunciadoA.size();
-                t2=arregloEnunciadoI.size();
+                System.out.println("Prr: " + arregloEnunciadoA.get(0));
+                t = arregloEnunciadoA.size();
+                t2 = arregloEnunciadoI.size();
                 System.out.println("A: " + arregloEnunciadoA.size());
                 System.out.println("I: " + arregloEnunciadoI.size());
 
@@ -665,7 +664,7 @@ public class MetodosBD {
                 ps.setString(3, id);
                 ps.executeUpdate();
 
-                JOptionPane.showMessageDialog(null, "Respuesta guardada");
+                
 
             } else {
                 id = IdsAbiertas.get(contador2);
@@ -677,7 +676,7 @@ public class MetodosBD {
                 ps.setString(3, id);
                 ps.executeUpdate();
 
-                JOptionPane.showMessageDialog(null, "Respuesta guardada");
+                
 
             }
 
@@ -690,9 +689,7 @@ public class MetodosBD {
 
     public void siguientePregunta() {
 
-        
-      
-        if (arregloEnunciadoA.get(contador2).indexOf(contador2)>1) {
+        if (contador2 <= arregloEnunciadoA.size() - 1) {
             estudiante.txtAreaPregunta.setText(arregloEnunciadoA.get(contador2));
             estudiante.txtRespuesta.setVisible(true);
 
@@ -700,22 +697,34 @@ public class MetodosBD {
             estudiante.rbtnRespuesta2.setVisible(false);
             estudiante.rbtnRespuesta3.setVisible(false);
             estudiante.rbtnRespuesta4.setVisible(false);
-            
-            
-            System.out.println("reee: "+arregloEnunciadoI.indexOf(contador1));
-         
-        } else  if (arregloEnunciadoI.indexOf(contador1)!= -1 ) {
-           
+
+        } else if (contador1 <= arregloEnunciadoI.size() - 1) {
+
             estudiante.txtAreaPregunta.setText(arregloEnunciadoI.get(contador1));
 
             estudiante.txtRespuesta.setVisible(false);
+            estudiante.rbtnRespuesta1.setVisible(true);
+            estudiante.rbtnRespuesta2.setVisible(true);
+            estudiante.rbtnRespuesta3.setVisible(true);
+            estudiante.rbtnRespuesta4.setVisible(true);
             estudiante.rbtnRespuesta1.setText(arregloResp1.get(contador1));
             estudiante.rbtnRespuesta2.setText(arregloResp2.get(contador1));
             estudiante.rbtnRespuesta3.setText(arregloResp3.get(contador1));
             estudiante.rbtnRespuesta4.setText(arregloResp4.get(contador1));
-            
-            
+
         } else {
+            estudiante.btnSiguiente.setVisible(false);
+            estudiante.jScrollPane2.setVisible(false);
+            estudiante.lblActividad.setVisible(false);
+            estudiante.lblNumeroPregunta.setVisible(false);
+            estudiante.txtAreaPregunta.setVisible(false);
+            estudiante.txtRespuesta.setVisible(false);
+            estudiante.txtRespuesta.setVisible(false);
+            estudiante.rbtnRespuesta1.setVisible(false);
+            estudiante.rbtnRespuesta2.setVisible(false);
+            estudiante.rbtnRespuesta3.setVisible(false);
+            estudiante.rbtnRespuesta4.setVisible(false);
+            estudiante.txtRespuesta.setText("");
             JOptionPane.showMessageDialog(null, "Actividad terminada");
             estudiante.jList_Actividades.enable(true);
 
