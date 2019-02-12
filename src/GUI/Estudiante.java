@@ -56,7 +56,8 @@ public class Estudiante extends javax.swing.JInternalFrame {
         txtAreaPregunta.setVisible(false);
         jScrollPane2.setVisible(false);
         btnSiguiente.setVisible(false);
-        
+        txtAreaPdf.setVisible(false);
+        jScrollPane3.setVisible(false);
 
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
 
@@ -95,6 +96,8 @@ public class Estudiante extends javax.swing.JInternalFrame {
         txtAreaPregunta = new javax.swing.JTextArea();
         txtRespuesta = new javax.swing.JTextField();
         btnSiguiente = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtAreaPdf = new javax.swing.JTextArea();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximizable(true);
@@ -249,6 +252,13 @@ public class Estudiante extends javax.swing.JInternalFrame {
         jPanel3.add(btnSiguiente);
         btnSiguiente.setBounds(240, 380, 80, 23);
 
+        txtAreaPdf.setColumns(20);
+        txtAreaPdf.setRows(5);
+        jScrollPane3.setViewportView(txtAreaPdf);
+
+        jPanel3.add(jScrollPane3);
+        jScrollPane3.setBounds(30, 40, 540, 390);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -293,7 +303,7 @@ public class Estudiante extends javax.swing.JInternalFrame {
 
     private void jList_ActividadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList_ActividadesMouseClicked
         metodobd.consultaActividad();
-       
+
         metodobd.llenarIntermedia();
         jList_Actividades.enable(false);
 
@@ -306,25 +316,35 @@ public class Estudiante extends javax.swing.JInternalFrame {
         if (!txtRespuesta.isVisible()) {
 
             if (rbtnRespuesta1.isSelected()) {
-                metodobd.agregarRespuesta(txtAreaPregunta.getText(), rbtnRespuesta1.getText().toString(),"Icfes");
+                metodobd.agregarRespuesta(txtAreaPregunta.getText(), rbtnRespuesta1.getText().toString(), "Icfes");
+                txtAreaPdf.append(lblNumeroPregunta.getText()+". " + txtAreaPregunta.getText() + "\n");
+                txtAreaPdf.append("" + rbtnRespuesta1.getText().toString() + "\n\n");
             }
             if (rbtnRespuesta2.isSelected()) {
-                metodobd.agregarRespuesta(txtAreaPregunta.getText(), rbtnRespuesta2.getText().toString(),"Icfes");
+                metodobd.agregarRespuesta(txtAreaPregunta.getText(), rbtnRespuesta2.getText().toString(), "Icfes");
+                txtAreaPdf.append(lblNumeroPregunta.getText()+". " + txtAreaPregunta.getText() + "\n");
+                txtAreaPdf.append("" + rbtnRespuesta2.getText().toString() + "\n\n");
             }
             if (rbtnRespuesta3.isSelected()) {
-                metodobd.agregarRespuesta(txtAreaPregunta.getText(), rbtnRespuesta3.getText().toString(),"Icfes");
+                metodobd.agregarRespuesta(txtAreaPregunta.getText(), rbtnRespuesta3.getText().toString(), "Icfes");
+                txtAreaPdf.append(lblNumeroPregunta.getText()+". " + txtAreaPregunta.getText() + "\n");
+                txtAreaPdf.append("" + rbtnRespuesta3.getText().toString() + "\n\n");
             }
             if (rbtnRespuesta4.isSelected()) {
-                metodobd.agregarRespuesta(txtAreaPregunta.getText(), rbtnRespuesta4.getText().toString(),"Icfes");
+                metodobd.agregarRespuesta(txtAreaPregunta.getText(), rbtnRespuesta4.getText().toString(), "Icfes");
+                txtAreaPdf.append(lblNumeroPregunta.getText()+". " + txtAreaPregunta.getText() + "\n");
+                txtAreaPdf.append("" + rbtnRespuesta4.getText().toString() + "\n\n");
             }
 
         } else {
-            metodobd.agregarRespuesta(txtAreaPregunta.getText(), txtRespuesta.getText(),"");
+            metodobd.agregarRespuesta(txtAreaPregunta.getText(), txtRespuesta.getText(), "");
+            txtAreaPdf.append(lblNumeroPregunta.getText()+". " + txtAreaPregunta.getText() + "\n");
+            txtAreaPdf.append("" + txtRespuesta.getText() + "\n\n");
 
         }
-        lblNumeroPregunta.setText("" + con3);
-        con3++;
-        metodobd.siguientePregunta();
+       metodobd.siguientePregunta();
+        
+        
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
 
@@ -343,6 +363,7 @@ public class Estudiante extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     public javax.swing.JLabel lblActividad;
     public javax.swing.JLabel lblNumeroPregunta;
@@ -351,6 +372,7 @@ public class Estudiante extends javax.swing.JInternalFrame {
     public javax.swing.JRadioButton rbtnRespuesta2;
     public javax.swing.JRadioButton rbtnRespuesta3;
     public javax.swing.JRadioButton rbtnRespuesta4;
+    public javax.swing.JTextArea txtAreaPdf;
     public javax.swing.JTextArea txtAreaPregunta;
     public javax.swing.JTextField txtRespuesta;
     // End of variables declaration//GEN-END:variables
