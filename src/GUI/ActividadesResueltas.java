@@ -6,19 +6,27 @@
 package GUI;
 
 import Logica.MetodosBD;
+import java.awt.Desktop;
+import java.io.File;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author andre
  */
 public class ActividadesResueltas extends javax.swing.JFrame {
-    MetodosBD metodosbd= new MetodosBD(this);
+
+    MetodosBD metodosbd = new MetodosBD(this);
+
+    int id = 0;
 
     /**
      * Creates new form ActividadesResueltas
      */
     public ActividadesResueltas() {
         initComponents();
+        metodosbd.listarActividadesRealizadas();
         setLocationRelativeTo(null);
         //metodosbd.agregarActividadesRealizadas();
     }
@@ -33,8 +41,9 @@ public class ActividadesResueltas extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-        jScrollPane9 = new javax.swing.JScrollPane();
-        jList_ActividadesResueltas = new javax.swing.JList<>();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable_ActividadesResueltas = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,12 +55,28 @@ public class ActividadesResueltas extends javax.swing.JFrame {
             }
         });
 
-        jList_ActividadesResueltas.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista de actividades resueltas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTable_ActividadesResueltas.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jTable_ActividadesResueltas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "", "Title 2", "Title 3"
+            }
+        ));
+        jTable_ActividadesResueltas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable_ActividadesResueltasMouseClicked(evt);
+            }
         });
-        jScrollPane9.setViewportView(jList_ActividadesResueltas);
+        jScrollPane1.setViewportView(jTable_ActividadesResueltas);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 370, 290));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -60,18 +85,18 @@ public class ActividadesResueltas extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addGap(214, 214, 214))
+                .addGap(217, 217, 217))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(122, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
-                .addGap(26, 26, 26)
+                .addGap(34, 34, 34)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addComponent(jButton1))
         );
 
@@ -80,8 +105,38 @@ public class ActividadesResueltas extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTable_ActividadesResueltasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_ActividadesResueltasMouseClicked
+
+        int column = jTable_ActividadesResueltas.getColumnModel().getColumnIndexAtX(evt.getX());
+        int row = evt.getY() / jTable_ActividadesResueltas.getRowHeight();
+        int fila=jTable_ActividadesResueltas.getSelectedRow();
+        if (row < jTable_ActividadesResueltas.getRowCount() && row >= 0 && column < jTable_ActividadesResueltas.getColumnCount() && column >= 0) {
+            id =Integer.parseInt((String) jTable_ActividadesResueltas.getValueAt(fila,0));  
+                    //(int) jTable_ActividadesResueltas.getValueAt(row, 0);
+            Object value = jTable_ActividadesResueltas.getValueAt(row, column);
+            if (value instanceof JButton) {
+                ((JButton) value).doClick();
+                JButton boton = (JButton) value;
+
+                if (boton.getText().equals("Vacio")) {
+                    JOptionPane.showMessageDialog(null, "No hay archivo");
+                } else {
+                    metodosbd.ejecutar_archivoPDF(id);
+                    try {
+                        Desktop.getDesktop().open(new File("new.pdf"));
+                    } catch (Exception ex) {
+                    }
+                }
+
+            } else {
+                String name = "" + jTable_ActividadesResueltas.getValueAt(row, 1);
+            }
+        }
+
+    }//GEN-LAST:event_jTable_ActividadesResueltasMouseClicked
 
     /**
      * @param args the command line arguments
@@ -120,7 +175,8 @@ public class ActividadesResueltas extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JList<String> jList_ActividadesResueltas;
-    private javax.swing.JScrollPane jScrollPane9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    public javax.swing.JTable jTable_ActividadesResueltas;
     // End of variables declaration//GEN-END:variables
 }
