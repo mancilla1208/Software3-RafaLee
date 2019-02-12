@@ -167,7 +167,7 @@ public class Estudiante extends javax.swing.JInternalFrame {
                 jButtonSalirEstudianteActionPerformed(evt);
             }
         });
-        jPanel2.add(jButtonSalirEstudiante, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 20, 62, 45));
+        jPanel2.add(jButtonSalirEstudiante, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, 62, 45));
 
         jButtonVolverEstu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/volver2.png"))); // NOI18N
         jButtonVolverEstu.setContentAreaFilled(false);
