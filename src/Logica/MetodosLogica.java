@@ -37,40 +37,92 @@ public class MetodosLogica {
     byte[] bytesImg;
     GestionArchivos gestion = new GestionArchivos();
 
+    /**
+     * Metodo constructor que se encargara de enviar los datos a la entidad
+     * docente
+     *
+     * @param docente
+     */
     public MetodosLogica(Docente docente) {
         this.docente = docente;
     }
 
+    /**
+     * Metodo constructor que se encargara de enviar los datos a la entidad
+     * MetodosBD donde se encuentra todo el manejo de consultas MySql
+     *
+     * @param metodosBD
+     */
     public MetodosLogica(MetodosBD metodosBD) {
         this.metodosBD = metodosBD;
     }
 
+    /**
+     * Metodo constructor que se encargara de enviar los datos a la entidad
+     * gestion que se encarga de gestionar todos los datos del estudiante
+     *
+     * @param gestion
+     */
     public MetodosLogica(GestionarEstudiante gestion) {
         this.gestionEstudiante = gestion;
     }
 
+    /**
+     * Metodo constructor que se encargara de enviar los datos a la entidad
+     * login, en la cual valida entrada del docente a la aplicación
+     *
+     * @param login
+     */
     public MetodosLogica(Login login) {
         this.login = login;
     }
 
+    /**
+     * Metodo constructor que se encargara de enviar los datos a la entidad
+     * estudiante
+     *
+     * @param estudiante
+     */
     public MetodosLogica(Estudiante estudiante) {
         this.estudiante = estudiante;
     }
 
+    /**
+     * Metodo constructor que se encargara de enviar los datos a la entidad
+     * registroDocente para realizar el ingreso de nuevos docentes y sus perfles
+     * a la platafoma
+     *
+     * @param registroDocente
+     */
     public MetodosLogica(RegistroDocente registroDocente) {
         this.registroDoce = registroDocente;
     }
 
+    /**
+     * Metodo que se encarga de limpiar los campos en la ventada de docente al
+     * momento de crear una actividad
+     *
+     */
     public void limpiarCamposCrearActi() {
         docente.jTextField_NombreActivi.setText("");
         docente.jTextField_GradoActividad.setText("");
     }
 
+    /**
+     * Metodo que se encarga de limpiar los campos en la ventada de gestion de
+     * estudiantes la cual la administra el docente.
+     *
+     */
     public void limpiarCamposGEstudiantes() {
         GestionarEstudiante.txtNombreCompletoEstu.setText("");
         GestionarEstudiante.txtGradoEstu.setText("");
     }
 
+    /**
+     * Metodo que se encarga de limpiar los campos en la pregunta en la interfaz
+     * del docente al momento de crear la actividad
+     *
+     */
     public void limpiarCamposPregunta() {
         if (Docente.jComboBox_TipoPreguntas.getSelectedItem().toString().equals("Icfes")) {
             docente.jTextAreaPregunta.setText("");
@@ -85,6 +137,11 @@ public class MetodosLogica {
 
     }
 
+    /**
+     * Metodo que se encarga de permitir cargar y almacenar archivos, ya sean
+     * imagenes o documentos de texto en cualquier formato
+     *
+     */
     public void cargarArchivoGeneral() {
         if (seleccionado.showDialog(null, "ABRIR ARCHIVO") == JFileChooser.APPROVE_OPTION) {
             archivo = seleccionado.getSelectedFile();
@@ -105,6 +162,11 @@ public class MetodosLogica {
         }
     }
 
+    /**
+     * Metodo que se encarga de permitir cargar y almacenar archivos, ya sean
+     * imagenes o documentos de texto en cualquier formato
+     *
+     */
     public void cargarArchivoPregunta() {
         if (seleccionado.showDialog(null, "ABRIR ARCHIVO") == JFileChooser.APPROVE_OPTION) {
             archivo = seleccionado.getSelectedFile();
@@ -125,6 +187,11 @@ public class MetodosLogica {
         }
     }
 
+    /**
+     * Metodo que se encarga de hacer la transición de la ventana docente al
+     * inicio de la aplicación
+     *
+     */
     public static void irDeDocente_Inicio() {
 
         int seleccion = JOptionPane.showOptionDialog(
@@ -149,6 +216,11 @@ public class MetodosLogica {
         }
     }
 
+    /**
+     * Metodo que se encarga de añadir los tipo de preguntas a la actividad a
+     * realizar
+     *
+     */
     public void añadirTipoPregunta() {
         if (docente.jComboBox_TipoPreguntas.getSelectedItem() == "Icfes") {
             docente.jTextAreaRespuesta.setVisible(false);
