@@ -186,7 +186,6 @@ public class Docente extends javax.swing.JInternalFrame {
         jPanel_Actividades.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Actividades", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 1, 12))); // NOI18N
 
         jList_ActividadesG0.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        jList_ActividadesG0.setForeground(new java.awt.Color(204, 204, 255));
         jScrollPane8.setViewportView(jList_ActividadesG0);
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
@@ -209,7 +208,6 @@ public class Docente extends javax.swing.JInternalFrame {
         jTabbedPane3.addTab("Grado 0", jPanel12);
 
         jList_ActividadesG1.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        jList_ActividadesG1.setForeground(new java.awt.Color(255, 204, 204));
         jScrollPane2.setViewportView(jList_ActividadesG1);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -232,7 +230,6 @@ public class Docente extends javax.swing.JInternalFrame {
         jTabbedPane3.addTab("Grado 1", jPanel6);
 
         jList_ActividadesG2.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        jList_ActividadesG2.setForeground(new java.awt.Color(255, 255, 204));
         jScrollPane3.setViewportView(jList_ActividadesG2);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -255,7 +252,6 @@ public class Docente extends javax.swing.JInternalFrame {
         jTabbedPane3.addTab("Grado 2", jPanel7);
 
         jList_ActividadesG3.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        jList_ActividadesG3.setForeground(new java.awt.Color(204, 255, 204));
         jScrollPane4.setViewportView(jList_ActividadesG3);
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
@@ -278,7 +274,6 @@ public class Docente extends javax.swing.JInternalFrame {
         jTabbedPane3.addTab("Grado 3", jPanel8);
 
         jList_ActividadesG4.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        jList_ActividadesG4.setForeground(new java.awt.Color(204, 255, 255));
         jScrollPane5.setViewportView(jList_ActividadesG4);
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
@@ -301,7 +296,6 @@ public class Docente extends javax.swing.JInternalFrame {
         jTabbedPane3.addTab("Grado 4", jPanel9);
 
         jList_ActividadesG5.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        jList_ActividadesG5.setForeground(new java.awt.Color(255, 204, 255));
         jScrollPane6.setViewportView(jList_ActividadesG5);
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
@@ -510,7 +504,25 @@ public class Docente extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonExitDocenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExitDocenteActionPerformed
-        System.exit(0);
+
+        int seleccion = JOptionPane.showOptionDialog(
+                null, // Componente padre
+                "Esta seguro que desea salir.?", //Mensaje
+                "Seleccione una opción", // Título
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null, // null para icono por defecto.
+                new Object[]{"Si", "No"}, // null para YES, NO y CANCEL
+                "Si");
+
+        if (seleccion == JOptionPane.YES_OPTION) {
+
+            System.exit(0);
+        } else {
+
+        }
+
+
     }//GEN-LAST:event_jButtonExitDocenteActionPerformed
 
     private void jButton_CrearActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CrearActividadActionPerformed
@@ -534,6 +546,7 @@ public class Docente extends javax.swing.JInternalFrame {
 
     private void jB_GuardarTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_GuardarTareaActionPerformed
         logica.limpiarCamposCrearActi();
+        metodobd.cargarActividades();
         JOptionPane.showMessageDialog(null, "Actividad creada con exito");
     }//GEN-LAST:event_jB_GuardarTareaActionPerformed
 

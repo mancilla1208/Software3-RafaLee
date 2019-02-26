@@ -236,7 +236,7 @@ public class Principal extends javax.swing.JFrame {
 
         try {
 
-            File path = new File("D:\\Universidad\\Software 3\\ProyectoFinal-RafaLee\\Software3-RafaLee\\src\\manualAyuda\\ManualEstudiante.pdf");
+            File path = new File("E:\\Universidad\\Software 3\\ProyectoFinal-RafaLee\\Software3-RafaLee\\src\\manualAyuda\\ManualEstudiante.pdf");
             Desktop.getDesktop().open(path);
 
         } catch (IOException e) {

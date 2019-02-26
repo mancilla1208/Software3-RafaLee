@@ -26,12 +26,12 @@ import javax.swing.JOptionPane;
 public class ConexionMySql {
 
     public String BD = "rafalee_bd";
-    public String url = "jdbc:mysql://localhost/" + BD;
-    public String usuario = "rafalee";
-    public String clave = "123456";
-//    public String url = "jdbc:mysql://192.168.1.60/" + BD;
-//    public String usuario = "rafalee";
-//    public String clave = "123456";
+//    public String url = "jdbc:mysql://localhost/" + BD;
+//    public String usuario = "root";
+//    public String clave = "";
+    public String url = "jdbc:mysql://10.10.0.2/" + BD;
+    public String usuario = "rafaLeeBD";
+    public String clave = "1234";
 
     /*
     * Metodo encargado de crear la conexión con sus respectivos parametros (nombre, contraseña)

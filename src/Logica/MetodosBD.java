@@ -16,12 +16,16 @@ import GUI.Login;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.HeadlessException;
 import java.awt.Image;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -49,7 +53,7 @@ import javax.swing.table.DefaultTableModel;
  * estudiantes de la lista y base de datos.
  */
 public class MetodosBD {
-
+    PdfDAO dao = null;
     MetodosLogica logica = new MetodosLogica(this);
     ConexionMySql con = new ConexionMySql();
     Connection cn = con.Conectar();
@@ -571,10 +575,12 @@ public class MetodosBD {
                     + "= i.id_Actividad3 where a.id_Actividad =" + idActividad1;
 
             Statement st1;
+           
+            estudiante.txtAreaPdf.append("                       "+ estudiante.lblActividad.getText()+"\n"+"\n");
             try {
                 st1 = cn.createStatement();
                 ResultSet rs1 = st1.executeQuery(sql1);
-
+                     
                 while (rs1.next()) {
 
                     estudiante.lblActividad.setVisible(true);
@@ -747,36 +753,36 @@ public class MetodosBD {
 
     }
 
-    public void llenarIntermedia() {
-        String SqlID = "SELECT a.idActividad FROM rafalee_bd.actividad a WHERE nombre='" + estudiante.lblActividad.getText() + "'";
-        try {
-            cn = con.Conectar();
-            Statement st = cn.createStatement();
-            ResultSet rs1 = st.executeQuery(SqlID);
-            if (rs1.next()) {
-                idActividad = rs1.getString(1);
-
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
-        }
-        try {
-
-            PreparedStatement ps = cn.prepareStatement("INSERT INTO rafalee_bd.estudianteactividad(id_Estudiante,id_Actividad) VALUES (?,?)");
-            ps.setString(1, idEstudiante);
-            ps.setString(2, idActividad);
-            ps.executeUpdate();
-
-        } catch (SQLException ex) {
-            Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
+//    public void llenarIntermedia() {
+//        String SqlID = "SELECT a.idActividad FROM rafalee_bd.actividad a WHERE nombre='" + estudiante.lblActividad.getText() + "'";
+//        try {
+//            cn = con.Conectar();
+//            Statement st = cn.createStatement();
+//            ResultSet rs1 = st.executeQuery(SqlID);
+//            if (rs1.next()) {
+//                idActividad = rs1.getString(1);
+//
+//            }
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
+//        }
+//        try {
+//
+//            PreparedStatement ps = cn.prepareStatement("INSERT INTO rafalee_bd.estudianteactividad(id_Estudiante,id_Actividad) VALUES (?,?)");
+//            ps.setString(1, idEstudiante);
+//            ps.setString(2, idActividad);
+//            ps.executeUpdate();
+//
+//        } catch (SQLException ex) {
+//            Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
     public void convertirPdF() {
         JFileChooser archivos = new JFileChooser();
         try {
             String nombrePDF = estudiante.lblActividad.getText() + " - " + estudiante.jLabelNombreEstudiante.getText();
-            String ruta = "D:\\Universidad\\Software 3\\ProyectoFinal-RafaLee\\Software3-RafaLee\\src\\archivosPDF\\" + nombrePDF + ".pdf";
+            String ruta = "E:\\Universidad\\Software 3\\ProyectoFinal-RafaLee\\Software3-RafaLee\\src\\archivosPDF\\" + nombrePDF + ".pdf";
+
             File pdf = new File(ruta);
             OutputStream texto = new FileOutputStream(pdf);
             Document doc = new Document();
@@ -786,24 +792,9 @@ public class MetodosBD {
             doc.close();
             texto.close();
 
-//            //***********************
-//            sql s = new sql();
-//            int codigo = s.auto_increment("SELECT MAX(codigopdf) FROM pdf;");
-//            File ruta = new File(ruta_archivo);
-//            if (nombre.trim().length() != 0 && ruta_archivo.trim().length() != 0) {
-//                guardar_pdf(codigo, nombre, ruta);
-//                tpdf.visualizar_PdfVO(tabla);
-//                ruta_archivo = "";
-//                activa_boton(false, false, false);
-//                txtname.setEnabled(false);
-//            } else {
-//                JOptionPane.showMessageDialog(null, "Rellenar todo los campos");
-//            }
-//            //**************************
-
+            InputStream inputStream = new FileInputStream(pdf);
             byte[] pdf1 = new byte[(int) ruta.length()];
-            InputStream input = new FileInputStream(ruta);
-            input.read(pdf1);
+            inputStream.read(pdf1);
 
             String sql = "INSERT INTO rafalee_bd.pdf (nombrepdf, archivopdf) VALUES( ?, ?);";
             PreparedStatement ps = null;
@@ -827,71 +818,35 @@ public class MetodosBD {
         modelo.addColumn("Nombre");
         modelo.addColumn("Archivo");
 
-        String sql = "SELECT * FROM rafalee_bd.pdf";
-        Object[] datos = new Object[3];
-        Statement st;
+       ImageIcon icono = null;
+        if (get_Image("/Imagen/imgPDF.png") != null) {
+            icono = new ImageIcon(get_Image("/Imagen/imgPDF.png"));
+        }
 
-        try {
-            st = cn.createStatement();
-            ResultSet rs = st.executeQuery(sql);
-            while (rs.next()) {
-                datos[0] = rs.getString(1);
-                datos[1] = rs.getString(2);
+        dao = new PdfDAO();
+        PdfVO vo = new PdfVO();
+        ArrayList<PdfVO> list = dao.Listar_PdfVO();
 
-                ImageIcon icono = null;
-                if (get_Image("/Imagenes/imgPDF.png") != null) {
-                    icono = new ImageIcon(get_Image("/Imagenes/imgPDF.png"));
-                }
-
-                if (rs.getString(3) != null) {
-                    datos[2] = new JButton(icono);
+        if (list.size() > 0) {
+            for (int i = 0; i < list.size(); i++) {
+                Object fila[] = new Object[3];
+                vo = list.get(i);
+                fila[0] = vo.getCodigopdf();
+                fila[1] = vo.getNombrepdf();
+                if (vo.getArchivopdf() != null) {
+                    fila[2] = new JButton(icono);
                 } else {
-                    datos[2] = new JButton("Vacio");
+                    fila[2] = new JButton("Vacio");
                 }
-                modelo.addRow(datos);
+
+                modelo.addRow(fila);
             }
             actividades.jTable_ActividadesResueltas.setModel(modelo);
-
-        } catch (SQLException ex) {
-            Logger.getLogger(GestionarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+           actividades.jTable_ActividadesResueltas.setRowHeight(32);
         }
     }
 
-//Permite mostrar PDF contenido en la base de datos
-    public void ejecutar_archivoPDF(int id) {
 
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        byte[] b = null;
-
-        try {
-            ps = cn.prepareStatement("SELECT p.archivopdf FROM rafalee_bd.pdf p WHERE codigopdf = ?;");
-            ps.setInt(1, id);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                b = rs.getBytes(1);
-                System.out.println("Aca " + b);
-            }
-            InputStream bos = new ByteArrayInputStream(b);
-
-            int tamanoInput = bos.available();
-            byte[] datosPDF = new byte[tamanoInput];
-            bos.read(datosPDF, 0, tamanoInput);
-
-            OutputStream out = new FileOutputStream("new.pdf");
-            out.write(datosPDF);
-
-            //abrir archivo
-            out.close();
-            bos.close();
-            ps.close();
-            rs.close();
-            cn.close();
-
-        } catch (IOException | NumberFormatException | SQLException ex) {
-            System.out.println("Error al abrir archivo PDF " + ex.getMessage());
-        }
-    }
 
     public Image get_Image(String ruta) {
         try {

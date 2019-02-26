@@ -6,8 +6,13 @@
 package GUI;
 
 import Logica.MetodosBD;
+import Logica.PdfDAO;
+import java.awt.Color;
 import java.awt.Desktop;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.InputStream;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
@@ -17,6 +22,7 @@ import javax.swing.JOptionPane;
  */
 public class ActividadesResueltas extends javax.swing.JFrame {
 
+    PdfDAO p = null;
     MetodosBD metodosbd = new MetodosBD(this);
 
     int id = 0;
@@ -28,7 +34,8 @@ public class ActividadesResueltas extends javax.swing.JFrame {
         initComponents();
         metodosbd.listarActividadesRealizadas();
         setLocationRelativeTo(null);
-        //metodosbd.agregarActividadesRealizadas();
+
+        jPanel_ListaTareas.setOpaque(false);
     }
 
     /**
@@ -41,22 +48,30 @@ public class ActividadesResueltas extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        jPanel_ListaTareas = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable_ActividadesResueltas = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(590, 610));
+        setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(590, 610));
+        setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Home.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/volver2.png"))); // NOI18N
         jButton1.setContentAreaFilled(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 470, -1, -1));
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista de actividades resueltas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel_ListaTareas.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel_ListaTareas.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista de actividades resueltas", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
+        jPanel_ListaTareas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTable_ActividadesResueltas.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTable_ActividadesResueltas.setModel(new javax.swing.table.DefaultTableModel(
@@ -76,46 +91,27 @@ public class ActividadesResueltas extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable_ActividadesResueltas);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 370, 290));
+        jPanel_ListaTareas.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 370, 310));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(217, 217, 217))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                .addComponent(jButton1))
-        );
+        getContentPane().add(jPanel_ListaTareas, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 107, 410, 360));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/OtraTarea - copia.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 588, 608));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTable_ActividadesResueltasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_ActividadesResueltasMouseClicked
 
         int column = jTable_ActividadesResueltas.getColumnModel().getColumnIndexAtX(evt.getX());
         int row = evt.getY() / jTable_ActividadesResueltas.getRowHeight();
-        int fila=jTable_ActividadesResueltas.getSelectedRow();
+
         if (row < jTable_ActividadesResueltas.getRowCount() && row >= 0 && column < jTable_ActividadesResueltas.getColumnCount() && column >= 0) {
-            id =Integer.parseInt((String) jTable_ActividadesResueltas.getValueAt(fila,0));  
-                    //(int) jTable_ActividadesResueltas.getValueAt(row, 0);
+            id = (int) jTable_ActividadesResueltas.getValueAt(row, 0);
             Object value = jTable_ActividadesResueltas.getValueAt(row, column);
             if (value instanceof JButton) {
                 ((JButton) value).doClick();
@@ -124,15 +120,38 @@ public class ActividadesResueltas extends javax.swing.JFrame {
                 if (boton.getText().equals("Vacio")) {
                     JOptionPane.showMessageDialog(null, "No hay archivo");
                 } else {
-                    metodosbd.ejecutar_archivoPDF(id);
+                    PdfDAO pd = new PdfDAO();
+                    pd.ejecutar_archivoPDF(id);
                     try {
-                        Desktop.getDesktop().open(new File("new.pdf"));
+                        File directorio = new File("temp"); //Creas un nuevo directorio a nivel de tu jar.
+                        directorio.mkdirs();
+                        directorio.setWritable(true);
+                        //copias la direccion
+                        String archivo = directorio.getCanonicalPath() + File.pathSeparator + "Vertebrados - Yulieth Tusarma.pdf";
+                        //nuevo archivo en esa direccion
+                        File temp = new File(archivo);
+                        InputStream is = this.getClass().getResourceAsStream("/archivosPDF/Vertebrados - Yulieth Tusarma.pdf");
+                        FileOutputStream archivoDestino = new FileOutputStream(temp);
+                        FileWriter fw = new FileWriter(temp);
+                        byte[] buffer = new byte[512 * 1024];
+                        //lees el archivo hasta que se acabe...
+                        int nbLectura;
+                        while ((nbLectura = is.read(buffer)) != -1) {
+                            archivoDestino.write(buffer, 0, nbLectura);
+                        }
+                        //cierras el archivo,el inputS y el FileW
+                        fw.close();
+                        archivoDestino.close();
+                        is.close();
+                        //abres el archivo temporal
+                        Desktop.getDesktop().open(temp);
                     } catch (Exception ex) {
                     }
                 }
 
             } else {
                 String name = "" + jTable_ActividadesResueltas.getValueAt(row, 1);
+
             }
         }
 
@@ -175,7 +194,8 @@ public class ActividadesResueltas extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel_ListaTareas;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable jTable_ActividadesResueltas;
     // End of variables declaration//GEN-END:variables
